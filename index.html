@@ -43,7 +43,6 @@ html,body{height:100%;margin:0;padding:0;}
 body{font-family:'Poppins',system-ui,sans-serif;background:var(--bg-1);color:var(--txt);
   display:flex;justify-content:center;overflow:hidden;transition:background .4s ease,color .3s ease;position:relative;}
 input,select,button,textarea{font-family:inherit;color:inherit;}
-/* Decorative blobs — radial-gradients are already soft, no CSS blur filter needed (perf win) */
 body::before,body::after{content:'';position:fixed;border-radius:50%;
   pointer-events:none;z-index:0;transition:background .4s ease;}
 body::before{width:380px;height:380px;top:-90px;left:-90px;
@@ -94,51 +93,36 @@ body.light .iconbar.themebtn{color:var(--gold);}
 .net.on{background:var(--green);box-shadow:0 0 9px var(--green);}
 
 /* STORAGE BAR */
-.storage-bar{
-  flex-shrink:0;height:20px;
-  background:var(--glass);
+.storage-bar{flex-shrink:0;height:20px;background:var(--glass);
   border-bottom:1px solid var(--glass-border);
   display:flex;align-items:center;gap:7px;
   padding:0 12px;font-size:8.5px;font-weight:600;color:var(--txt-3);
-  transition:background .4s ease;
-  transform:translateZ(0);
-}
-.storage-bar .sb-dot{
-  width:6px;height:6px;border-radius:50%;
-  background:#ef4444;flex-shrink:0;box-shadow:0 0 6px #ef4444;transition:.3s;
-}
+  transition:background .4s ease;transform:translateZ(0);}
+.storage-bar .sb-dot{width:6px;height:6px;border-radius:50%;
+  background:#ef4444;flex-shrink:0;box-shadow:0 0 6px #ef4444;transition:.3s;}
 .storage-bar .sb-dot.on{background:#22c55e;box-shadow:0 0 6px #22c55e;}
-.storage-bar .sb-track{
-  flex:1;height:5px;border-radius:3px;
-  background:rgba(255,255,255,.08);overflow:hidden;
-}
+.storage-bar .sb-track{flex:1;height:5px;border-radius:3px;
+  background:rgba(255,255,255,.08);overflow:hidden;}
 body.light .storage-bar .sb-track{background:rgba(15,23,42,.08);}
-.storage-bar .sb-fill{
-  height:100%;width:2%;border-radius:3px;
+.storage-bar .sb-fill{height:100%;width:2%;border-radius:3px;
   background:linear-gradient(90deg,#22c55e,#16a34a);
-  transition:width .6s cubic-bezier(.34,1.2,.4,1),background .3s;
-}
+  transition:width .6s cubic-bezier(.34,1.2,.4,1),background .3s;}
 .storage-bar .sb-fill.warn{background:linear-gradient(90deg,#fbbf24,#f59e0b);}
 .storage-bar .sb-fill.danger{background:linear-gradient(90deg,#ef4444,#b91c1c);}
-.storage-bar .sb-label{
-  flex-shrink:0;font-family:'Poppins',sans-serif;
-  letter-spacing:.2px;color:var(--txt-3);
-}
+.storage-bar .sb-label{flex-shrink:0;font-family:'Poppins',sans-serif;
+  letter-spacing:.2px;color:var(--txt-3);}
 .storage-bar .sb-label b{color:var(--txt);font-weight:700;}
-.storage-bar .sb-sync{
-  font-size:8px;color:var(--txt-4);
+.storage-bar .sb-sync{font-size:8px;color:var(--txt-4);
   padding:1px 6px;border-radius:6px;
   background:var(--glass-2);border:1px solid var(--glass-border-2);
-  font-weight:600;flex-shrink:0;white-space:nowrap;
-}
+  font-weight:600;flex-shrink:0;white-space:nowrap;}
 .storage-bar .sb-sync.ok{color:#22c55e;border-color:rgba(34,197,94,.3);}
 .storage-bar .sb-sync.off{color:#f59e0b;border-color:rgba(245,158,11,.3);}
 
 .screens{flex:1;position:relative;overflow:hidden;}
 .screen{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;
   padding:12px 12px 190px;display:none;
-  -webkit-overflow-scrolling:touch;
-  contain:content;}
+  -webkit-overflow-scrolling:touch;contain:content;}
 .screen.active{display:block;animation:fade .2s ease;}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .screen::-webkit-scrollbar{width:0;}
@@ -158,15 +142,14 @@ body.light .storage-bar .sb-track{background:rgba(15,23,42,.08);}
   -webkit-overflow-scrolling:touch;}
 .chips::-webkit-scrollbar{display:none;}
 .chip{flex-shrink:0;padding:7px 15px;border-radius:20px;font-size:12px;font-weight:500;
-  background:var(--glass);
-  border:1px solid var(--glass-border);color:var(--txt-3);cursor:pointer;transition:.18s;}
+  background:var(--glass);border:1px solid var(--glass-border);color:var(--txt-3);
+  cursor:pointer;transition:.18s;}
 .chip.active{background:linear-gradient(135deg,var(--gold),var(--gold-2));
   color:#1c1917;border-color:transparent;font-weight:600;box-shadow:0 4px 16px var(--gold-glow);}
 
 /* ITEM GRID */
 .item-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.item-card{background:var(--glass-2);
-  border:1px solid var(--glass-border);
+.item-card{background:var(--glass-2);border:1px solid var(--glass-border);
   box-shadow:var(--glass-hl),var(--glass-shadow);border-radius:16px;padding:12px 12px 11px;
   cursor:pointer;transition:.18s;position:relative;overflow:hidden;}
 .item-card::after{content:'';position:absolute;right:-30px;top:-30px;width:70px;height:70px;
@@ -187,8 +170,7 @@ body.light .storage-bar .sb-track{background:rgba(15,23,42,.08);}
   font-family:'Noto Nastaliq Urdu',serif;line-height:2.2;}
 
 /* CARDS */
-.card{background:var(--glass);
-  border:1px solid var(--glass-border);
+.card{background:var(--glass);border:1px solid var(--glass-border);
   box-shadow:var(--glass-hl),var(--glass-shadow);border-radius:16px;padding:13px;
   margin-bottom:12px;}
 .card-title{font-size:12.5px;font-weight:600;color:var(--gold);margin-bottom:11px;
@@ -197,8 +179,7 @@ body.light .storage-bar .sb-track{background:rgba(15,23,42,.08);}
   background:linear-gradient(180deg,var(--gold),var(--gold-2));}
 
 /* INPUTS */
-input,select{width:100%;background:var(--glass-2);
-  border:1px solid var(--glass-border-2);
+input,select{width:100%;background:var(--glass-2);border:1px solid var(--glass-border-2);
   border-radius:11px;padding:11px 12px;color:var(--txt);font-size:13px;outline:0;
   transition:.18s;box-shadow:var(--glass-hl);-webkit-appearance:none;appearance:none;}
 input:focus,select:focus{border-color:var(--gold);
@@ -293,8 +274,7 @@ body.light .sheet{background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(2
   background:var(--glass);border-top:1px solid var(--glass-border);box-shadow:var(--glass-hl);}
 
 /* CART ITEM */
-.citem{background:var(--glass-2);
-  border:1px solid var(--glass-border);
+.citem{background:var(--glass-2);border:1px solid var(--glass-border);
   box-shadow:var(--glass-hl);border-radius:14px;padding:11px;margin-bottom:9px;}
 .citem-top{display:flex;align-items:center;gap:8px;margin-bottom:9px;}
 .citem-name{flex:1;font-family:'Noto Nastaliq Urdu',serif;font-size:15px;line-height:1.9;
@@ -365,7 +345,7 @@ body.light .sheet{background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(2
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .quickfill button:active{transform:scale(.94);background:var(--gold-soft);color:var(--gold);}
 
-/* ADD-ITEM MODAL */
+/* MODALS */
 .am-bg{position:absolute;inset:0;z-index:200;background:rgba(0,0,0,.65);
   display:flex;align-items:center;justify-content:center;padding:20px;
   opacity:0;pointer-events:none;transition:opacity .22s;}
@@ -418,7 +398,7 @@ body.light .am-bg{background:rgba(15,23,42,.45);}
   border-radius:11px;padding:10px 11px;margin-bottom:12px;line-height:1.7;font-weight:500;}
 .am-warn .ic{font-size:13px;line-height:1.4;}
 
-/* RECEIPT — COMPACT */
+/* RECEIPT — SCREEN PREVIEW */
 .paper-wrap{padding:14px 10px;display:flex;justify-content:center;min-height:100%;}
 .paper{position:relative;width:100%;max-width:320px;background:#ffffff;color:#0f172a;
   border-radius:8px;padding:12px 11px 12px;font-family:'Poppins',sans-serif;font-weight:500;
@@ -469,8 +449,8 @@ table.p-items td.r,table.p-items th.r{text-align:right;}
 
 /* TOAST */
 .toast{position:absolute;left:50%;bottom:150px;transform:translate(-50%,20px);
-  background:var(--glass-3);
-  border:1px solid var(--glass-border-2);box-shadow:var(--glass-hl),var(--glass-shadow);
+  background:var(--glass-3);border:1px solid var(--glass-border-2);
+  box-shadow:var(--glass-hl),var(--glass-shadow);
   color:var(--txt);padding:10px 20px;border-radius:30px;font-size:12.5px;font-weight:500;
   z-index:500;opacity:0;pointer-events:none;transition:.25s;white-space:nowrap;max-width:90%;
   will-change:transform,opacity;}
@@ -482,7 +462,6 @@ table.p-items td.r,table.p-items th.r{text-align:right;}
   position:sticky;top:0;z-index:10;padding:8px 4px;
   background:linear-gradient(180deg,var(--bg-1) 0%,var(--bg-1) 75%,transparent 100%);
   border-radius:10px;}
-body.light .hist-toolbar{background:linear-gradient(180deg,var(--bg-1) 0%,var(--bg-1) 75%,transparent 100%);}
 .hist-toolbar::-webkit-scrollbar{display:none;}
 .hist-toolbar .spacer{flex:1;}
 .hist-toolbar .btn{width:auto;white-space:nowrap;flex-shrink:0;}
@@ -491,8 +470,7 @@ body.light .hist-toolbar{background:linear-gradient(180deg,var(--bg-1) 0%,var(--
   border:1px solid rgba(251,191,36,.28);border-radius:10px;
   display:flex;align-items:center;gap:5px;flex-shrink:0;white-space:nowrap;}
 .hist-sel-info::before{content:'●';font-size:8px;color:var(--gold);}
-.hist-card{background:var(--glass-2);
-  border:1px solid var(--glass-border);
+.hist-card{background:var(--glass-2);border:1px solid var(--glass-border);
   box-shadow:var(--glass-hl);border-radius:14px;padding:11px;margin-bottom:9px;
   cursor:pointer;transition:.14s;position:relative;overflow:hidden;}
 .hist-card:active{transform:scale(.985);background:var(--glass-3);}
@@ -601,35 +579,112 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
 .cf-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .cf-actions .btn{padding:12px;font-size:13px;}
 
-/* PRINT */
+/* ============================================================
+   PRINT  —  EXACT PAGE SIZE: 74.5 × 132.5 mm  (211.3 × 375.5 pt)
+   ============================================================ */
 #printArea{display:none;}
+
 @media print{
-  body{background:#fff !important;display:block !important;overflow:visible !important;}
+  @page{ size: 74.5mm 132.5mm; margin: 0; }
+
+  html,body{
+    margin:0 !important; padding:0 !important;
+    background:#fff !important; color:#000 !important;
+    display:block !important; overflow:visible !important;
+    width:74.5mm !important;
+  }
   body::before,body::after{display:none !important;}
   .app{display:none !important;}
-  #printArea{display:block !important;padding:0;margin:0;}
-  #printArea .paper{box-shadow:none !important;max-width:76mm !important;
-    width:76mm !important;border-radius:0 !important;padding:2mm 3mm !important;
-    font-weight:700 !important;font-size:11px !important;
-    -webkit-print-color-adjust:exact;print-color-adjust:exact;}
-  #printArea .p-urdu{font-weight:900 !important;font-size:17px !important;line-height:1.9 !important;}
-  #printArea .p-shop{font-weight:900 !important;font-size:9px !important;}
-  #printArea .p-meta-line{font-weight:800 !important;font-size:9.5px !important;}
-  #printArea .p-info{font-weight:800 !important;font-size:10px !important;}
+
+  #printArea{
+    display:block !important;
+    margin:0 !important; padding:0 !important;
+    width:74.5mm !important;
+  }
+  #printArea .paper-wrap{
+    padding:0 !important; margin:0 !important;
+    min-height:0 !important; display:block !important;
+  }
+  #printArea .paper{
+    width:74.5mm !important;
+    max-width:74.5mm !important;
+    min-height:132.5mm !important;
+    padding:1.5mm 2mm !important;
+    margin:0 !important;
+    border-radius:0 !important;
+    box-shadow:none !important;
+    font-size:8.5px !important;
+    line-height:1.3 !important;
+    font-weight:600 !important;
+    color:#0f172a !important;
+    background:#ffffff !important;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+
+  /* Header block */
+  #printArea .p-head{padding-bottom:3px !important;border-bottom-width:1px !important;}
+  #printArea .p-urdu{font-weight:900 !important;font-size:12px !important;line-height:1.6 !important;}
+  #printArea .p-shop{font-weight:900 !important;font-size:7px !important;letter-spacing:.4px !important;}
+  #printArea .p-meta-line{font-weight:800 !important;font-size:6.8px !important;margin-top:1.5px !important;}
+
+  /* Bill / customer info */
+  #printArea .p-info{
+    font-weight:800 !important;font-size:7.5px !important;
+    padding:3px 0 !important;line-height:1.3 !important;
+    border-bottom-width:1px !important;
+  }
   #printArea .p-info b{font-weight:900 !important;}
-  #printArea table.p-items th{font-weight:900 !important;font-size:9px !important;padding:4px 2px !important;}
-  #printArea table.p-items td{font-weight:800 !important;font-size:10.5px !important;padding:4px 2px !important;}
-  #printArea .sub2{font-weight:700 !important;font-size:8.5px !important;}
-  #printArea .p-tr{font-weight:800 !important;font-size:10.5px !important;}
+
+  /* Items table */
+  #printArea table.p-items{margin-top:3px !important;}
+  #printArea table.p-items th{
+    font-weight:900 !important;font-size:7px !important;
+    padding:2px 1px !important;border-bottom-width:1px !important;
+  }
+  #printArea table.p-items td{
+    font-weight:800 !important;font-size:7.5px !important;
+    padding:2px 1px !important;line-height:1.25 !important;
+    border-bottom-width:.5px !important;
+  }
+  #printArea .sub2{font-weight:700 !important;font-size:6px !important;line-height:1.2 !important;}
+
+  /* Totals */
+  #printArea .p-totals{margin-top:3px !important;padding-top:3px !important;border-top-width:1px !important;}
+  #printArea .p-tr{font-weight:800 !important;font-size:7.5px !important;padding:1px 0 !important;}
   #printArea .p-tr b{font-weight:900 !important;}
-  #printArea .p-tr.grand{font-weight:900 !important;font-size:13px !important;}
-  #printArea .p-tr.grand b{font-weight:900 !important;font-size:15px !important;}
-  #printArea .p-note-line{font-weight:900 !important;font-size:11.5px !important;}
-  #printArea .p-stamp{font-weight:900 !important;border-width:2px !important;
-    font-size:12px !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-  #printArea .p-foot{font-weight:800 !important;font-size:8.5px !important;}
-  #printArea .p-foot .dev{font-weight:800 !important;font-size:8px !important;}
-  @page{size:80mm auto;margin:0;}
+  #printArea .p-tr.grand{
+    font-weight:900 !important;font-size:9.5px !important;
+    padding:3px 0 !important;margin-top:2px !important;
+    border-top-width:1px !important;border-bottom-width:1px !important;
+  }
+  #printArea .p-tr.grand b{font-weight:900 !important;font-size:11px !important;}
+
+  /* Notes */
+  #printArea .p-note-line{
+    font-weight:900 !important;font-size:8px !important;line-height:1.5 !important;
+    margin-top:4px !important;padding-top:3px !important;border-top-width:1px !important;
+  }
+  #printArea .p-note-small{font-weight:700 !important;font-size:6px !important;margin-top:1px !important;}
+
+  /* Stamp */
+  #printArea .p-stamp{
+    font-weight:900 !important;border-width:1.5px !important;
+    font-size:9px !important;padding:1.5px 5px !important;
+    top:3px !important;right:3px !important;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+
+  /* Footer + signatures */
+  #printArea .p-foot{
+    font-weight:800 !important;font-size:6.5px !important;
+    margin-top:6px !important;
+  }
+  #printArea .p-foot .sig{width:56px !important;padding-top:1.5px !important;}
+  #printArea .p-foot .dev{
+    font-weight:800 !important;font-size:6px !important;line-height:1.4 !important;
+  }
+  #printArea .p-foot .dev b{font-weight:900 !important;font-size:6.5px !important;}
 }
 </style>
 </head>
@@ -662,7 +717,6 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
     <div class="net" id="netDot" title="Firebase"></div>
   </header>
 
-  <!-- STORAGE BAR -->
   <div class="storage-bar" id="storageBar">
     <div class="sb-dot" id="sbDot"></div>
     <div class="sb-track"><div class="sb-fill" id="sbFill"></div></div>
@@ -672,7 +726,6 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
 
   <main class="screens">
 
-    <!-- POS -->
     <section class="screen active" id="screen-pos">
       <div class="searchwrap">
         <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
@@ -683,7 +736,6 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
       <div class="empty" id="posEmpty" style="display:none">کوئی آئٹم نہیں ملا</div>
     </section>
 
-    <!-- ITEMS -->
     <section class="screen" id="screen-items">
       <div class="card">
         <div class="card-title" data-ur="نیا آئٹم شامل کریں" data-en="Add New Item">نیا آئٹم شامل کریں</div>
@@ -710,7 +762,6 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
       </div>
     </section>
 
-    <!-- HISTORY -->
     <section class="screen" id="screen-history">
       <div class="card" style="padding:11px;">
         <div class="searchwrap" style="margin-bottom:0;">
@@ -725,7 +776,6 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
       </div>
     </section>
 
-    <!-- REPORTS -->
     <section class="screen" id="screen-reports">
       <div class="card">
         <div class="card-title" data-ur="کمائی / منافع" data-en="Earnings / Profit">کمائی / منافع</div>
@@ -740,7 +790,6 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
       <div class="rep-grid" id="repGrid"></div>
     </section>
 
-    <!-- SETTINGS -->
     <section class="screen" id="screen-settings">
       <div class="card">
         <div class="card-title" data-ur="دکان کی معلومات" data-en="Shop Info">دکان کی معلومات</div>
@@ -810,7 +859,6 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
     </button>
   </nav>
 
-  <!-- CART SHEET -->
   <div class="sheet" id="cartSheet">
     <div class="sheet-head">
       <button class="iconbtn" data-close="cartSheet">←</button>
@@ -892,7 +940,6 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
     </div>
   </div>
 
-  <!-- RECEIPT SHEET -->
   <div class="sheet" id="receiptSheet">
     <div class="sheet-head">
       <button class="iconbtn" data-close="receiptSheet">←</button>
@@ -913,7 +960,6 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
     </div>
   </div>
 
-  <!-- ADD-ITEM MODAL -->
   <div class="am-bg" id="addModal">
     <div class="am-box" id="addModalBox">
       <div class="am-head">
@@ -948,7 +994,6 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
     </div>
   </div>
 
-  <!-- PRICE SETUP MODAL -->
   <div class="am-bg" id="priceModal">
     <div class="am-box" style="max-width:340px;">
       <div class="am-head">
@@ -982,7 +1027,6 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
     </div>
   </div>
 
-  <!-- DUPLICATE CONFIRM -->
   <div class="cf-bg" id="dupConfirmModal">
     <div class="cf-box">
       <div class="cf-icon warn">
@@ -1002,7 +1046,6 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
     </div>
   </div>
 
-  <!-- DELETE CONFIRM -->
   <div class="cf-bg" id="delConfirmModal">
     <div class="cf-box">
       <div class="cf-icon">
@@ -1029,14 +1072,14 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
 
 <script type="module">
 /* ============================================================
-   AL IBRAHIM POS — v3.2
+   AL IBRAHIM POS — v3.3
    Firebase + Storage Indicator + WhatsApp + Reports
    Duplicate check • 12-hour time • Price setup guard
    Pakistani phone validation + saved customer picker
    Item sync: push on add/edit/setup • self-delete • one-time init
+   Print: 74.5 × 132.5 mm (211.3 × 375.5 pt)
    ============================================================ */
 
-/* ---------- FIREBASE CONFIG ---------- */
 const FIREBASE_CONFIG = {
   apiKey:            "AIzaSyBIgfJgAGWIbxnTW75rXLrRvcc853sILHA",
   authDomain:        "al-ibrahim-material.firebaseapp.com",
@@ -1046,8 +1089,7 @@ const FIREBASE_CONFIG = {
   messagingSenderId: "739064796538",
   appId:             "1:739064796538:web:fee256341b743755ff72c3"
 };
-
-const FIREBASE_LIMIT_BYTES = 1024 * 1024 * 1024; /* 1 GB free plan */
+const FIREBASE_LIMIT_BYTES = 1024 * 1024 * 1024;
 
 /* ---------- THEME BOOT ---------- */
 (function(){
@@ -1125,7 +1167,7 @@ save(LS_ITEMS, items);
 const fmt = n => Number(n||0).toLocaleString('en-PK', { maximumFractionDigits:2 });
 const uid = p => p + '_' + Date.now().toString(36) + Math.random().toString(36).slice(2,6);
 
-/* ---------- 12-HOUR TIME HELPERS ---------- */
+/* ---------- 12-HOUR TIME ---------- */
 function time12(d){
   let h = d.getHours();
   const m = String(d.getMinutes()).padStart(2,'0');
@@ -1156,7 +1198,7 @@ function nextBillNo(){
   return Math.max(...bills.map(b => Number(b.no)||0)) + 1;
 }
 
-/* ---------- PAKISTANI PHONE HELPERS ---------- */
+/* ---------- PAKISTANI PHONE ---------- */
 function normalizePakPhone(raw){
   let p = String(raw||'').replace(/\D/g,'');
   if (!p) return '';
@@ -1179,7 +1221,7 @@ function toast(msg, ms=1700){
   toastTimer = setTimeout(() => el.classList.remove('show'), ms);
 }
 
-/* LANGUAGE */
+/* ---------- LANGUAGE ---------- */
 function applyLanguage(lang){
   LANG = lang;
   try{ localStorage.setItem('aib_lang', lang); }catch(e){}
@@ -1236,7 +1278,7 @@ $('#langBtn').addEventListener('click', () => {
   toast(next === 'en' ? '🌐 English' : '🌐 اردو');
 });
 
-/* THEME */
+/* ---------- THEME ---------- */
 function applyTheme(isLight){
   document.body.classList.toggle('light', isLight);
   try{ localStorage.setItem('aib_theme', isLight ? 'light' : 'dark'); }catch(e){}
@@ -1249,7 +1291,7 @@ $('#themeBtn').addEventListener('click', () => {
   toast(isLight ? '☀️ Day Mode' : '🌙 Night Mode');
 });
 
-/* NAV */
+/* ---------- NAV ---------- */
 $$('.navbtn').forEach(btn => {
   btn.addEventListener('click', () => {
     $$('.navbtn').forEach(b => b.classList.remove('active'));
@@ -1267,7 +1309,7 @@ function openSheet(id){ const s=$('#'+id); if(s) s.classList.add('open'); }
 function closeSheet(id){ const s=$('#'+id); if(s) s.classList.remove('open'); }
 $$('[data-close]').forEach(b => b.addEventListener('click', () => closeSheet(b.dataset.close)));
 
-/* POS */
+/* ---------- POS ---------- */
 function itemPriceReady(it){
   return Number(it.rate) > 0 && Number(it.costPrice) > 0;
 }
@@ -1302,18 +1344,18 @@ function renderItems(){
     return `
     <div class="item-card ${ready?'':'noprice'}" data-id="${i.id}">
       ${ready ? '' : `<div class="warn-tag">${t('قیمت سیٹ کریں','SET PRICE')}</div>`}
-      <div class="ic-ur">${i.ur || i.name}</div>
-      <div class="ic-name">${i.name}</div>
+      <div class="ic-ur">${escHTML(i.ur || i.name)}</div>
+      <div class="ic-name">${escHTML(i.name)}</div>
       <div class="ic-bottom">
         <span class="ic-rate">Rs ${fmt(i.rate)}</span>
-        <span class="ic-unit">/ ${i.unit}</span>
+        <span class="ic-unit">/ ${escHTML(i.unit)}</span>
       </div>
     </div>`;
   }).join('');
 }
 $('#searchInput').addEventListener('input', renderItems);
 
-/* ADD-ITEM MODAL */
+/* ---------- ADD-ITEM MODAL ---------- */
 let modalItem = null;
 function openAddModal(item){
   modalItem = item;
@@ -1411,7 +1453,7 @@ $('#itemGrid').addEventListener('click', e => {
   openAddModal(it);
 });
 
-/* CART */
+/* ---------- CART ---------- */
 function updateCartBar(){
   const onPOS = $('#screen-pos').classList.contains('active');
   const count = cart.reduce((s,l) => s + Number(l.qty||0), 0);
@@ -1437,7 +1479,7 @@ function renderCart(){
     box.innerHTML = cart.map((l,i) => `
       <div class="citem" data-idx="${i}">
         <div class="citem-top">
-          <div class="citem-name">${l.ur || l.name}<span>${l.name}</span></div>
+          <div class="citem-name">${escHTML(l.ur || l.name)}<span>${escHTML(l.name)}</span></div>
           <button class="iconbtn danger" data-act="del">✕</button>
         </div>
         <div class="citem-row">
@@ -1495,7 +1537,7 @@ $('#mAddBtn').addEventListener('click', () => {
   toast(t('شامل ہو گیا ✔', 'Added ✔'));
 });
 
-/* CALC TOTALS */
+/* ---------- TOTALS ---------- */
 function calcTotals(){
   const sub     = cart.reduce((s,l) => s + Number(l.qty||0) * Number(l.rate||0), 0);
   const disc    = Number($('#discInput').value)    || 0;
@@ -1584,9 +1626,7 @@ $$('.quickfill button').forEach(b => {
   });
 });
 
-/* ============================================================
-   DUPLICATE BILL CHECK
-   ============================================================ */
+/* ---------- DUPLICATE BILL CHECK ---------- */
 function itemSignature(lines){
   return (lines||[]).map(l =>
     `${(l.ur||l.name||'').trim()}|${(l.name||'').trim()}|${Number(l.qty)||0}|${Number(l.rate)||0}`
@@ -1624,9 +1664,7 @@ $('#dupConfirmModal').addEventListener('click', e => {
   if (e.target.id === 'dupConfirmModal') closeDupConfirm();
 });
 
-/* ============================================================
-   SAVED CUSTOMERS (Name + Phone picker)
-   ============================================================ */
+/* ---------- SAVED CUSTOMERS ---------- */
 function savedCustomers(){
   const map = new Map();
   bills.forEach(b => {
@@ -1669,8 +1707,8 @@ function renderCustSuggest(){
   box.innerHTML = `<div class="cust-head">${t('محفوظ کسٹمرز','SAVED CUSTOMERS')}</div>` +
     list.map((c,i) => `
       <div class="cust-item" data-idx="${i}">
-        <div class="cust-nm">${c.name || t('نام کے بغیر','No name')}</div>
-        <div class="cust-ph">${c.phone || '—'}</div>
+        <div class="cust-nm">${escHTML(c.name) || t('نام کے بغیر','No name')}</div>
+        <div class="cust-ph">${escHTML(c.phone) || '—'}</div>
       </div>`).join('');
   box.classList.add('show');
 }
@@ -1703,8 +1741,61 @@ document.addEventListener('click', e => {
   }
 });
 
-/* GENERATE BILL */
-function buildAndSaveBill(){
+/* ---------- GENERATE BILL ---------- */
+let billBusy = false;
+
+/* Cloud counter se unique bill number (transaction). Offline ho to local number + baad me check. */
+async function reserveBillNo(){
+  const localNext = nextBillNo();
+  if (!fbReady || !fbApi || !fbApi.runTransaction) return { no: localNext, reserved: false };
+  const maxKnown = Math.max(0, ...bills.filter(b => b.synced).map(b => Number(b.no)||0));
+  const job = fbApi.runTransaction(fbDb, async tx => {
+    const ref = fbApi.doc(fbDb, 'meta', 'billCounter');
+    const snap = await tx.get(ref);
+    const c = Math.max(snap.exists() ? Number(snap.data().last)||0 : 0, maxKnown);
+    const no = Math.max(c + 1, localNext);
+    tx.set(ref, { last: no, updatedAt: Date.now() });
+    return no;
+  });
+  try{
+    const no = await Promise.race([job, new Promise((_,rej) => setTimeout(() => rej(new Error('timeout')), 2500))]);
+    return { no, reserved: true };
+  }catch(e){
+    console.warn('[BillNo] counter unavailable, local number used:', e.message);
+    job.catch(()=>{});
+    return { no: localNext, reserved: false };
+  }
+}
+
+/* Upload se pehle: agar number kisi aur device ne le liya ho to naya number do */
+async function ensureUniqueBillNo(bill){
+  if (bill.noReserved || bill.synced || !fbReady || !fbApi.runTransaction) return;
+  const maxKnown = Math.max(0, ...bills.filter(b => b.synced).map(b => Number(b.no)||0));
+  const no = await fbApi.runTransaction(fbDb, async tx => {
+    const ref = fbApi.doc(fbDb, 'meta', 'billCounter');
+    const snap = await tx.get(ref);
+    const c = Math.max(snap.exists() ? Number(snap.data().last)||0 : 0, maxKnown);
+    const mine = Number(bill.no)||0;
+    const final = mine > c ? mine : c + 1;
+    tx.set(ref, { last: Math.max(c, final), updatedAt: Date.now() });
+    return final;
+  });
+  if (no !== bill.no){
+    console.log('[BillNo] renumbered', bill.no, '→', no);
+    bill.no = no;
+    toast(t(`بل نمبر #${no} کر دیا گیا (نمبر ٹکراؤ)`, `Bill renumbered to #${no} (number clash)`), 3000);
+    if ($('#receiptSheet').classList.contains('open') && currentBill && currentBill.id === bill.id) renderReceipt(bill);
+  }
+  bill.noReserved = true;
+}
+
+async function buildAndSaveBill(){
+  if (billBusy) return;
+  billBusy = true;
+  try{ await _buildAndSaveBill(); } finally { billBusy = false; }
+}
+
+async function _buildAndSaveBill(){
   const tt = calcTotals();
   const rawPhone = $('#custPhone').value.trim();
   let phone = '';
@@ -1716,9 +1807,11 @@ function buildAndSaveBill(){
 
   const payMethod = $('#payMethod').value || 'Cash';
   const payStatus = $('#payStatus').value || 'Unpaid';
+  const rsv = await reserveBillNo();
   const bill = {
     id: uid('bill'),
-    no: nextBillNo(),
+    no: rsv.no,
+    noReserved: rsv.reserved,
     date: new Date().toISOString(),
     customer: $('#custName').value.trim() || 'Walk-in Customer',
     phone,
@@ -1743,13 +1836,11 @@ function buildAndSaveBill(){
 $('#genBillBtn').addEventListener('click', () => {
   if (!cart.length) return toast(t('پہلے آئٹم شامل کریں', 'Add an item first'));
 
-  /* phone validation before anything */
   const rawPhone = $('#custPhone').value.trim();
   if (rawPhone && !normalizePakPhone(rawPhone)){
     return toast(t('فون نمبر 11 ہندسوں کا ہونا چاہیے (03XXXXXXXXX)', 'Phone must be 11 digits (03XXXXXXXXX)'));
   }
 
-  /* duplicate check */
   const nowIso = new Date().toISOString();
   const dup = findDuplicateBill(cart, nowIso);
   if (dup){
@@ -1759,7 +1850,7 @@ $('#genBillBtn').addEventListener('click', () => {
   buildAndSaveBill();
 });
 
-/* RECEIPT */
+/* ---------- RECEIPT ---------- */
 function billProfit(b){
   const cogs = (b.items||[]).reduce((s,l) => s + (Number(l.costPrice)||0) * Number(l.qty||0), 0);
   return Number(b.total||0) - cogs;
@@ -1774,8 +1865,8 @@ function renderReceipt(b){
   const rows = b.items.map((l,i) => `
     <tr>
       <td class="c">${i+1}</td>
-      <td>${l.ur || l.name}<div class="sub2">${l.name}</div></td>
-      <td class="c">${fmt(l.qty)}<div class="sub2">${l.unit}</div></td>
+      <td>${escHTML(l.ur || l.name)}<div class="sub2">${escHTML(l.name)}</div></td>
+      <td class="c">${fmt(l.qty)}<div class="sub2">${escHTML(l.unit)}</div></td>
       <td class="r">${fmt(l.rate)}</td>
       <td class="r">${fmt(l.qty * l.rate)}</td>
     </tr>`).join('');
@@ -1807,7 +1898,7 @@ function renderReceipt(b){
     </div>
     <div class="p-info">
       <div>Bill #: <b>${b.no}</b><br>Date: <b>${fmtDate(b.date)}</b></div>
-      <div>Customer: <b>${b.customer}</b>${b.phone ? `<br>Phone: <b>${b.phone}</b>` : ''}</div>
+      <div>Customer: <b>${escHTML(b.customer)}</b>${b.phone ? `<br>Phone: <b>${escHTML(b.phone)}</b>` : ''}</div>
     </div>
     <table class="p-items">
       <thead>
@@ -1850,7 +1941,7 @@ $('#printBtn').addEventListener('click', () => {
   window.print();
 });
 
-/* WHATSAPP */
+/* ---------- WHATSAPP ---------- */
 $('#waBtn').addEventListener('click', () => {
   if (!currentBill) return toast(t('پہلے بل بنائیں', 'Generate a bill first'));
   if (!currentBill.phone) return toast(t('کسٹمر کا فون نمبر درج کریں', 'Enter customer phone first'));
@@ -1900,7 +1991,7 @@ function buildWhatsAppMsg(b){
   return L.join('\n');
 }
 
-/* JPG */
+/* ---------- JPG ---------- */
 $('#jpgBtn').addEventListener('click', async () => {
   if (typeof html2canvas === 'undefined'){
     await loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
@@ -1943,7 +2034,7 @@ $('#syncBtn').addEventListener('click', () => {
   if (currentBill) syncBillToFirebase(currentBill, true);
 });
 
-/* ITEMS MANAGEMENT */
+/* ---------- ITEMS MANAGEMENT ---------- */
 $('#addItemBtn').addEventListener('click', async () => {
   const ur   = $('#newUr').value.trim();
   const name = $('#newName').value.trim();
@@ -1977,8 +2068,8 @@ function renderItemsList(){
     return `
     <div class="ilist-item" data-id="${i.id}">
       <div class="ilist-info">
-        <div class="ilist-ur">${i.ur || i.name}</div>
-        <div class="ilist-sub">${i.name} • ${i.unit} • ${i.cat||'Other'}</div>
+        <div class="ilist-ur">${escHTML(i.ur || i.name)}</div>
+        <div class="ilist-sub">${escHTML(i.name)} • ${escHTML(i.unit)} • ${escHTML(i.cat||'Other')}</div>
       </div>
       <div class="ilist-prices">
         <div class="ilist-rate">Rs ${fmt(i.rate)}</div>
@@ -2019,7 +2110,7 @@ $('#itemsList').addEventListener('click', e => {
   }
 });
 
-/* HISTORY */
+/* ---------- HISTORY ---------- */
 let histSelectMode = false;
 let histSelection  = new Set();
 let pendingDelete  = null;
@@ -2127,7 +2218,7 @@ function renderHistory(){
         <div class="hist-main">
           <div class="hist-top">
             <div class="hist-no">#${b.no}</div>
-            <div class="hist-cust">${b.customer}</div>
+            <div class="hist-cust">${escHTML(b.customer)}</div>
             ${payBadge}
             <div class="badge ${b.synced?'ok':'pend'}">${b.synced?'☁':'⏳'}</div>
           </div>
@@ -2138,7 +2229,7 @@ function renderHistory(){
           <div class="hist-phone">
             ${b.phone ? `
               <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              ${b.phone}
+              ${escHTML(b.phone)}
             ` : ''}
             ${profit !== 0 ? `<span class="hist-profit">+ Rs ${fmt(profit)}</span>` : ''}
           </div>
@@ -2194,7 +2285,7 @@ $('#historyList').addEventListener('click', e => {
   openSheet('receiptSheet');
 });
 
-/* DELETE CONFIRM */
+/* ---------- DELETE CONFIRM ---------- */
 function askDeleteBills(ids){
   if (!ids || !ids.length) return;
   if ($('#receiptSheet').classList.contains('open')) closeSheet('receiptSheet');
@@ -2204,8 +2295,8 @@ function askDeleteBills(ids){
   if (single){
     $('#delTitle').textContent = t('بل ڈیلیٹ کریں؟', 'Delete Bill?');
     $('#delMsg').innerHTML = t(
-      `بل <b>#${single.no}</b> — <b>${single.customer}</b> ڈیلیٹ کریں؟`,
-      `Delete bill <b>#${single.no}</b> for <b>${single.customer}</b>?`
+      `بل <b>#${single.no}</b> — <b>${escHTML(single.customer)}</b> ڈیلیٹ کریں؟`,
+      `Delete bill <b>#${single.no}</b> for <b>${escHTML(single.customer)}</b>?`
     );
   } else {
     $('#delTitle').textContent = t('کئی بل ڈیلیٹ کریں؟', 'Delete Multiple Bills?');
@@ -2228,6 +2319,7 @@ $('#delConfirmBtn').addEventListener('click', () => {
   const idSet = new Set(ids);
   bills = bills.filter(b => !idSet.has(b.id));
   save(LS_BILLS, bills);
+  ids.forEach(deleteBillFromFirebase);      /* baqi devices se bhi delete ho jaye */
   histSelection.clear();
   if (bills.length === 0) histSelectMode = false;
   if (currentBill && idSet.has(currentBill.id)) currentBill = null;
@@ -2242,7 +2334,7 @@ $('#delConfirmModal').addEventListener('click', e => {
   if (e.target.id === 'delConfirmModal') closeDelConfirm();
 });
 
-/* REPORTS */
+/* ---------- REPORTS ---------- */
 function periodStart(period){
   const now = new Date();
   if (period === 'today'){ const d = new Date(now); d.setHours(0,0,0,0); return d; }
@@ -2314,7 +2406,7 @@ function renderReports(){
   `;
 }
 
-/* SETTINGS */
+/* ---------- SETTINGS ---------- */
 function fillSettingsForm(){
   $('#setShopUr').value  = settings.shopUr;
   $('#setShopEn').value  = settings.shopEn;
@@ -2339,17 +2431,48 @@ $('#saveSettingsBtn').addEventListener('click', () => {
   toast(t('سیٹنگ محفوظ ✔', 'Settings saved ✔'));
 });
 
-$('#resetBtn').addEventListener('click', () => {
-  if (!confirm(t('تمام ڈیٹا ڈیلیٹ ہو جائے گا۔ جاری رکھیں؟', 'All data will be deleted. Continue?'))) return;
+async function wipeCloudCollection(name){
+  const snap = await fbApi.getDocs(fbApi.collection(fbDb, name));
+  const docs = snap.docs;
+  for (let i = 0; i < docs.length; i += 20){
+    await Promise.all(docs.slice(i, i + 20).map(d => fbApi.deleteDoc(d.ref)));
+  }
+  return docs.length;
+}
+
+$('#resetBtn').addEventListener('click', async () => {
+  if (!confirm(t('اس ڈیوائس کا تمام ڈیٹا ڈیلیٹ ہو جائے گا۔ جاری رکھیں؟', 'All data on THIS device will be deleted. Continue?'))) return;
+
+  let wipeCloud = false;
+  if (fbReady){
+    wipeCloud = confirm(t(
+      '⚠ کیا کلاؤڈ (Firebase) سے بھی تمام بل اور آئٹمز ڈیلیٹ کریں؟\n\nOK = سب ڈیوائسز سے ڈیٹا ختم (واپس نہیں آئے گا)\nCancel = صرف اس ڈیوائس سے ڈیلیٹ، ری لوڈ پر کلاؤڈ سے واپس آ جائے گا',
+      '⚠ Also delete ALL bills & items from the cloud (Firebase)?\n\nOK = wipe every device (cannot be undone)\nCancel = only this device; data returns from cloud on reload'
+    ));
+  }
+  if (wipeCloud){
+    if (!confirm(t('آخری تصدیق: سب ڈیوائسز کا ڈیٹا مستقل ختم ہو گا۔', 'Final confirmation: this permanently erases data on ALL devices.'))) return;
+    try{
+      toast(t('کلاؤڈ صاف ہو رہا ہے...', 'Wiping cloud...'), 3000);
+      if (billsUnsub){ billsUnsub(); billsUnsub = null; }
+      if (itemsUnsub){ itemsUnsub(); itemsUnsub = null; }
+      await wipeCloudCollection('bills');
+      await wipeCloudCollection('items');
+      try{ await fbApi.deleteDoc(fbApi.doc(fbDb, 'meta', 'billCounter')); }catch(e){}
+    }catch(e){
+      console.error('[Reset] cloud wipe failed:', e);
+      return toast(t('کلاؤڈ صاف نہیں ہو سکا — دوبارہ کوشش کریں', 'Cloud wipe failed — try again'), 3500);
+    }
+  }
   localStorage.removeItem(LS_ITEMS);
   localStorage.removeItem(LS_BILLS);
   localStorage.removeItem(LS_SET);
-  localStorage.removeItem(LS_FB_ITEMS_INIT);   /* allow re-seed on next launch */
+  localStorage.removeItem(LS_FB_ITEMS_INIT);
   location.reload();
 });
 
 /* ============================================================
-   FIREBASE — DYNAMIC IMPORT
+   FIREBASE
    ============================================================ */
 let fbDb = null, fbAuth = null, fbApi = null, fbReady = false;
 let syncInProgress = false;
@@ -2363,13 +2486,22 @@ async function initFirebase(){
     const authMod = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js');
 
     const fbApp = appMod.initializeApp(FIREBASE_CONFIG);
-    fbDb   = fsMod.getFirestore(fbApp);
+    try{
+      fbDb = fsMod.initializeFirestore(fbApp, {
+        localCache: fsMod.persistentLocalCache({ tabManager: fsMod.persistentMultipleTabManager() })
+      });
+    }catch(e){
+      console.warn('[Firebase] persistent cache unavailable, using default:', e.message);
+      fbDb = fsMod.getFirestore(fbApp);
+    }
     fbAuth = authMod.getAuth(fbApp);
 
     fbApi = {
       collection: fsMod.collection, doc: fsMod.doc,
       setDoc: fsMod.setDoc, getDocs: fsMod.getDocs,
       deleteDoc: fsMod.deleteDoc,
+      onSnapshot: fsMod.onSnapshot,
+      runTransaction: fsMod.runTransaction,
       serverTimestamp: fsMod.serverTimestamp
     };
 
@@ -2384,8 +2516,9 @@ async function initFirebase(){
 
     console.log('[Firebase] Connected ✔');
 
+    startBillsListener();            /* REALTIME: sab devices ke bills yahan live aayenge */
     setTimeout(autoSyncPendingBills, 800);
-    setTimeout(initItemsSync, 1500);     /* one-time only — never overwrites cloud */
+    startItemsListener();
     setTimeout(fetchFirebaseUsage, 2000);
 
   }catch(err){
@@ -2421,14 +2554,16 @@ async function syncBillToFirebase(bill, manual=false){
     return false;
   }
   try{
+    try{ await ensureUniqueBillNo(bill); }catch(e){ console.warn('[BillNo] check failed, will retry:', e.message); return false; }
     const data = { ...bill };
-    delete data.id; /* id is the doc key */
+    delete data.id;
+    data.synced = true;              /* cloud copy hamesha synced=true */
     await fbApi.setDoc(fbApi.doc(fbDb, 'bills', bill.id), {
       ...data, createdAt: fbApi.serverTimestamp(), shop: settings.shopEn
     });
     bill.synced = true;
     const idx = bills.findIndex(b => b.id === bill.id);
-    if (idx > -1){ bills[idx].synced = true; save(LS_BILLS, bills); }
+    if (idx > -1){ bills[idx].synced = true; bills[idx].no = bill.no; bills[idx].noReserved = true; save(LS_BILLS, bills); renderHistory(); }
     if (currentBill && currentBill.id === bill.id){
       $('#syncBadge').textContent = 'Synced';
       $('#syncBadge').className = 'badge ok';
@@ -2441,6 +2576,84 @@ async function syncBillToFirebase(bill, manual=false){
     if (manual) toast(t('Sync ناکام — بعد میں دوبارہ کوشش', 'Sync failed — will retry'));
     return false;
   }
+}
+
+/* ---------- REALTIME BILLS SYNC (all devices) ---------- */
+let billsUnsub = null;
+let billsReconciled = false;
+
+function escHTML(v){
+  return String(v == null ? '' : v).replace(/[&<>"']/g, c => (
+    {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function cloudToBill(id, v){
+  const b = { ...v, id, synced: true };
+  delete b.createdAt;
+  if (!Array.isArray(b.items)) b.items = [];
+  b.items = b.items.map(l => ({ ...l, costPrice: Number(l.costPrice)||0 }));
+  b.advance   = Number(b.advance)||0;
+  b.total     = Number(b.total)||0;
+  b.remaining = typeof b.remaining === 'number' ? b.remaining : Math.max(0, b.total - b.advance);
+  if (!b.payMethod) b.payMethod = 'Cash';
+  if (!b.payStatus) b.payStatus = b.remaining <= 0 && b.total > 0 ? 'Full Paid' : (b.advance > 0 ? 'Half Paid' : 'Unpaid');
+  if (!b.date) b.date = new Date().toISOString();
+  return b;
+}
+
+function startBillsListener(){
+  if (billsUnsub || !fbReady || !fbApi) return;
+  billsUnsub = fbApi.onSnapshot(
+    fbApi.collection(fbDb, 'bills'),
+    { includeMetadataChanges: false },
+    snap => {
+      const byId = new Map(bills.map(b => [b.id, b]));
+      let changed = false;
+
+      snap.docChanges().forEach(ch => {
+        const id = ch.doc.id;
+        if (ch.type === 'removed'){
+          const loc = byId.get(id);
+          if (loc && loc.synced){ byId.delete(id); histSelection.delete(id); changed = true; }
+          return;
+        }
+        if (!byId.has(id)){
+          byId.set(id, cloudToBill(id, ch.doc.data({ serverTimestamps:'estimate' })));
+          changed = true;
+        }
+      });
+
+      /* Pehli server-confirmed snapshot: jo bill local me synced hai magar cloud me nahi
+         (kisi aur device ne delete kiya) usay hata do */
+      if (!billsReconciled && !snap.metadata.fromCache){
+        billsReconciled = true;
+        const cloudIds = new Set(snap.docs.map(d => d.id));
+        [...byId.values()].forEach(b => {
+          if (b.synced && !cloudIds.has(b.id)){ byId.delete(b.id); histSelection.delete(b.id); changed = true; }
+        });
+        setTimeout(autoSyncPendingBills, 300);   /* local unsynced bills upload */
+      }
+
+      if (!changed) return;
+      bills = [...byId.values()].sort((a,b) => new Date(b.date) - new Date(a.date));
+      save(LS_BILLS, bills);
+      if (bills.length === 0) histSelectMode = false;
+      renderHistory(); renderReports(); updateSyncBadge(); renderCustSuggest();
+      setTimeout(fetchFirebaseUsage, 500);
+    },
+    err => {
+      console.error('[Bills listener] error:', err);
+      billsUnsub = null;
+      toast(t('Live sync بند — Firebase Rules/Auth چیک کریں', 'Live sync failed — check Firebase rules/auth'), 3500);
+      setTimeout(startBillsListener, 15000);     /* dobara koshish */
+    }
+  );
+}
+
+async function deleteBillFromFirebase(id){
+  if (!fbReady || !fbApi || !id) return;
+  try{ await fbApi.deleteDoc(fbApi.doc(fbDb, 'bills', id)); }
+  catch(e){ console.error('[Firebase] delete bill failed:', e); }
 }
 
 function updateSyncBadge(){
@@ -2463,10 +2676,7 @@ $('#syncBadgeBtn').addEventListener('click', () => {
   autoSyncPendingBills();
 });
 
-/* ---------- ITEM SYNC: push one • delete one • one-time init ---------- */
-
-/* Push a single item (with rate + costPrice) to Firebase.
-   Called on: add new item, price setup save, manual price edit. */
+/* ---------- ITEM SYNC ---------- */
 async function pushItemToFirebase(item){
   if (!fbReady || !fbApi || !item) return;
   try{
@@ -2476,15 +2686,14 @@ async function pushItemToFirebase(item){
       ur:         item.ur,
       unit:       item.unit,
       cat:        item.cat || 'Other',
-      rate:       Number(item.rate) || 0,       /* sell price  */
-      costPrice:  Number(item.costPrice) || 0,  /* cost price  */
+      rate:       Number(item.rate) || 0,
+      costPrice:  Number(item.costPrice) || 0,
       updatedAt:  Date.now()
     });
     console.log('[Firebase] Item saved:', item.name, '| sell:', item.rate, '| cost:', item.costPrice);
   }catch(e){ console.error('[Firebase] push item failed:', e); }
 }
 
-/* Delete a single item from Firebase (self-delete). */
 async function deleteItemFromFirebase(id){
   if (!fbReady || !fbApi || !id) return;
   try{
@@ -2493,44 +2702,68 @@ async function deleteItemFromFirebase(id){
   }catch(e){ console.error('[Firebase] delete item failed:', e); }
 }
 
-/* One-time init sync. Only runs the first time the app is opened on a device.
-   - If Firebase is empty  → push local items once.
-   - If Firebase has data  → pull them down (never overwrite cloud with stale local).
-   After this runs once, we never touch Firebase items automatically again. */
-async function initItemsSync(){
-  if (!fbReady || !fbApi) return;
-  if (localStorage.getItem(LS_FB_ITEMS_INIT) === '1') return;
+function cloudToItem(id, v){
+  v = v || {};
+  return {
+    id,
+    name:      v.name || '',
+    ur:        v.ur   || v.name || '',
+    unit:      v.unit || '',
+    cat:       v.cat  || 'Other',
+    rate:      Number(v.rate) || 0,
+    costPrice: Number(v.costPrice) || 0
+  };
+}
 
-  try{
-    const snap = await fbApi.getDocs(fbApi.collection(fbDb, 'items'));
+let itemsUnsub = null;
+let itemsFirstSync = true;
 
-    if (snap.empty){
-      /* Firebase empty → seed it with what we have locally (one time only) */
-      for (const it of items) await pushItemToFirebase(it);
-      console.log('[InitSync] Seeded Firebase with local items');
-    } else {
-      /* Firebase has data → adopt it as the source of truth */
-      items = snap.docs.map(d => {
-        const v = d.data() || {};
-        return {
-          id:        d.id,
-          name:      v.name || '',
-          ur:        v.ur   || v.name || '',
-          unit:      v.unit || '',
-          cat:       v.cat  || 'Other',
-          rate:      Number(v.rate) || 0,
-          costPrice: Number(v.costPrice) || 0
-        };
+/* REALTIME ITEMS: rate/cost/naye ya delete hue items sab devices par live */
+function startItemsListener(){
+  if (itemsUnsub || !fbReady || !fbApi) return;
+  itemsUnsub = fbApi.onSnapshot(
+    fbApi.collection(fbDb, 'items'),
+    snap => {
+      /* Pehli server snapshot */
+      if (itemsFirstSync){
+        if (snap.metadata.fromCache && snap.empty) return;       /* cache khali — server ka intezar */
+        itemsFirstSync = false;
+        if (snap.empty){
+          items.forEach(it => pushItemToFirebase(it));           /* cloud khali: local items seed */
+          localStorage.setItem(LS_FB_ITEMS_INIT, '1');
+          return;
+        }
+        items = snap.docs.map(d => cloudToItem(d.id, d.data()));
+        save(LS_ITEMS, items);
+        localStorage.setItem(LS_FB_ITEMS_INIT, '1');
+        renderCats(); renderItems(); renderItemsList();
+        return;
+      }
+      let changed = false;
+      snap.docChanges().forEach(ch => {
+        const id = ch.doc.id;
+        const idx = items.findIndex(x => x.id === id);
+        if (ch.type === 'removed'){
+          if (idx > -1){ items.splice(idx, 1); changed = true; }
+          return;
+        }
+        const fresh = cloudToItem(id, ch.doc.data());
+        if (idx === -1){ items.push(fresh); changed = true; }
+        else if (JSON.stringify(items[idx]) !== JSON.stringify({ ...items[idx], ...fresh })){
+          items[idx] = { ...items[idx], ...fresh }; changed = true;
+        }
       });
+      if (!changed) return;
       save(LS_ITEMS, items);
+      if (activeCat !== 'All' && !items.some(i => i.cat === activeCat)) activeCat = 'All';
       renderCats(); renderItems(); renderItemsList();
-      console.log('[InitSync] Pulled', items.length, 'items from Firebase');
+    },
+    err => {
+      console.error('[Items listener] error:', err);
+      itemsUnsub = null;
+      setTimeout(startItemsListener, 15000);
     }
-
-    localStorage.setItem(LS_FB_ITEMS_INIT, '1');
-  }catch(e){
-    console.error('[InitSync] failed:', e);
-  }
+  );
 }
 
 async function pullItemsFromFirebase(){
@@ -2563,7 +2796,6 @@ async function pullItemsFromFirebase(){
 $('#syncAllBtn').addEventListener('click', async () => {
   if (!fbReady) return toast(t('Firebase نہیں لگا', 'Firebase not ready'));
   toast(t('Sync جاری ہے...', 'Syncing...'), 2000);
-  /* push current local items once (manual) */
   for (const it of items) await pushItemToFirebase(it);
   await autoSyncPendingBills();
   const pending = bills.filter(b => !b.synced).length;
@@ -2573,9 +2805,7 @@ $('#syncAllBtn').addEventListener('click', async () => {
 
 $('#pullBtn').addEventListener('click', pullItemsFromFirebase);
 
-/* ============================================================
-   STORAGE USAGE INDICATOR
-   ============================================================ */
+/* ---------- STORAGE ---------- */
 function updateStorageBar(usedBytes){
   const pct = Math.min(100, (usedBytes / FIREBASE_LIMIT_BYTES) * 100);
   const fill = $('#sbFill');
@@ -2609,8 +2839,9 @@ async function fetchFirebaseUsage(){
     return;
   }
   try{
-    const billsSnap = await fbApi.getDocs(fbApi.collection(fbDb, 'bills'));
-    const itemsSnap = await fbApi.getDocs(fbApi.collection(fbDb, 'items'));
+    /* Local counts (realtime listener se already sync) — Firestore reads bachte hain */
+    const billsSnap = { size: bills.filter(x => x.synced).length };
+    const itemsSnap = { size: items.length };
 
     const billsBytes = billsSnap.size * 1600;
     const itemsBytes = itemsSnap.size * 250;
