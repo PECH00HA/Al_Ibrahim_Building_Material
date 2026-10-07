@@ -1,0 +1,2610 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="theme-color" content="#0a0e1a" id="themeColorMeta" />
+<title>Al Ibrahim Building Material & Supplier — POS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400..700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-1:#0a0e1a;--glass:rgba(255,255,255,.06);--glass-2:rgba(255,255,255,.09);
+  --glass-3:rgba(255,255,255,.14);--glass-border:rgba(255,255,255,.10);
+  --glass-border-2:rgba(255,255,255,.16);--glass-hl:inset 0 1px 0 rgba(255,255,255,.10);
+  --glass-shadow:0 8px 32px rgba(0,0,0,.35);
+  --txt:#f1f5f9;--txt-2:#cbd5e1;--txt-3:#94a3b8;--txt-4:#64748b;
+  --gold:#fbbf24;--gold-2:#f59e0b;--gold-soft:rgba(251,191,36,.15);
+  --gold-glow:rgba(245,158,11,.35);--green:#22c55e;--red:#ef4444;
+  --am-bg1:rgba(30,41,59,.98);--am-bg2:rgba(15,23,42,.98);
+  --am-border:rgba(255,255,255,.16);--am-hl:inset 0 1px 0 rgba(255,255,255,.12);
+  --am-shadow:0 20px 60px rgba(0,0,0,.65);
+  --am-input-bg:rgba(255,255,255,.09);--am-input-border:rgba(255,255,255,.16);
+  --am-qty-bg:rgba(255,255,255,.09);--am-qty-border:rgba(255,255,255,.16);
+  --am-total-bg:rgba(251,191,36,.15);--am-total-border:rgba(251,191,36,.25);
+}
+body.light{
+  --bg-1:#e0e7ff;--glass:rgba(255,255,255,.55);--glass-2:rgba(255,255,255,.72);
+  --glass-3:rgba(255,255,255,.88);--glass-border:rgba(255,255,255,.85);
+  --glass-border-2:rgba(15,23,42,.10);--glass-hl:inset 0 1px 0 rgba(255,255,255,.95);
+  --glass-shadow:0 8px 32px rgba(15,23,42,.12);
+  --txt:#0f172a;--txt-2:#1e293b;--txt-3:#475569;--txt-4:#64748b;
+  --gold:#d97706;--gold-2:#b45309;--gold-soft:rgba(217,119,6,.12);
+  --gold-glow:rgba(217,119,6,.3);--red:#dc2626;
+  --am-bg1:#ffffff;--am-bg2:#f8fafc;--am-border:rgba(15,23,42,.10);
+  --am-hl:inset 0 1px 0 #ffffff;--am-shadow:0 20px 60px rgba(15,23,42,.18);
+  --am-input-bg:rgba(241,245,249,.9);--am-input-border:rgba(15,23,42,.10);
+  --am-qty-bg:rgba(241,245,249,.9);--am-qty-border:rgba(15,23,42,.10);
+  --am-total-bg:rgba(217,119,6,.10);--am-total-border:rgba(217,119,6,.22);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;margin:0;padding:0;}
+body{font-family:'Poppins',system-ui,sans-serif;background:var(--bg-1);color:var(--txt);
+  display:flex;justify-content:center;overflow:hidden;transition:background .4s ease,color .3s ease;position:relative;}
+input,select,button,textarea{font-family:inherit;color:inherit;}
+body::before,body::after{content:'';position:fixed;border-radius:50%;filter:blur(110px);
+  pointer-events:none;z-index:0;transition:background .4s ease;}
+body::before{width:380px;height:380px;top:-90px;left:-90px;
+  background:radial-gradient(circle,rgba(251,191,36,.38),transparent 68%);}
+body::after{width:420px;height:420px;bottom:-110px;right:-110px;
+  background:radial-gradient(circle,rgba(59,130,246,.32),transparent 68%);}
+body.light::before{background:radial-gradient(circle,rgba(251,191,36,.55),transparent 68%);}
+body.light::after{background:radial-gradient(circle,rgba(99,102,241,.42),transparent 68%);}
+.app{position:relative;z-index:1;width:100%;max-width:460px;height:100dvh;
+  display:flex;flex-direction:column;overflow:hidden;
+  background:linear-gradient(180deg,rgba(10,14,26,.55),rgba(10,14,26,.35));
+  backdrop-filter:blur(24px) saturate(140%);-webkit-backdrop-filter:blur(24px) saturate(140%);
+  transition:background .4s ease;}
+body.light .app{background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,.18));}
+
+/* APP BAR */
+.appbar{flex-shrink:0;display:flex;align-items:center;gap:8px;padding:11px 10px;
+  background:var(--glass);backdrop-filter:blur(20px) saturate(160%);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);
+  border-bottom:1px solid var(--glass-border);box-shadow:var(--glass-hl);}
+.logo{width:40px;height:40px;border-radius:13px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));
+  display:grid;place-items:center;font-weight:700;font-size:12px;color:#1c1917;
+  letter-spacing:.5px;box-shadow:0 6px 20px var(--gold-glow),inset 0 1px 0 rgba(255,255,255,.4);}
+.brand{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:2px;}
+.brand .urdu{font-family:'Noto Nastaliq Urdu',serif;font-size:13.5px;line-height:1.9;
+  color:var(--gold);font-weight:600;white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis;margin:0;}
+.brand .sub{font-size:9.5px;color:var(--txt-3);letter-spacing:.3px;line-height:1.4;
+  margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.iconbar{width:34px;height:34px;border-radius:11px;flex-shrink:0;background:var(--glass-2);
+  border:1px solid var(--glass-border-2);box-shadow:var(--glass-hl);color:var(--txt-2);
+  display:grid;place-items:center;cursor:pointer;position:relative;
+  transition:transform .18s,background .2s,color .2s;}
+.iconbar:active{transform:scale(.88);}
+.iconbar svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.9;
+  stroke-linecap:round;stroke-linejoin:round;display:block;}
+.iconbar .moon{display:block;}.iconbar .sun{display:none;}
+body.light .iconbar .moon{display:none;}body.light .iconbar .sun{display:block;}
+body.light .iconbar.themebtn{color:var(--gold);}
+.langbtn{width:auto;min-width:34px;padding:0 8px;font-size:10px;font-weight:700;
+  letter-spacing:.5px;color:var(--gold);}
+.sync-badge{position:absolute;top:-4px;right:-4px;min-width:15px;height:15px;padding:0 4px;
+  background:var(--red);color:#fff;border-radius:8px;font-size:8.5px;font-weight:700;
+  display:none;align-items:center;justify-content:center;box-shadow:0 0 0 2px var(--bg-1);}
+.sync-badge.show{display:flex;}
+.net{width:9px;height:9px;border-radius:50%;background:var(--red);flex-shrink:0;
+  box-shadow:0 0 9px var(--red);transition:.3s;}
+.net.on{background:var(--green);box-shadow:0 0 9px var(--green);}
+
+/* STORAGE BAR */
+.storage-bar{
+  flex-shrink:0;height:20px;
+  background:var(--glass);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--glass-border);
+  display:flex;align-items:center;gap:7px;
+  padding:0 12px;font-size:8.5px;font-weight:600;color:var(--txt-3);
+  transition:background .4s ease;
+}
+.storage-bar .sb-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:#ef4444;flex-shrink:0;box-shadow:0 0 6px #ef4444;transition:.3s;
+}
+.storage-bar .sb-dot.on{background:#22c55e;box-shadow:0 0 6px #22c55e;}
+.storage-bar .sb-track{
+  flex:1;height:5px;border-radius:3px;
+  background:rgba(255,255,255,.08);overflow:hidden;
+}
+body.light .storage-bar .sb-track{background:rgba(15,23,42,.08);}
+.storage-bar .sb-fill{
+  height:100%;width:2%;border-radius:3px;
+  background:linear-gradient(90deg,#22c55e,#16a34a);
+  transition:width .6s cubic-bezier(.34,1.2,.4,1),background .3s;
+}
+.storage-bar .sb-fill.warn{background:linear-gradient(90deg,#fbbf24,#f59e0b);}
+.storage-bar .sb-fill.danger{background:linear-gradient(90deg,#ef4444,#b91c1c);}
+.storage-bar .sb-label{
+  flex-shrink:0;font-family:'Poppins',sans-serif;
+  letter-spacing:.2px;color:var(--txt-3);
+}
+.storage-bar .sb-label b{color:var(--txt);font-weight:700;}
+.storage-bar .sb-sync{
+  font-size:8px;color:var(--txt-4);
+  padding:1px 6px;border-radius:6px;
+  background:var(--glass-2);border:1px solid var(--glass-border-2);
+  font-weight:600;flex-shrink:0;white-space:nowrap;
+}
+.storage-bar .sb-sync.ok{color:#22c55e;border-color:rgba(34,197,94,.3);}
+.storage-bar .sb-sync.off{color:#f59e0b;border-color:rgba(245,158,11,.3);}
+
+.screens{flex:1;position:relative;overflow:hidden;}
+.screen{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;
+  padding:12px 12px 190px;display:none;}
+.screen.active{display:block;animation:fade .2s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.screen::-webkit-scrollbar{width:0;}
+
+/* SEARCH */
+.searchwrap{display:flex;align-items:center;gap:9px;background:var(--glass-2);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid var(--glass-border);box-shadow:var(--glass-hl);
+  border-radius:14px;padding:11px 13px;margin-bottom:11px;transition:border-color .2s;}
+.searchwrap:focus-within{border-color:var(--gold);}
+.searchwrap svg{width:17px;height:17px;stroke:var(--txt-3);flex-shrink:0;fill:none;
+  stroke-width:2;stroke-linecap:round;}
+.searchwrap input{flex:1;background:none;border:0;outline:0;color:var(--txt);font-size:13.5px;}
+.searchwrap input::placeholder{color:var(--txt-4);}
+
+/* CHIPS */
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:11px;scrollbar-width:none;}
+.chips::-webkit-scrollbar{display:none;}
+.chip{flex-shrink:0;padding:7px 15px;border-radius:20px;font-size:12px;font-weight:500;
+  background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid var(--glass-border);color:var(--txt-3);cursor:pointer;transition:.18s;}
+.chip.active{background:linear-gradient(135deg,var(--gold),var(--gold-2));
+  color:#1c1917;border-color:transparent;font-weight:600;box-shadow:0 4px 16px var(--gold-glow);}
+
+/* ITEM GRID */
+.item-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.item-card{background:var(--glass-2);backdrop-filter:blur(16px) saturate(150%);
+  -webkit-backdrop-filter:blur(16px) saturate(150%);border:1px solid var(--glass-border);
+  box-shadow:var(--glass-hl),var(--glass-shadow);border-radius:16px;padding:12px 12px 11px;
+  cursor:pointer;transition:.18s;position:relative;overflow:hidden;}
+.item-card::after{content:'';position:absolute;right:-30px;top:-30px;width:70px;height:70px;
+  border-radius:50%;background:radial-gradient(circle,var(--gold-soft),transparent 70%);
+  pointer-events:none;}
+.item-card:active{transform:scale(.95);background:var(--glass-3);}
+.item-card.noprice{border-color:rgba(245,158,11,.45);}
+.item-card .warn-tag{position:absolute;top:6px;right:6px;font-size:9px;
+  background:rgba(245,158,11,.18);color:#f59e0b;border:1px solid rgba(245,158,11,.3);
+  padding:1px 6px;border-radius:8px;font-weight:700;letter-spacing:.2px;}
+.ic-ur{font-family:'Noto Nastaliq Urdu',serif;font-size:17px;line-height:1.95;
+  color:var(--gold);font-weight:600;}
+.ic-name{font-size:10.5px;color:var(--txt-3);margin-top:-4px;letter-spacing:.2px;}
+.ic-bottom{display:flex;align-items:baseline;gap:4px;margin-top:8px;}
+.ic-rate{font-size:14px;font-weight:700;color:var(--txt);}
+.ic-unit{font-size:10px;color:var(--txt-4);}
+.empty{text-align:center;padding:44px 16px;color:var(--txt-4);font-size:13px;
+  font-family:'Noto Nastaliq Urdu',serif;line-height:2.2;}
+
+/* CARDS */
+.card{background:var(--glass);backdrop-filter:blur(18px) saturate(150%);
+  -webkit-backdrop-filter:blur(18px) saturate(150%);border:1px solid var(--glass-border);
+  box-shadow:var(--glass-hl),var(--glass-shadow);border-radius:16px;padding:13px;
+  margin-bottom:12px;}
+.card-title{font-size:12.5px;font-weight:600;color:var(--gold);margin-bottom:11px;
+  display:flex;align-items:center;gap:7px;}
+.card-title::before{content:'';width:3px;height:14px;border-radius:2px;
+  background:linear-gradient(180deg,var(--gold),var(--gold-2));}
+
+/* INPUTS */
+input,select{width:100%;background:var(--glass-2);backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);border:1px solid var(--glass-border-2);
+  border-radius:11px;padding:11px 12px;color:var(--txt);font-size:13px;outline:0;
+  transition:.18s;box-shadow:var(--glass-hl);-webkit-appearance:none;appearance:none;}
+input:focus,select:focus{border-color:var(--gold);
+  box-shadow:0 0 0 3px var(--gold-soft),var(--glass-hl);}
+input::placeholder{color:var(--txt-4);}
+select{cursor:pointer;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23fbbf24' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat:no-repeat;background-position:right 12px center;padding-right:34px;}
+select option{background:var(--bg-1);color:var(--txt);}
+body.light select option{background:#fff;color:#0f172a;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:11px;}
+.form-grid .full{grid-column:1/-1;}
+
+/* BUTTONS */
+.btn{width:100%;border:0;border-radius:13px;padding:12px;font-size:13.5px;font-weight:600;
+  cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center;gap:7px;}
+.btn:active{transform:scale(.97);}
+.btn.primary{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#1c1917;
+  box-shadow:0 8px 24px var(--gold-glow),inset 0 1px 0 rgba(255,255,255,.4);}
+.btn.dark{background:var(--glass-2);border:1px solid var(--glass-border-2);color:var(--txt-2);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:var(--glass-hl);}
+.btn.green{background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;
+  box-shadow:0 8px 24px rgba(34,197,94,.3),inset 0 1px 0 rgba(255,255,255,.3);}
+.btn.wa{background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;
+  box-shadow:0 8px 24px rgba(37,211,102,.3),inset 0 1px 0 rgba(255,255,255,.25);}
+.btn.red{background:linear-gradient(135deg,#ef4444,#b91c1c);color:#fff;
+  box-shadow:0 8px 24px rgba(239,68,68,.3),inset 0 1px 0 rgba(255,255,255,.3);}
+.btn.ghost{background:transparent;border:1.5px dashed var(--glass-border-2);color:var(--txt-3);}
+.btn.big{padding:15px;font-size:14.5px;}
+.btn.sm{width:auto;padding:8px 14px;font-size:12px;border-radius:10px;}
+
+/* ITEM LIST */
+.ilist-item{display:flex;align-items:center;gap:8px;padding:10px 0;
+  border-bottom:1px solid var(--glass-border);}
+.ilist-item:last-child{border-bottom:0;padding-bottom:0;}
+.ilist-info{flex:1;min-width:0;}
+.ilist-ur{font-family:'Noto Nastaliq Urdu',serif;font-size:14px;line-height:1.9;color:var(--txt);}
+.ilist-sub{font-size:10px;color:var(--txt-4);margin-top:-4px;line-height:1.5;}
+.ilist-prices{display:flex;flex-direction:column;gap:1px;text-align:right;}
+.ilist-rate{font-size:12.5px;font-weight:700;color:var(--gold);white-space:nowrap;}
+.ilist-cost{font-size:9.5px;font-weight:600;color:var(--txt-4);white-space:nowrap;}
+.ilist-cost.miss{color:#f59e0b;}
+.iconbtn{width:30px;height:30px;border-radius:9px;background:var(--glass-2);
+  border:1px solid var(--glass-border-2);color:var(--txt-3);display:grid;place-items:center;
+  cursor:pointer;flex-shrink:0;font-size:14px;transition:.14s;box-shadow:var(--glass-hl);}
+.iconbtn:active{transform:scale(.88);}
+.iconbtn.danger{color:var(--red);}
+
+/* CART BAR */
+.cartbar{position:absolute;left:12px;right:12px;bottom:76px;z-index:40;
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));border-radius:16px;
+  padding:12px 16px;display:none;align-items:center;justify-content:space-between;
+  color:#1c1917;box-shadow:0 12px 36px var(--gold-glow),inset 0 1px 0 rgba(255,255,255,.4);
+  cursor:pointer;transition:.15s;}
+.cartbar.show{display:flex;animation:pop .25s cubic-bezier(.34,1.56,.64,1);}
+.cartbar:active{transform:scale(.98);}
+@keyframes pop{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
+.cartbar .cb-l{font-size:10.5px;font-weight:600;opacity:.8;letter-spacing:.4px;}
+.cartbar .cb-t{font-size:16px;font-weight:700;}
+.cartbar .cb-r{font-size:12.5px;font-weight:700;background:rgba(0,0,0,.16);
+  padding:8px 14px;border-radius:10px;}
+
+/* BOTTOM NAV */
+.bottomnav{position:absolute;bottom:0;left:0;right:0;height:62px;z-index:50;
+  background:var(--glass);backdrop-filter:blur(24px) saturate(160%);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);border-top:1px solid var(--glass-border);
+  box-shadow:var(--glass-hl);display:flex;align-items:stretch;
+  padding-bottom:env(safe-area-inset-bottom);}
+.navbtn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;background:none;border:0;color:var(--txt-4);font-size:8.5px;font-weight:500;
+  cursor:pointer;transition:.18s;position:relative;padding:0 2px;}
+.navbtn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.9;
+  stroke-linecap:round;stroke-linejoin:round;}
+.navbtn.active{color:var(--gold);}
+.navbtn.active::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:24px;height:2.5px;border-radius:0 0 4px 4px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-2));box-shadow:0 0 8px var(--gold-glow);}
+
+/* SHEETS */
+.sheet{position:absolute;inset:0;z-index:100;
+  background:linear-gradient(180deg,rgba(10,14,26,.85),rgba(10,14,26,.75));
+  backdrop-filter:blur(28px) saturate(150%);-webkit-backdrop-filter:blur(28px) saturate(150%);
+  display:flex;flex-direction:column;transform:translateY(101%);
+  transition:transform .32s cubic-bezier(.4,0,.2,1);visibility:hidden;}
+body.light .sheet{background:linear-gradient(180deg,rgba(255,255,255,.65),rgba(255,255,255,.5));}
+.sheet.open{transform:translateY(0);visibility:visible;}
+.sheet-head{flex-shrink:0;display:flex;align-items:center;gap:11px;padding:12px 14px;
+  background:var(--glass);border-bottom:1px solid var(--glass-border);box-shadow:var(--glass-hl);}
+.sheet-title{flex:1;font-size:14.5px;font-weight:600;color:var(--txt);}
+.sheet-body{flex:1;overflow-y:auto;padding:13px 14px 20px;}
+.sheet-body::-webkit-scrollbar{width:0;}
+.sheet-foot{flex-shrink:0;padding:12px 14px calc(12px + env(safe-area-inset-bottom));
+  background:var(--glass);border-top:1px solid var(--glass-border);box-shadow:var(--glass-hl);}
+
+/* CART ITEM */
+.citem{background:var(--glass-2);backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);border:1px solid var(--glass-border);
+  box-shadow:var(--glass-hl);border-radius:14px;padding:11px;margin-bottom:9px;}
+.citem-top{display:flex;align-items:center;gap:8px;margin-bottom:9px;}
+.citem-name{flex:1;font-family:'Noto Nastaliq Urdu',serif;font-size:15px;line-height:1.9;
+  color:var(--txt);font-weight:600;}
+.citem-name span{font-family:'Poppins',sans-serif;font-size:10px;color:var(--txt-4);
+  font-weight:400;margin-left:5px;}
+.citem-row{display:flex;align-items:center;gap:8px;}
+.qtybox{display:flex;align-items:center;background:var(--glass-3);
+  border:1px solid var(--glass-border-2);border-radius:10px;overflow:hidden;}
+.qtybox button{width:32px;height:34px;background:none;border:0;color:var(--gold);
+  font-size:17px;cursor:pointer;font-weight:600;line-height:1;}
+.qtybox button:active{background:var(--gold-soft);}
+.qtybox input{width:46px;border:0;background:none;text-align:center;padding:0;
+  font-size:13.5px;font-weight:600;color:var(--txt);border-radius:0;box-shadow:none;}
+.qtybox input:focus{box-shadow:none;border:0;}
+.rateinp{width:78px;padding:9px 8px;font-size:12.5px;text-align:right;}
+.amt{margin-left:auto;font-size:13.5px;font-weight:700;color:var(--gold);white-space:nowrap;}
+
+/* CUSTOMER SUGGEST */
+.cust-suggest{display:none;margin-top:9px;border-radius:12px;overflow:hidden;
+  border:1px solid var(--glass-border-2);background:var(--glass-2);
+  box-shadow:var(--glass-hl);}
+.cust-suggest.show{display:block;animation:fade .18s ease;}
+.cust-head{font-size:9px;font-weight:700;color:var(--txt-4);letter-spacing:.5px;
+  text-transform:uppercase;padding:7px 11px 4px;}
+.cust-item{display:flex;align-items:center;gap:8px;padding:9px 11px;cursor:pointer;
+  border-top:1px solid var(--glass-border);transition:.15s;}
+.cust-item:active{background:var(--gold-soft);}
+.cust-nm{flex:1;font-size:12.5px;color:var(--txt);font-weight:600;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.cust-ph{font-size:11px;color:var(--gold);font-weight:700;white-space:nowrap;
+  letter-spacing:.2px;}
+
+/* TOTALS */
+.trow{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:8px 0;font-size:12.5px;color:var(--txt-3);
+  border-bottom:1px dashed var(--glass-border-2);}
+.trow:last-child{border-bottom:0;}
+.trow b{color:var(--txt);font-size:13.5px;font-weight:600;}
+.trow input{width:110px;padding:8px 10px;font-size:12.5px;text-align:right;}
+.trow.grand{border-top:1.5px solid var(--glass-border-2);
+  border-bottom:1.5px solid var(--glass-border-2);margin:7px 0;padding:12px 0;}
+.trow.grand span{font-size:13px;color:var(--gold);font-weight:600;}
+.trow.grand b{font-size:19px;color:var(--gold);font-weight:700;}
+
+/* PAYMENT */
+.pay-section{margin-top:14px;padding-top:12px;border-top:1.5px dashed var(--gold);}
+.pay-section-title{font-size:11.5px;font-weight:700;color:var(--gold);margin-bottom:10px;
+  display:flex;align-items:center;gap:6px;letter-spacing:.3px;text-transform:uppercase;}
+.pay-section-title::before{content:'💳';font-size:13px;}
+.pay-row{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:10px;}
+.pay-field label{font-size:10.5px;color:var(--txt-3);display:block;margin-bottom:5px;
+  padding-left:3px;font-weight:500;}
+.pay-field select,.pay-field input{padding:10px 11px;font-size:12.5px;}
+.pay-preview{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:11px;
+  background:var(--glass-2);border:1px solid var(--glass-border-2);font-size:11.5px;
+  margin-top:6px;box-shadow:var(--glass-hl);}
+.pay-preview .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;
+  background:var(--gold);box-shadow:0 0 8px currentColor;}
+.pay-preview.paid .dot{background:var(--green);box-shadow:0 0 8px var(--green);}
+.pay-preview.unpaid .dot{background:var(--red);box-shadow:0 0 8px var(--red);}
+.pay-preview .label{color:var(--txt-3);flex:1;}
+.pay-preview .val{color:var(--txt);font-weight:700;}
+.quickfill{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
+.quickfill button{flex:1;min-width:0;padding:7px 8px;border-radius:9px;
+  background:var(--glass-2);border:1px solid var(--glass-border-2);color:var(--txt-3);
+  font-size:10.5px;font-weight:600;cursor:pointer;transition:.15s;box-shadow:var(--glass-hl);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.quickfill button:active{transform:scale(.94);background:var(--gold-soft);color:var(--gold);}
+
+/* ADD-ITEM MODAL */
+.am-bg{position:absolute;inset:0;z-index:200;background:rgba(0,0,0,.55);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .22s;}
+body.light .am-bg{background:rgba(15,23,42,.35);}
+.am-bg.open{opacity:1;pointer-events:auto;}
+.am-box{width:100%;max-width:360px;
+  background:linear-gradient(160deg,var(--am-bg1),var(--am-bg2));
+  backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);
+  border:1px solid var(--am-border);border-radius:20px;padding:18px;
+  box-shadow:var(--am-shadow),var(--am-hl);
+  transform:translateY(20px) scale(.96);
+  transition:transform .28s cubic-bezier(.34,1.56,.64,1),background .35s ease,border-color .3s ease;}
+.am-bg.open .am-box{transform:translateY(0) scale(1);}
+.am-head{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
+.am-icon{width:44px;height:44px;border-radius:13px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));
+  display:grid;place-items:center;color:#1c1917;font-weight:800;font-size:16px;
+  box-shadow:0 6px 18px var(--gold-glow);}
+.am-title-wrap{flex:1;min-width:0;}
+.am-title{font-family:'Noto Nastaliq Urdu',serif;font-size:17px;line-height:1.95;
+  color:var(--gold);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.am-sub{font-size:10.5px;color:var(--txt-3);margin-top:-3px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.am-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:13px;}
+.am-field label{font-size:10.5px;color:var(--txt-3);display:block;margin-bottom:5px;
+  padding-left:3px;font-weight:500;}
+.am-qty{display:flex;align-items:stretch;background:var(--am-qty-bg);
+  border:1px solid var(--am-qty-border);border-radius:11px;overflow:hidden;
+  box-shadow:var(--glass-hl);transition:background .25s,border-color .25s;}
+.am-qty button{width:42px;background:none;border:0;color:var(--gold);
+  font-size:20px;font-weight:700;cursor:pointer;line-height:1;}
+.am-qty button:active{background:var(--gold-soft);}
+.am-qty input{flex:1;border:0;background:none;border-radius:0;
+  padding:12px 4px;text-align:center;box-shadow:none;
+  font-size:15px;font-weight:700;color:var(--gold);}
+.am-qty input:focus{box-shadow:none;border:0;}
+.am-rate{font-size:15px;font-weight:700;text-align:center;
+  padding:12px 8px;color:var(--gold);background:var(--am-input-bg);
+  border:1px solid var(--am-input-border);}
+.am-total{display:flex;align-items:center;justify-content:space-between;
+  padding:11px 13px;border-radius:12px;background:var(--am-total-bg);
+  border:1px solid var(--am-total-border);margin-bottom:14px;
+  transition:background .25s,border-color .25s;}
+.am-total span{font-size:11.5px;color:var(--txt-3);font-weight:500;
+  letter-spacing:.3px;text-transform:uppercase;}
+.am-total b{font-size:19px;color:var(--gold);font-weight:800;}
+.am-actions{display:grid;grid-template-columns:1fr 1.4fr;gap:10px;}
+.am-warn{display:flex;align-items:flex-start;gap:8px;font-size:11px;color:#f59e0b;
+  background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.3);
+  border-radius:11px;padding:10px 11px;margin-bottom:12px;line-height:1.7;font-weight:500;}
+.am-warn .ic{font-size:13px;line-height:1.4;}
+
+/* RECEIPT — COMPACT */
+.paper-wrap{padding:14px 10px;display:flex;justify-content:center;min-height:100%;}
+.paper{position:relative;width:100%;max-width:320px;background:#ffffff;color:#0f172a;
+  border-radius:8px;padding:12px 11px 12px;font-family:'Poppins',sans-serif;font-weight:500;
+  box-shadow:0 14px 40px rgba(0,0,0,.4);overflow:hidden;font-size:10.5px;line-height:1.4;}
+.p-stamp{position:absolute;top:6px;right:6px;
+  padding:3px 8px;border:2px solid #b91c1c;border-radius:5px;
+  color:#b91c1c;font-weight:900;font-size:11px;letter-spacing:1.5px;
+  text-transform:uppercase;transform:rotate(-8deg);
+  background:rgba(255,255,255,.85);opacity:.9;}
+.p-stamp.partial{border-color:#c2410c;color:#c2410c;}
+.p-stamp.credit{border-color:#a16207;color:#a16207;}
+.p-head{text-align:center;padding-bottom:6px;border-bottom:1.5px solid #0f172a;}
+.p-urdu{font-family:'Noto Nastaliq Urdu',serif;font-size:16px;line-height:1.85;
+  font-weight:700;color:#0f172a;margin-bottom:0;}
+.p-shop{font-size:8.5px;font-weight:800;letter-spacing:.7px;color:#0f172a;margin-top:-2px;}
+.p-meta-line{font-size:9px;font-weight:600;color:#334155;margin-top:3px;letter-spacing:.2px;}
+.p-info{display:flex;justify-content:space-between;font-size:9.5px;color:#1e293b;
+  padding:5px 0;border-bottom:1px dashed #94a3b8;line-height:1.5;font-weight:600;}
+.p-info b{color:#0f172a;font-weight:800;}
+.p-info > div:last-child{text-align:right;}
+table.p-items{width:100%;border-collapse:collapse;margin-top:5px;}
+table.p-items th{font-size:8.5px;font-weight:800;color:#0f172a;text-transform:uppercase;
+  letter-spacing:.3px;padding:4px 2px;border-bottom:1.5px solid #0f172a;text-align:left;}
+table.p-items td{font-size:10px;font-weight:600;padding:4px 2px;
+  border-bottom:1px solid #e2e8f0;color:#0f172a;vertical-align:top;line-height:1.35;}
+table.p-items td.c,table.p-items th.c{text-align:center;}
+table.p-items td.r,table.p-items th.r{text-align:right;}
+.sub2{font-size:8px;color:#64748b;font-weight:500;line-height:1.3;}
+.p-totals{margin-top:6px;padding-top:5px;border-top:1.5px solid #0f172a;}
+.p-tr{display:flex;justify-content:space-between;font-size:10px;padding:2px 0;
+  color:#1e293b;font-weight:600;}
+.p-tr b{color:#0f172a;font-weight:800;}
+.p-tr.grand{font-size:12.5px;font-weight:900;color:#0f172a;border-top:1.5px solid #0f172a;
+  border-bottom:1.5px solid #0f172a;margin-top:4px;padding:6px 0;}
+.p-tr.grand b{font-size:14px;font-weight:900;}
+.p-tr.paid b{color:#15803d;}
+.p-tr.due b{color:#b91c1c;}
+.p-note-line{text-align:center;font-family:'Noto Nastaliq Urdu',serif;
+  font-size:10.5px;line-height:1.85;color:#0f172a;font-weight:700;
+  margin-top:8px;padding-top:6px;border-top:1px dashed #94a3b8;}
+.p-note-small{text-align:center;font-size:8px;color:#64748b;margin-top:2px;letter-spacing:.2px;font-weight:600;}
+.p-foot{display:flex;justify-content:space-between;align-items:flex-end;
+  margin-top:12px;font-size:8px;color:#475569;font-weight:600;}
+.p-foot .sig{border-top:1px solid #64748b;padding-top:2px;width:68px;text-align:center;}
+.p-foot .dev{font-size:7.5px;color:#475569;font-weight:700;letter-spacing:.2px;
+  text-align:right;line-height:1.6;}
+.p-foot .dev b{display:block;color:#0f172a;font-weight:800;font-size:8px;}
+
+/* TOAST */
+.toast{position:absolute;left:50%;bottom:150px;transform:translate(-50%,20px);
+  background:var(--glass-3);backdrop-filter:blur(20px) saturate(160%);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);
+  border:1px solid var(--glass-border-2);box-shadow:var(--glass-hl),var(--glass-shadow);
+  color:var(--txt);padding:10px 20px;border-radius:30px;font-size:12.5px;font-weight:500;
+  z-index:500;opacity:0;pointer-events:none;transition:.25s;white-space:nowrap;max-width:90%;}
+.toast.show{opacity:1;transform:translate(-50%,0);}
+
+/* HISTORY */
+.hist-toolbar{display:flex;gap:7px;align-items:center;margin:0 0 10px;
+  flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;
+  position:sticky;top:0;z-index:10;padding:8px 4px;
+  background:linear-gradient(180deg,var(--bg-1) 0%,var(--bg-1) 75%,transparent 100%);
+  border-radius:10px;}
+body.light .hist-toolbar{background:linear-gradient(180deg,var(--bg-1) 0%,var(--bg-1) 75%,transparent 100%);}
+.hist-toolbar::-webkit-scrollbar{display:none;}
+.hist-toolbar .spacer{flex:1;}
+.hist-toolbar .btn{width:auto;white-space:nowrap;flex-shrink:0;}
+.hist-sel-info{font-size:11px;font-weight:700;color:var(--gold);
+  padding:7px 11px;background:var(--gold-soft);
+  border:1px solid rgba(251,191,36,.28);border-radius:10px;
+  display:flex;align-items:center;gap:5px;flex-shrink:0;white-space:nowrap;}
+.hist-sel-info::before{content:'●';font-size:8px;color:var(--gold);}
+.hist-card{background:var(--glass-2);backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);border:1px solid var(--glass-border);
+  box-shadow:var(--glass-hl);border-radius:14px;padding:11px;margin-bottom:9px;
+  cursor:pointer;transition:.14s;position:relative;overflow:hidden;}
+.hist-card:active{transform:scale(.985);background:var(--glass-3);}
+.hist-card.selected{border-color:var(--gold);background:var(--gold-soft);
+  box-shadow:0 0 0 2px var(--gold-soft),var(--glass-hl),0 4px 16px var(--gold-glow);}
+.hist-card.selected::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,var(--gold),var(--gold-2));
+  border-radius:14px 0 0 14px;}
+.hist-row-top{display:flex;align-items:flex-start;gap:9px;}
+.hist-check{width:22px;height:22px;border-radius:7px;flex-shrink:0;
+  border:1.5px solid var(--glass-border-2);background:var(--glass-3);
+  display:grid;place-items:center;cursor:pointer;transition:.18s;margin-top:2px;}
+.hist-check svg{width:12px;height:12px;fill:none;stroke:#1c1917;stroke-width:3.2;
+  stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:.15s;}
+.hist-check.on{background:linear-gradient(135deg,var(--gold),var(--gold-2));
+  border-color:var(--gold);box-shadow:0 2px 8px var(--gold-glow);}
+.hist-check.on svg{opacity:1;}
+.hist-main{flex:1;min-width:0;}
+.hist-top{display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap;}
+.hist-no{font-size:11.5px;font-weight:800;color:var(--gold);flex-shrink:0;}
+.hist-cust{flex:1;font-size:11.5px;color:var(--txt-2);overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;min-width:0;}
+.badge{font-size:8px;padding:2.5px 7px;border-radius:20px;font-weight:600;
+  letter-spacing:.3px;white-space:nowrap;flex-shrink:0;}
+.badge.ok{background:rgba(34,197,94,.16);color:#4ade80;}
+body.light .badge.ok{color:#16a34a;}
+.badge.pend{background:var(--gold-soft);color:var(--gold);}
+.badge.paid{background:rgba(34,197,94,.18);color:#22c55e;}
+body.light .badge.paid{color:#15803d;}
+.badge.half{background:rgba(251,191,36,.18);color:#f59e0b;}
+.badge.due{background:rgba(239,68,68,.18);color:#ef4444;}
+.hist-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.hist-date{font-size:9.5px;color:var(--txt-4);}
+.hist-total{font-size:14.5px;font-weight:700;color:var(--txt);}
+.hist-phone{font-size:9.5px;color:var(--txt-3);display:flex;align-items:center;gap:5px;
+  margin-top:3px;flex-wrap:wrap;font-weight:600;}
+.hist-phone svg{width:11px;height:11px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:2;}
+.hist-profit{font-size:9.5px;color:#22c55e;font-weight:700;margin-left:auto;}
+body.light .hist-profit{color:#15803d;}
+.hist-del-single{width:28px;height:28px;border-radius:9px;flex-shrink:0;
+  background:rgba(239,68,68,.10);border:1px solid rgba(239,68,68,.22);
+  color:var(--red);display:grid;place-items:center;cursor:pointer;transition:.15s;margin-top:1px;}
+.hist-del-single:active{transform:scale(.88);background:rgba(239,68,68,.22);}
+.hist-del-single svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round;}
+
+/* REPORTS */
+.report-tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;}
+.report-tabs::-webkit-scrollbar{display:none;}
+.report-tabs button{flex-shrink:0;padding:8px 14px;border-radius:11px;
+  background:var(--glass-2);border:1px solid var(--glass-border-2);color:var(--txt-3);
+  font-size:11.5px;font-weight:600;cursor:pointer;transition:.15s;box-shadow:var(--glass-hl);
+  font-family:inherit;white-space:nowrap;}
+.report-tabs button.active{background:linear-gradient(135deg,var(--gold),var(--gold-2));
+  color:#1c1917;border-color:transparent;box-shadow:0 4px 16px var(--gold-glow);}
+.report-tabs button:active{transform:scale(.94);}
+.rep-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.rep-card{background:var(--glass-2);border:1px solid var(--glass-border);
+  border-radius:14px;padding:12px;box-shadow:var(--glass-hl);}
+.rep-card.full{grid-column:1/-1;}
+.rep-card .rep-label{font-size:10px;color:var(--txt-3);font-weight:600;
+  text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px;}
+.rep-card .rep-val{font-size:17px;font-weight:800;color:var(--txt);}
+.rep-card .rep-val.gold{color:var(--gold);}
+.rep-card .rep-val.green{color:var(--green);}
+.rep-card .rep-val.red{color:var(--red);}
+body.light .rep-card .rep-val.green{color:#16a34a;}
+.rep-card .rep-sub{font-size:10px;color:var(--txt-4);margin-top:2px;font-weight:500;}
+.rep-big{background:linear-gradient(135deg,var(--gold),var(--gold-2));
+  border:0;box-shadow:0 8px 24px var(--gold-glow),inset 0 1px 0 rgba(255,255,255,.4);}
+.rep-big .rep-label,.rep-big .rep-val,.rep-big .rep-sub{color:#1c1917;}
+.rep-big .rep-val{font-size:22px;}
+.rep-empty{text-align:center;padding:34px 16px;color:var(--txt-4);font-size:12.5px;
+  font-family:'Noto Nastaliq Urdu',serif;line-height:2.1;}
+
+/* CONFIRM MODAL */
+.cf-bg{position:absolute;inset:0;z-index:300;background:rgba(0,0,0,.6);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;pointer-events:none;transition:.22s;}
+body.light .cf-bg{background:rgba(15,23,42,.4);}
+.cf-bg.open{opacity:1;pointer-events:auto;}
+.cf-box{width:100%;max-width:340px;
+  background:linear-gradient(160deg,var(--am-bg1),var(--am-bg2));
+  backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);
+  border:1px solid var(--am-border);border-radius:20px;padding:20px 18px 16px;
+  box-shadow:var(--am-shadow),var(--am-hl);
+  transform:translateY(20px) scale(.94);
+  transition:.28s cubic-bezier(.34,1.56,.64,1);text-align:center;}
+.cf-bg.open .cf-box{transform:translateY(0) scale(1);}
+.cf-icon{width:58px;height:58px;border-radius:18px;margin:0 auto 14px;
+  background:linear-gradient(135deg,rgba(239,68,68,.22),rgba(185,28,28,.14));
+  border:1.5px solid rgba(239,68,68,.3);
+  display:grid;place-items:center;color:var(--red);
+  box-shadow:0 8px 24px rgba(239,68,68,.2),inset 0 1px 0 rgba(255,255,255,.15);}
+.cf-icon svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round;}
+.cf-icon.warn{background:linear-gradient(135deg,rgba(245,158,11,.22),rgba(180,83,9,.14));
+  border-color:rgba(245,158,11,.35);color:#f59e0b;
+  box-shadow:0 8px 24px rgba(245,158,11,.2),inset 0 1px 0 rgba(255,255,255,.15);}
+.cf-title{font-size:16px;font-weight:700;color:var(--txt);margin-bottom:6px;}
+.cf-msg{font-size:12.5px;color:var(--txt-3);line-height:1.7;margin-bottom:6px;}
+.cf-msg b{color:var(--red);font-weight:700;}
+.cf-msg.warnmsg b{color:#f59e0b;}
+.cf-sub{font-size:10.5px;color:var(--txt-4);margin-bottom:16px;font-style:italic;}
+.cf-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.cf-actions .btn{padding:12px;font-size:13px;}
+
+/* PRINT */
+#printArea{display:none;}
+@media print{
+  body{background:#fff !important;display:block !important;overflow:visible !important;}
+  body::before,body::after{display:none !important;}
+  .app{display:none !important;}
+  #printArea{display:block !important;padding:0;margin:0;}
+  #printArea .paper{box-shadow:none !important;max-width:76mm !important;
+    width:76mm !important;border-radius:0 !important;padding:2mm 3mm !important;
+    font-weight:700 !important;font-size:11px !important;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  #printArea .p-urdu{font-weight:900 !important;font-size:17px !important;line-height:1.9 !important;}
+  #printArea .p-shop{font-weight:900 !important;font-size:9px !important;}
+  #printArea .p-meta-line{font-weight:800 !important;font-size:9.5px !important;}
+  #printArea .p-info{font-weight:800 !important;font-size:10px !important;}
+  #printArea .p-info b{font-weight:900 !important;}
+  #printArea table.p-items th{font-weight:900 !important;font-size:9px !important;padding:4px 2px !important;}
+  #printArea table.p-items td{font-weight:800 !important;font-size:10.5px !important;padding:4px 2px !important;}
+  #printArea .sub2{font-weight:700 !important;font-size:8.5px !important;}
+  #printArea .p-tr{font-weight:800 !important;font-size:10.5px !important;}
+  #printArea .p-tr b{font-weight:900 !important;}
+  #printArea .p-tr.grand{font-weight:900 !important;font-size:13px !important;}
+  #printArea .p-tr.grand b{font-weight:900 !important;font-size:15px !important;}
+  #printArea .p-note-line{font-weight:900 !important;font-size:11.5px !important;}
+  #printArea .p-stamp{font-weight:900 !important;border-width:2px !important;
+    font-size:12px !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  #printArea .p-foot{font-weight:800 !important;font-size:8.5px !important;}
+  #printArea .p-foot .dev{font-weight:800 !important;font-size:8px !important;}
+  @page{size:80mm auto;margin:0;}
+}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+
+  <header class="appbar">
+    <div class="logo">AIB</div>
+    <div class="brand">
+      <div class="urdu" id="brandUrdu">الابراہیم بلڈنگ میٹریل اینڈ سپلائر</div>
+      <div class="sub"  id="brandSub">Muhammad Ishaq • 0331-1303120</div>
+    </div>
+    <button class="iconbar langbtn" id="langBtn" title="Urdu / English">UR</button>
+    <button class="iconbar themebtn" id="themeBtn" title="Day / Night">
+      <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="sun"  viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="4"/>
+        <line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </button>
+    <button class="iconbar" id="syncBadgeBtn" title="Pending Sync" style="display:none;">
+      <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><polyline points="21 4 21 10 15 10"/></svg>
+      <span class="sync-badge" id="syncPendingBadge">0</span>
+    </button>
+    <div class="net" id="netDot" title="Firebase"></div>
+  </header>
+
+  <!-- STORAGE BAR -->
+  <div class="storage-bar" id="storageBar">
+    <div class="sb-dot" id="sbDot"></div>
+    <div class="sb-track"><div class="sb-fill" id="sbFill"></div></div>
+    <div class="sb-label"><b id="sbUsed">0 KB</b> / 1 GB</div>
+    <div class="sb-sync off" id="sbSync">OFFLINE</div>
+  </div>
+
+  <main class="screens">
+
+    <!-- POS -->
+    <section class="screen active" id="screen-pos">
+      <div class="searchwrap">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="searchInput" type="text" placeholder="آئٹم تلاش کریں..." />
+      </div>
+      <div class="chips" id="catChips"></div>
+      <div class="item-grid" id="itemGrid"></div>
+      <div class="empty" id="posEmpty" style="display:none">کوئی آئٹم نہیں ملا</div>
+    </section>
+
+    <!-- ITEMS -->
+    <section class="screen" id="screen-items">
+      <div class="card">
+        <div class="card-title" data-ur="نیا آئٹم شامل کریں" data-en="Add New Item">نیا آئٹم شامل کریں</div>
+        <div class="form-grid">
+          <input id="newUr"    placeholder="اردو نام" dir="rtl" />
+          <input id="newName"  placeholder="Item name (English)" />
+          <input id="newUnit"  placeholder="Unit (بوری / عدد)" />
+          <input id="newRate"  type="number" inputmode="decimal" placeholder="Sell Price (Rs)" />
+          <input id="newCost"  type="number" inputmode="decimal" placeholder="Cost Price (Rs)" />
+          <select id="newCat" class="full">
+            <option value="Cement">Cement — سیمنٹ</option>
+            <option value="Brick">Brick — اینٹ</option>
+            <option value="Bajri">Bajri — بجری</option>
+            <option value="Reti">Reti — ریتی</option>
+            <option value="Sariya">Sariya — سریا</option>
+            <option value="Other">Other — دیگر</option>
+          </select>
+        </div>
+        <button class="btn primary" id="addItemBtn" data-ur="+ آئٹم شامل کریں" data-en="+ Add Item">+ آئٹم شامل کریں</button>
+      </div>
+      <div class="card">
+        <div class="card-title" data-ur="آئٹم لسٹ" data-en="Item List">آئٹم لسٹ</div>
+        <div id="itemsList"></div>
+      </div>
+    </section>
+
+    <!-- HISTORY -->
+    <section class="screen" id="screen-history">
+      <div class="card" style="padding:11px;">
+        <div class="searchwrap" style="margin-bottom:0;">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="histSearch" type="text" placeholder="تلاش: فون / بل نمبر / نام" />
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title" data-ur="محفوظ بلز" data-en="Saved Bills">محفوظ بلز</div>
+        <div class="hist-toolbar" id="histToolbar"></div>
+        <div id="historyList"></div>
+      </div>
+    </section>
+
+    <!-- REPORTS -->
+    <section class="screen" id="screen-reports">
+      <div class="card">
+        <div class="card-title" data-ur="کمائی / منافع" data-en="Earnings / Profit">کمائی / منافع</div>
+        <div class="report-tabs" id="reportTabs">
+          <button data-period="today" class="active" data-ur="آج" data-en="Today">آج</button>
+          <button data-period="week"  data-ur="اس ہفتے" data-en="Week">اس ہفتے</button>
+          <button data-period="month" data-ur="اس مہینے" data-en="Month">اس مہینے</button>
+          <button data-period="year"  data-ur="اس سال" data-en="Year">اس سال</button>
+          <button data-period="all"   data-ur="کل" data-en="All">کل</button>
+        </div>
+      </div>
+      <div class="rep-grid" id="repGrid"></div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="screen" id="screen-settings">
+      <div class="card">
+        <div class="card-title" data-ur="دکان کی معلومات" data-en="Shop Info">دکان کی معلومات</div>
+        <div class="form-grid">
+          <input id="setShopUr" class="full" dir="rtl" placeholder="اردو نام" />
+          <input id="setShopEn" class="full" placeholder="Shop name (English)" />
+          <input id="setOwner" class="full" placeholder="Owner name" />
+          <input id="setPhone" placeholder="Phone" />
+          <input id="setPhone2" placeholder="Phone 2 (optional)" />
+          <input id="setAddress" class="full" placeholder="Address" />
+          <input id="setFooter" class="full" dir="rtl" placeholder="رسید کا نوٹ" />
+        </div>
+        <button class="btn primary" id="saveSettingsBtn" data-ur="محفوظ کریں" data-en="Save">محفوظ کریں</button>
+      </div>
+      <div class="card">
+        <div class="card-title" data-ur="Firebase سنک" data-en="Firebase Sync">Firebase سنک</div>
+        <div style="font-size:11.5px;color:var(--txt-3);line-height:1.85;margin-bottom:11px;"
+             data-ur="تمام بلز پہلے موبائل میں محفوظ ہوتے ہیں — آن لائن ہونے پر خودکار کلاؤڈ میں Sync ہو جاتے ہیں۔"
+             data-en="All bills saved offline first — auto-sync to cloud when online.">
+          تمام بلز پہلے موبائل میں محفوظ ہوتے ہیں — آن لائن ہونے پر خودکار کلاؤڈ میں Sync ہو جاتے ہیں۔
+        </div>
+        <button class="btn green" id="syncAllBtn" data-ur="☁ ابھی Sync کریں" data-en="☁ Sync Now">☁ ابھی Sync کریں</button>
+        <div style="height:9px"></div>
+        <button class="btn dark" id="pullBtn" data-ur="⬇ Firebase سے آئٹمز لائیں" data-en="⬇ Pull Items from Firebase">⬇ Firebase سے آئٹمز لائیں</button>
+      </div>
+      <div class="card">
+        <div class="card-title" data-ur="خطرناک زون" data-en="Danger Zone">خطرناک زون</div>
+        <button class="btn dark" id="resetBtn" style="color:var(--red);"
+                data-ur="تمام ڈیٹا ری سیٹ کریں" data-en="Reset All Data">تمام ڈیٹا ری سیٹ کریں</button>
+      </div>
+      <div style="text-align:center;font-size:9.5px;color:var(--txt-4);padding:6px 0 20px;line-height:1.9;">
+        Al Ibrahim Building Material &amp; Supplier<br>
+        <span style="opacity:.8;font-weight:600;">Developer : Khalid Ali</span><br>
+        <span style="opacity:.8;font-weight:600;">WhatsApp : 03003919555</span>
+      </div>
+    </section>
+  </main>
+
+  <div class="cartbar" id="cartBar">
+    <div>
+      <div class="cb-l" id="cbCount">0 ITEMS</div>
+      <div class="cb-t" id="cbTotal">Rs 0</div>
+    </div>
+    <div class="cb-r" data-ur="بل دیکھیں ←" data-en="View Bill →">بل دیکھیں ←</div>
+  </div>
+
+  <nav class="bottomnav">
+    <button class="navbtn active" data-screen="screen-pos">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span data-ur="نیا بل" data-en="New">نیا بل</span>
+    </button>
+    <button class="navbtn" data-screen="screen-items">
+      <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+      <span data-ur="آئٹمز" data-en="Items">آئٹمز</span>
+    </button>
+    <button class="navbtn" data-screen="screen-history">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span data-ur="ہسٹری" data-en="History">ہسٹری</span>
+    </button>
+    <button class="navbtn" data-screen="screen-reports">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      <span data-ur="رپورٹ" data-en="Reports">رپورٹ</span>
+    </button>
+    <button class="navbtn" data-screen="screen-settings">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      <span data-ur="سیٹنگ" data-en="Settings">سیٹنگ</span>
+    </button>
+  </nav>
+
+  <!-- CART SHEET -->
+  <div class="sheet" id="cartSheet">
+    <div class="sheet-head">
+      <button class="iconbtn" data-close="cartSheet">←</button>
+      <div class="sheet-title" data-ur="بل بنائیں" data-en="Current Bill">بل بنائیں</div>
+      <button class="iconbtn danger" id="clearCartBtn">🗑</button>
+    </div>
+    <div class="sheet-body">
+      <div class="card" style="padding:11px;">
+        <div class="form-grid" style="margin-bottom:0;">
+          <input id="custName"  placeholder="کسٹمر کا نام" autocomplete="off" />
+          <input id="custPhone" type="tel" inputmode="numeric" maxlength="11"
+                 placeholder="فون نمبر" autocomplete="off" />
+        </div>
+        <div class="cust-suggest" id="custSuggest"></div>
+      </div>
+      <div id="cartList"></div>
+      <div class="card">
+        <div class="card-title" data-ur="دستی آئٹم شامل کریں" data-en="Add Manual Item">دستی آئٹم شامل کریں</div>
+        <div class="form-grid">
+          <input id="mUr"   placeholder="اردو نام" dir="rtl" />
+          <input id="mName" placeholder="Item name" />
+          <input id="mUnit" placeholder="Unit" />
+          <input id="mRate" type="number" inputmode="decimal" placeholder="Sell Price" />
+          <input id="mCost" type="number" inputmode="decimal" placeholder="Cost Price" />
+          <input id="mQty"  type="number" inputmode="decimal" placeholder="Qty" value="1" />
+          <button class="btn primary" id="mAddBtn" style="padding:11px;grid-column:1/-1;"
+                  data-ur="شامل کریں" data-en="Add">شامل کریں</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title" data-ur="حساب کتاب" data-en="Bill Summary">حساب کتاب</div>
+        <div class="trow"><span data-ur="کل تعداد" data-en="Total Qty">کل تعداد</span><b id="tItems">0</b></div>
+        <div class="trow"><span data-ur="سب ٹوٹل" data-en="Sub Total">سب ٹوٹل</span><b id="tSub">Rs 0</b></div>
+        <div class="trow"><span data-ur="رعایت (Rs)" data-en="Discount (Rs)">رعایت (Rs)</span>
+          <input id="discInput" type="number" inputmode="decimal" value="0" /></div>
+        <div class="trow"><span data-ur="بھاڑا / مزدوری (Rs)" data-en="Mazdoori (Rs)">بھاڑا / مزدوری (Rs)</span>
+          <input id="freightInput" type="number" inputmode="decimal" value="0" /></div>
+        <div class="trow grand"><span data-ur="کل رقم" data-en="GRAND TOTAL">کل رقم</span><b id="tGrand">Rs 0</b></div>
+        <div class="pay-section">
+          <div class="pay-section-title" data-ur="ادائیگی کی تفصیل" data-en="Payment Details">ادائیگی کی تفصیل</div>
+          <div class="pay-row">
+            <div class="pay-field">
+              <label data-ur="طریقہ کار" data-en="Method">طریقہ کار</label>
+              <select id="payMethod">
+                <option value="Cash">Cash — نقد</option>
+                <option value="Online / Bank">Online / Bank — بینک</option>
+                <option value="JazzCash">JazzCash</option>
+                <option value="EasyPaisa">EasyPaisa</option>
+                <option value="Credit / Udhaar">Credit / ادھار</option>
+              </select>
+            </div>
+            <div class="pay-field">
+              <label data-ur="حالت" data-en="Status">ادائیگی کی حالت</label>
+              <select id="payStatus">
+                <option value="Full Paid">Full Paid — پوری</option>
+                <option value="Half Paid">Half Paid — آدھی</option>
+                <option value="Unpaid">Unpaid — ادھار</option>
+              </select>
+            </div>
+          </div>
+          <div class="trow"><span data-ur="ادا شدہ (Rs)" data-en="Paid (Rs)">ادا شدہ (Rs)</span>
+            <input id="advanceInput" type="number" inputmode="decimal" value="0" /></div>
+          <div class="quickfill">
+            <button type="button" data-fill="full"    data-ur="پوری" data-en="Full">پوری</button>
+            <button type="button" data-fill="half"    data-ur="آدھی" data-en="Half">آدھی</button>
+            <button type="button" data-fill="quarter" data-ur="ایک چوتھائی" data-en="¼">ایک چوتھائی</button>
+            <button type="button" data-fill="zero"    data-ur="صفر" data-en="Zero">صفر</button>
+          </div>
+          <div class="pay-preview" id="payPreview">
+            <span class="dot"></span>
+            <span class="label" id="payPrevLabel" data-ur="باقی رقم" data-en="Remaining">باقی رقم</span>
+            <span class="val" id="tRem">Rs 0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sheet-foot">
+      <button class="btn primary big" id="genBillBtn" data-ur="بل بنائیں" data-en="GENERATE BILL">بل بنائیں</button>
+    </div>
+  </div>
+
+  <!-- RECEIPT SHEET -->
+  <div class="sheet" id="receiptSheet">
+    <div class="sheet-head">
+      <button class="iconbtn" data-close="receiptSheet">←</button>
+      <div class="sheet-title" data-ur="رسید" data-en="Receipt">رسید</div>
+      <div class="badge pend" id="syncBadge">Not Synced</div>
+    </div>
+    <div class="sheet-body" style="padding:0;">
+      <div class="paper-wrap"><div class="paper" id="receiptPaper"></div></div>
+    </div>
+    <div class="sheet-foot">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:7px;margin-bottom:9px;">
+        <button class="btn dark"  id="printBtn"  data-ur="🖨 پرنٹ" data-en="🖨 Print">🖨 پرنٹ</button>
+        <button class="btn dark"  id="jpgBtn"    data-ur="🖼 JPG" data-en="🖼 JPG">🖼 JPG</button>
+        <button class="btn wa"    id="waBtn"     data-ur="📱 واٹس" data-en="📱 WA">📱 واٹس</button>
+        <button class="btn green" id="syncBtn"   data-ur="☁ Sync" data-en="☁ Sync">☁ Sync</button>
+      </div>
+      <button class="btn primary big" id="newBillBtn" data-ur="نیا بل شروع کریں" data-en="START NEW BILL">نیا بل شروع کریں</button>
+    </div>
+  </div>
+
+  <!-- ADD-ITEM MODAL -->
+  <div class="am-bg" id="addModal">
+    <div class="am-box" id="addModalBox">
+      <div class="am-head">
+        <div class="am-icon" id="mIcon">₹</div>
+        <div class="am-title-wrap">
+          <div class="am-title" id="mTitleUr">سیمنٹ</div>
+          <div class="am-sub" id="mTitleEn">Cement</div>
+        </div>
+      </div>
+      <div class="am-grid">
+        <div class="am-field">
+          <label data-ur="تعداد" data-en="Quantity">تعداد</label>
+          <div class="am-qty">
+            <button type="button" id="mQtyMinus">−</button>
+            <input id="mQtyInp" type="number" inputmode="decimal" value="1" min="0" />
+            <button type="button" id="mQtyPlus">+</button>
+          </div>
+        </div>
+        <div class="am-field">
+          <label data-ur="ریٹ (Rs)" data-en="Rate (Rs)">ریٹ (Rs)</label>
+          <input id="mRateInp" class="am-rate" type="number" inputmode="decimal" value="0" />
+        </div>
+      </div>
+      <div class="am-total">
+        <span data-ur="کل رقم" data-en="Total">کل رقم</span>
+        <b id="mLineTotal">Rs 0</b>
+      </div>
+      <div class="am-actions">
+        <button class="btn dark" id="mCancelBtn" data-ur="منسوخ" data-en="Cancel">منسوخ</button>
+        <button class="btn primary" id="mConfirmBtn" data-ur="شامل کریں" data-en="Add to Cart">شامل کریں</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRICE SETUP MODAL -->
+  <div class="am-bg" id="priceModal">
+    <div class="am-box" style="max-width:340px;">
+      <div class="am-head">
+        <div class="am-icon" id="pmIcon">₹</div>
+        <div class="am-title-wrap">
+          <div class="am-title" id="pmTitleUr">سیمنٹ</div>
+          <div class="am-sub" id="pmTitleEn">Cement</div>
+        </div>
+      </div>
+      <div class="am-warn">
+        <span class="ic">⚠️</span>
+        <span data-ur="اس آئٹم کی فروخت یا لاگت قیمت سیٹ نہیں ہے۔ پہلے قیمت سیٹ اپ کریں۔"
+              data-en="Sell or cost price is not set for this item. Please set up the prices first.">
+          اس آئٹم کی فروخت یا لاگت قیمت سیٹ نہیں ہے۔ پہلے قیمت سیٹ اپ کریں۔
+        </span>
+      </div>
+      <div class="am-grid">
+        <div class="am-field">
+          <label data-ur="فروخت قیمت (Rs)" data-en="Sell Price (Rs)">فروخت قیمت (Rs)</label>
+          <input id="pmSell" class="am-rate" type="number" inputmode="decimal" placeholder="0" />
+        </div>
+        <div class="am-field">
+          <label data-ur="لاگت قیمت (Rs)" data-en="Cost Price (Rs)">لاگت قیمت (Rs)</label>
+          <input id="pmCost" class="am-rate" type="number" inputmode="decimal" placeholder="0" />
+        </div>
+      </div>
+      <div class="am-actions">
+        <button class="btn dark" id="pmCancelBtn" data-ur="منسوخ" data-en="Cancel">منسوخ</button>
+        <button class="btn primary" id="pmSaveBtn" data-ur="محفوظ کریں" data-en="Save Setup">محفوظ کریں</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DUPLICATE CONFIRM -->
+  <div class="cf-bg" id="dupConfirmModal">
+    <div class="cf-box">
+      <div class="cf-icon warn">
+        <svg viewBox="0 0 24 24">
+          <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+      </div>
+      <div class="cf-title" data-ur="یہی بل پہلے سے موجود ہے" data-en="Duplicate Bill Detected">یہی بل پہلے سے موجود ہے</div>
+      <div class="cf-msg warnmsg" id="dupMsg"></div>
+      <div class="cf-sub" data-ur="اگر یہ واقعی نیا بل ہے تو جاری رکھیں۔" data-en="If this is genuinely a new bill, continue.">اگر یہ واقعی نیا بل ہے تو جاری رکھیں۔</div>
+      <div class="cf-actions">
+        <button class="btn dark" id="dupCancelBtn" data-ur="منسوخ" data-en="Cancel">منسوخ</button>
+        <button class="btn primary" id="dupOkBtn" data-ur="جاری رکھیں" data-en="Continue">جاری رکھیں</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELETE CONFIRM -->
+  <div class="cf-bg" id="delConfirmModal">
+    <div class="cf-box">
+      <div class="cf-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+      </div>
+      <div class="cf-title" id="delTitle">Delete Bills?</div>
+      <div class="cf-msg" id="delMsg"></div>
+      <div class="cf-sub" id="delSub"></div>
+      <div class="cf-actions">
+        <button class="btn dark" id="delCancelBtn" data-ur="منسوخ" data-en="Cancel">منسوخ</button>
+        <button class="btn red"  id="delConfirmBtn" data-ur="ڈیلیٹ کریں" data-en="Delete">ڈیلیٹ کریں</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+</div>
+
+<div id="printArea"></div>
+
+<script type="module">
+/* ============================================================
+   AL IBRAHIM POS — v3.1
+   Firebase + Storage Indicator + WhatsApp + Reports
+   Duplicate check • 12-hour time • Price setup guard
+   Pakistani phone validation + saved customer picker
+   ============================================================ */
+
+/* ---------- FIREBASE CONFIG ---------- */
+const FIREBASE_CONFIG = {
+  apiKey:            "AIzaSyBIgfJgAGWIbxnTW75rXLrRvcc853sILHA",
+  authDomain:        "al-ibrahim-material.firebaseapp.com",
+  databaseURL:       "https://al-ibrahim-material-default-rtdb.firebaseio.com",
+  projectId:         "al-ibrahim-material",
+  storageBucket:     "al-ibrahim-material.firebasestorage.app",
+  messagingSenderId: "739064796538",
+  appId:             "1:739064796538:web:fee256341b743755ff72c3"
+};
+
+const FIREBASE_LIMIT_BYTES = 1024 * 1024 * 1024; /* 1 GB free plan */
+
+/* ---------- THEME BOOT ---------- */
+(function(){
+  try{
+    const s = localStorage.getItem('aib_theme') || 'dark';
+    if (s === 'light') document.body.classList.add('light');
+    const m = document.getElementById('themeColorMeta');
+    if (m) m.setAttribute('content', s === 'light' ? '#e0e7ff' : '#0a0e1a');
+  }catch(e){}
+})();
+
+let LANG = 'ur';
+try{ LANG = localStorage.getItem('aib_lang') || 'ur'; }catch(e){}
+if (LANG === 'en') document.body.classList.add('lang-en');
+document.documentElement.lang = LANG;
+
+const t = (ur, en) => LANG === 'en' ? en : ur;
+const $  = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+
+const LS_ITEMS = 'aib_items_v4';
+const LS_BILLS = 'aib_bills_v4';
+const LS_SET   = 'aib_settings_v4';
+
+function load(k, fb){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):fb; }catch(e){ return fb; } }
+function save(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+
+const DEFAULT_ITEMS = [
+  { id:'it_cement', name:'Cement', ur:'سیمنٹ', unit:'بوری',  rate:1300,  costPrice:0, cat:'Cement' },
+  { id:'it_brick',  name:'Brick',  ur:'اینٹ',  unit:'عدد',   rate:15,    costPrice:0, cat:'Brick'  },
+  { id:'it_bajri',  name:'Bajri',  ur:'بجری',  unit:'ٹرالی', rate:12000, costPrice:0, cat:'Bajri'  },
+  { id:'it_reti',   name:'Reti',   ur:'ریتی',  unit:'ٹرالی', rate:11000, costPrice:0, cat:'Reti'   },
+  { id:'it_sariya', name:'Sariya', ur:'سریا',  unit:'کلو',   rate:280,   costPrice:0, cat:'Sariya' }
+];
+
+const DEFAULT_SETTINGS = {
+  shopUr:'الابراہیم بلڈنگ میٹریل اینڈ سپلائر',
+  shopEn:'AL IBRAHIM BUILDING MATERIAL & SUPPLIER',
+  owner:'Muhammad Ishaq', ownerUr:'محمد اسحاق',
+  phone:'0331-1303120', phone2:'',
+  address:'Dera Murad Jamali, Balochistan',
+  footer:'شکریہ! دوبارہ تشریف لائیں', billNo:1
+};
+
+let items       = load(LS_ITEMS, DEFAULT_ITEMS);
+let bills       = load(LS_BILLS, []);
+let settings    = Object.assign({}, DEFAULT_SETTINGS, load(LS_SET, {}));
+let cart        = [];
+let activeCat   = 'All';
+let currentBill = null;
+let reportPeriod = 'today';
+
+if (!Array.isArray(items) || items.length === 0){
+  items = JSON.parse(JSON.stringify(DEFAULT_ITEMS));
+  save(LS_ITEMS, items);
+}
+items = items.map(i => ({ ...i, costPrice: Number(i.costPrice)||0 }));
+
+bills = bills.map(b => {
+  if (!b.payMethod) b.payMethod = 'Cash';
+  if (!b.payStatus){
+    if (b.remaining <= 0 && b.total > 0) b.payStatus = 'Full Paid';
+    else if (Number(b.advance) > 0) b.payStatus = 'Half Paid';
+    else b.payStatus = 'Unpaid';
+  }
+  if (typeof b.advance !== 'number') b.advance = 0;
+  if (typeof b.remaining !== 'number') b.remaining = Math.max(0, (b.total||0) - b.advance);
+  if (Array.isArray(b.items)) b.items = b.items.map(l => ({ ...l, costPrice: Number(l.costPrice)||0 }));
+  return b;
+});
+save(LS_BILLS, bills);
+save(LS_ITEMS, items);
+
+const fmt = n => Number(n||0).toLocaleString('en-PK', { maximumFractionDigits:2 });
+const uid = p => p + '_' + Date.now().toString(36) + Math.random().toString(36).slice(2,6);
+
+/* ---------- 12-HOUR TIME HELPERS ---------- */
+function time12(d){
+  let h = d.getHours();
+  const m = String(d.getMinutes()).padStart(2,'0');
+  const ap = h >= 12 ? 'PM' : 'AM';
+  h = h % 12; if (h === 0) h = 12;
+  return `${String(h).padStart(2,'0')}:${m} ${ap}`;
+}
+function fmtDate(iso){
+  const d = new Date(iso);
+  const p = n => String(n).padStart(2,'0');
+  return `${p(d.getDate())}/${p(d.getMonth()+1)}/${String(d.getFullYear()).slice(2)} ${time12(d)}`;
+}
+function fmtDateFull(iso){
+  const d = new Date(iso);
+  const p = n => String(n).padStart(2,'0');
+  return `${p(d.getDate())}/${p(d.getMonth()+1)}/${d.getFullYear()} ${time12(d)}`;
+}
+function fmtBytes(b){
+  if (!b) return '0 KB';
+  if (b < 1024) return b + ' B';
+  if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
+  if (b < 1024*1024*1024) return (b/(1024*1024)).toFixed(2) + ' MB';
+  return (b/(1024*1024*1024)).toFixed(2) + ' GB';
+}
+
+function nextBillNo(){
+  if (!bills.length) return 1;
+  return Math.max(...bills.map(b => Number(b.no)||0)) + 1;
+}
+
+/* ---------- PAKISTANI PHONE HELPERS ---------- */
+function normalizePakPhone(raw){
+  let p = String(raw||'').replace(/\D/g,'');
+  if (!p) return '';
+  if (p.startsWith('0092')) p = p.slice(4);
+  else if (p.startsWith('92')) p = p.slice(2);
+  if (p.startsWith('0')) p = p.slice(1);
+  if (p.length === 10 && p.startsWith('3')) return '0' + p;
+  return '';
+}
+function isValidPakPhone(raw){
+  return /^03\d{9}$/.test(String(raw||'').replace(/\D/g,''));
+}
+
+let toastTimer;
+function toast(msg, ms=1700){
+  const el = $('#toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), ms);
+}
+
+/* LANGUAGE */
+function applyLanguage(lang){
+  LANG = lang;
+  try{ localStorage.setItem('aib_lang', lang); }catch(e){}
+  document.documentElement.lang = lang;
+  document.body.classList.toggle('lang-en', lang === 'en');
+  $('#langBtn').textContent = lang === 'en' ? 'EN' : 'UR';
+
+  $$('[data-ur]').forEach(el => {
+    el.textContent = lang === 'en' ? el.dataset.en : el.dataset.ur;
+  });
+
+  const ph = {
+    searchInput: t('آئٹم تلاش کریں...', 'Search item...'),
+    histSearch:  t('تلاش: فون / بل نمبر / نام', 'Search: phone / bill # / name'),
+    custName:    t('کسٹمر کا نام', 'Customer name'),
+    custPhone:   t('فون نمبر (03XXXXXXXXX)', 'Phone (03XXXXXXXXX)'),
+    mUr:         t('اردو نام', 'Urdu name'),
+    mName:       t('آئٹم کا نام', 'Item name'),
+    mUnit:       t('یونٹ', 'Unit'),
+    mRate:       t('فروخت قیمت', 'Sell Price'),
+    mCost:       t('لاگت', 'Cost Price'),
+    mQty:        t('تعداد', 'Quantity'),
+    newRate:     t('فروخت قیمت (Rs)', 'Sell Price (Rs)'),
+    newCost:     t('لاگت / Cost Price (Rs)', 'Cost Price (Rs)')
+  };
+  Object.keys(ph).forEach(id => {
+    const el = $('#'+id);
+    if (el) el.placeholder = ph[id];
+  });
+
+  const pmSel = $('#payMethod');
+  if (pmSel){
+    pmSel.options[0].text = t('Cash — نقد', 'Cash');
+    pmSel.options[1].text = t('Online / Bank — بینک', 'Online / Bank');
+    pmSel.options[2].text = 'JazzCash';
+    pmSel.options[3].text = 'EasyPaisa';
+    pmSel.options[4].text = t('Credit / ادھار', 'Credit / Udhaar');
+  }
+  const psSel = $('#payStatus');
+  if (psSel){
+    psSel.options[0].text = t('Full Paid — پوری', 'Full Paid');
+    psSel.options[1].text = t('Half Paid — آدھی', 'Half Paid');
+    psSel.options[2].text = t('Unpaid — ادھار', 'Unpaid');
+  }
+
+  renderCats(); renderItems(); renderItemsList();
+  renderCart(); renderHistory(); updateCartBar(); renderReports();
+  renderCustSuggest();
+}
+
+$('#langBtn').addEventListener('click', () => {
+  const next = LANG === 'en' ? 'ur' : 'en';
+  applyLanguage(next);
+  toast(next === 'en' ? '🌐 English' : '🌐 اردو');
+});
+
+/* THEME */
+function applyTheme(isLight){
+  document.body.classList.toggle('light', isLight);
+  try{ localStorage.setItem('aib_theme', isLight ? 'light' : 'dark'); }catch(e){}
+  const m = $('#themeColorMeta');
+  if (m) m.setAttribute('content', isLight ? '#e0e7ff' : '#0a0e1a');
+}
+$('#themeBtn').addEventListener('click', () => {
+  const isLight = !document.body.classList.contains('light');
+  applyTheme(isLight);
+  toast(isLight ? '☀️ Day Mode' : '🌙 Night Mode');
+});
+
+/* NAV */
+$$('.navbtn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    $$('.navbtn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    $$('.screen').forEach(s => s.classList.remove('active'));
+    const tgt = $('#' + btn.dataset.screen);
+    if (tgt) tgt.classList.add('active');
+    if (btn.dataset.screen === 'screen-history'){ cleanupHistSelection(); renderHistory(); }
+    if (btn.dataset.screen === 'screen-reports') renderReports();
+    updateCartBar();
+  });
+});
+
+function openSheet(id){ const s=$('#'+id); if(s) s.classList.add('open'); }
+function closeSheet(id){ const s=$('#'+id); if(s) s.classList.remove('open'); }
+$$('[data-close]').forEach(b => b.addEventListener('click', () => closeSheet(b.dataset.close)));
+
+/* POS */
+function itemPriceReady(it){
+  return Number(it.rate) > 0 && Number(it.costPrice) > 0;
+}
+function renderCats(){
+  const cats = ['All', ...new Set(items.map(i => i.cat).filter(Boolean))];
+  $('#catChips').innerHTML = cats.map(c => {
+    const label = c === 'All' ? t('سب', 'All') : c;
+    return `<button class="chip ${c===activeCat?'active':''}" data-cat="${c}">${label}</button>`;
+  }).join('');
+}
+$('#catChips').addEventListener('click', e => {
+  const chip = e.target.closest('.chip'); if (!chip) return;
+  activeCat = chip.dataset.cat; renderCats(); renderItems();
+});
+
+function renderItems(){
+  const q = ($('#searchInput').value || '').trim().toLowerCase();
+  const list = items.filter(i => {
+    const okCat = activeCat === 'All' || i.cat === activeCat;
+    const okQ = !q || (i.name||'').toLowerCase().includes(q) || (i.ur||'').includes(q);
+    return okCat && okQ;
+  });
+  const empty = $('#posEmpty'), grid = $('#itemGrid');
+  if (!list.length){
+    empty.style.display = 'block';
+    empty.textContent = t('کوئی آئٹم نہیں ملا', 'No items found');
+    grid.innerHTML = ''; return;
+  }
+  empty.style.display = 'none';
+  grid.innerHTML = list.map(i => {
+    const ready = itemPriceReady(i);
+    return `
+    <div class="item-card ${ready?'':'noprice'}" data-id="${i.id}">
+      ${ready ? '' : `<div class="warn-tag">${t('قیمت سیٹ کریں','SET PRICE')}</div>`}
+      <div class="ic-ur">${i.ur || i.name}</div>
+      <div class="ic-name">${i.name}</div>
+      <div class="ic-bottom">
+        <span class="ic-rate">Rs ${fmt(i.rate)}</span>
+        <span class="ic-unit">/ ${i.unit}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+$('#searchInput').addEventListener('input', renderItems);
+
+/* ADD-ITEM MODAL */
+let modalItem = null;
+function openAddModal(item){
+  modalItem = item;
+  const rate = item ? Number(item.rate) : 0;
+  $('#mIcon').textContent   = (item && item.ur) ? item.ur.charAt(0) : '✎';
+  $('#mTitleUr').textContent = item ? (item.ur || item.name) : t('دستی آئٹم', 'Manual Item');
+  $('#mTitleEn').textContent = item ? item.name : t('نیا آئٹم', 'New item');
+  $('#mQtyInp').value  = 1;
+  $('#mRateInp').value = rate;
+  updateModalTotal();
+  $('#addModal').classList.add('open');
+  setTimeout(() => { $('#mQtyInp').focus(); $('#mQtyInp').select(); }, 200);
+}
+function closeAddModal(){ $('#addModal').classList.remove('open'); modalItem = null; }
+function updateModalTotal(){
+  const q = Number($('#mQtyInp').value) || 0;
+  const r = Number($('#mRateInp').value) || 0;
+  $('#mLineTotal').textContent = 'Rs ' + fmt(q * r);
+}
+$('#mQtyMinus').addEventListener('click', () => {
+  $('#mQtyInp').value = Math.max(0, (Number($('#mQtyInp').value)||0) - 1); updateModalTotal();
+});
+$('#mQtyPlus').addEventListener('click', () => {
+  $('#mQtyInp').value = (Number($('#mQtyInp').value)||0) + 1; updateModalTotal();
+});
+$('#mQtyInp').addEventListener('input', updateModalTotal);
+$('#mRateInp').addEventListener('input', updateModalTotal);
+$('#mCancelBtn').addEventListener('click', closeAddModal);
+$('#mConfirmBtn').addEventListener('click', () => {
+  const qty  = Number($('#mQtyInp').value)  || 0;
+  const rate = Number($('#mRateInp').value) || 0;
+  if (qty <= 0)  return toast(t('تعداد درج کریں', 'Enter quantity'));
+  if (rate <= 0) return toast(t('ریٹ درج کریں', 'Enter rate'));
+  if (modalItem){
+    const ex = cart.find(l => l.id === modalItem.id && Number(l.rate) === rate);
+    if (ex) ex.qty = Number(ex.qty) + qty;
+    else cart.push({ id: modalItem.id, name: modalItem.name, ur: modalItem.ur,
+      unit: modalItem.unit, rate, costPrice: Number(modalItem.costPrice)||0, qty });
+  }
+  updateCartBar();
+  toast(t('کارٹ میں شامل ✔', 'Added ✔'));
+  closeAddModal();
+  renderCart();
+});
+$('#addModal').addEventListener('click', e => { if (e.target.id === 'addModal') closeAddModal(); });
+
+/* ---------- PRICE SETUP MODAL ---------- */
+let priceSetupItem = null;
+function openPriceSetup(item){
+  priceSetupItem = item;
+  $('#pmIcon').textContent   = item.ur ? item.ur.charAt(0) : '✎';
+  $('#pmTitleUr').textContent = item.ur || item.name;
+  $('#pmTitleEn').textContent = item.name;
+  $('#pmSell').value = Number(item.rate) > 0 ? item.rate : '';
+  $('#pmCost').value = Number(item.costPrice) > 0 ? item.costPrice : '';
+  $('#priceModal').classList.add('open');
+  setTimeout(() => {
+    const target = Number(item.rate) > 0 ? $('#pmCost') : $('#pmSell');
+    target.focus(); target.select && target.select();
+  }, 220);
+}
+function closePriceModal(){
+  $('#priceModal').classList.remove('open');
+  priceSetupItem = null;
+}
+$('#pmCancelBtn').addEventListener('click', closePriceModal);
+$('#priceModal').addEventListener('click', e => {
+  if (e.target.id === 'priceModal') closePriceModal();
+});
+$('#pmSaveBtn').addEventListener('click', async () => {
+  if (!priceSetupItem) return;
+  const sell = Number($('#pmSell').value) || 0;
+  const cost = Number($('#pmCost').value) || 0;
+  if (sell <= 0) return toast(t('فروخت قیمت درج کریں', 'Enter sell price'));
+  if (cost <= 0) return toast(t('لاگت قیمت درج کریں', 'Enter cost price'));
+  const it = items.find(x => x.id === priceSetupItem.id);
+  if (!it) return closePriceModal();
+  it.rate = sell;
+  it.costPrice = cost;
+  save(LS_ITEMS, items);
+  await pushItemToFirebase(it);
+  renderItems(); renderItemsList();
+  const done = priceSetupItem;
+  closePriceModal();
+  toast(t('قیمت سیٹ اپ ✔', 'Price setup saved ✔'));
+  openAddModal(done);
+});
+
+$('#itemGrid').addEventListener('click', e => {
+  const card = e.target.closest('.item-card');
+  if (!card) return;
+  const it = items.find(x => x.id === card.dataset.id);
+  if (!it) return;
+  if (!itemPriceReady(it)){ openPriceSetup(it); return; }
+  openAddModal(it);
+});
+
+/* CART */
+function updateCartBar(){
+  const onPOS = $('#screen-pos').classList.contains('active');
+  const count = cart.reduce((s,l) => s + Number(l.qty||0), 0);
+  const total = cart.reduce((s,l) => s + Number(l.qty||0) * Number(l.rate||0), 0);
+  $('#cbCount').textContent = count + ' ' + t('آئٹمز', 'ITEMS');
+  $('#cbTotal').textContent = 'Rs ' + fmt(total);
+  $('#cartBar').classList.toggle('show', cart.length > 0 && onPOS);
+}
+$('#cartBar').addEventListener('click', () => { renderCart(); openSheet('cartSheet'); });
+$('#clearCartBtn').addEventListener('click', () => {
+  if (!cart.length) return;
+  if (confirm(t('پورا بل خالی کر دیں؟', 'Clear the entire bill?'))){
+    cart = []; renderCart(); updateCartBar();
+  }
+});
+
+function renderCart(){
+  const box = $('#cartList');
+  if (!cart.length){
+    box.innerHTML = `<div class="empty">${t('ابھی کوئی آئٹم نہیں', 'No items yet')}<br>
+      <span style="font-size:11px">${t('اوپر سے آئٹم منتخب کریں', 'Pick items from the grid')}</span></div>`;
+  } else {
+    box.innerHTML = cart.map((l,i) => `
+      <div class="citem" data-idx="${i}">
+        <div class="citem-top">
+          <div class="citem-name">${l.ur || l.name}<span>${l.name}</span></div>
+          <button class="iconbtn danger" data-act="del">✕</button>
+        </div>
+        <div class="citem-row">
+          <div class="qtybox">
+            <button data-act="minus">−</button>
+            <input type="number" inputmode="decimal" value="${l.qty}" data-act="qty" />
+            <button data-act="plus">+</button>
+          </div>
+          <input class="rateinp" type="number" inputmode="decimal" value="${l.rate}" data-act="rate" />
+          <div class="amt">Rs ${fmt(l.qty * l.rate)}</div>
+        </div>
+      </div>`).join('');
+  }
+  calcTotals();
+}
+
+$('#cartList').addEventListener('click', e => {
+  const btn = e.target.closest('[data-act]'); if (!btn) return;
+  const row = e.target.closest('.citem'); if (!row) return;
+  const i = Number(row.dataset.idx);
+  const act = btn.dataset.act;
+  if (act === 'plus')  cart[i].qty = Number(cart[i].qty||0) + 1;
+  if (act === 'minus') cart[i].qty = Math.max(0, Number(cart[i].qty||0) - 1);
+  if (act === 'del')   cart.splice(i,1);
+  if (act === 'minus' && cart[i] && cart[i].qty === 0) cart.splice(i,1);
+  renderCart(); updateCartBar();
+});
+
+$('#cartList').addEventListener('input', e => {
+  const inp = e.target.closest('[data-act="qty"], [data-act="rate"]'); if (!inp) return;
+  const row = e.target.closest('.citem');
+  const i = Number(row.dataset.idx);
+  const val = Math.max(0, Number(inp.value)||0);
+  if (inp.dataset.act === 'qty')  cart[i].qty  = val;
+  if (inp.dataset.act === 'rate') cart[i].rate = val;
+  row.querySelector('.amt').textContent = 'Rs ' + fmt(cart[i].qty * cart[i].rate);
+  calcTotals(); updateCartBar();
+});
+
+$('#mAddBtn').addEventListener('click', () => {
+  const ur   = $('#mUr').value.trim();
+  const name = $('#mName').value.trim();
+  const unit = $('#mUnit').value.trim() || t('عدد', 'nos');
+  const rate = Number($('#mRate').value) || 0;
+  const cost = Number($('#mCost').value) || 0;
+  const qty  = Number($('#mQty').value)  || 1;
+  if (!ur && !name) return toast(t('آئٹم کا نام لکھیں', 'Enter item name'));
+  if (rate <= 0)    return toast(t('ریٹ درج کریں', 'Enter rate'));
+  if (cost <= 0)    return toast(t('لاگت قیمت درج کریں', 'Enter cost price'));
+  if (qty  <= 0)    return toast(t('تعداد درج کریں', 'Enter quantity'));
+  cart.push({ id: uid('man'), name: name||ur, ur: ur||name, unit, rate, costPrice:cost, qty });
+  $('#mUr').value = $('#mName').value = $('#mUnit').value = $('#mRate').value = $('#mCost').value = '';
+  $('#mQty').value = 1;
+  renderCart(); updateCartBar();
+  toast(t('شامل ہو گیا ✔', 'Added ✔'));
+});
+
+/* CALC TOTALS */
+function calcTotals(){
+  const sub     = cart.reduce((s,l) => s + Number(l.qty||0) * Number(l.rate||0), 0);
+  const disc    = Number($('#discInput').value)    || 0;
+  const freight = Number($('#freightInput').value) || 0;
+  const advance = Number($('#advanceInput').value) || 0;
+  const total = Math.max(0, sub - disc + freight);
+  const rem   = Math.max(0, total - advance);
+  const qty   = cart.reduce((s,l) => s + Number(l.qty||0), 0);
+  $('#tItems').textContent = fmt(qty);
+  $('#tSub').textContent   = 'Rs ' + fmt(sub);
+  $('#tGrand').textContent = 'Rs ' + fmt(total);
+  $('#tRem').textContent   = 'Rs ' + fmt(rem);
+  updatePayPreview(total, advance, rem);
+  return { sub, disc, freight, advance, total, rem, qty };
+}
+
+function updatePayPreview(total, advance, rem){
+  const prev = $('#payPreview');
+  const lbl  = $('#payPrevLabel');
+  const val  = $('#tRem');
+  prev.classList.remove('paid','unpaid');
+  if (cart.length === 0 || total <= 0){
+    lbl.textContent = t('باقی رقم', 'Remaining');
+    val.textContent = 'Rs 0'; return;
+  }
+  if (advance >= total - 0.001){
+    prev.classList.add('paid');
+    lbl.textContent = t('پوری رقم ادا ✔', 'Fully Paid ✔');
+    val.textContent = 'Rs 0';
+  } else if (advance > 0){
+    lbl.textContent = t('باقی رقم', 'Remaining');
+    val.textContent = 'Rs ' + fmt(rem);
+  } else {
+    prev.classList.add('unpaid');
+    lbl.textContent = t('کل رقم باقی', 'Fully Unpaid');
+    val.textContent = 'Rs ' + fmt(rem);
+  }
+}
+
+$('#payStatus').addEventListener('change', () => {
+  const sub     = cart.reduce((s,l) => s + Number(l.qty||0) * Number(l.rate||0), 0);
+  const disc    = Number($('#discInput').value)    || 0;
+  const freight = Number($('#freightInput').value) || 0;
+  const total   = Math.max(0, sub - disc + freight);
+  const st = $('#payStatus').value;
+  if (st === 'Full Paid')       $('#advanceInput').value = Math.round(total);
+  else if (st === 'Half Paid')  $('#advanceInput').value = Math.round(total / 2);
+  else                          $('#advanceInput').value = 0;
+  calcTotals();
+});
+
+$('#advanceInput').addEventListener('input', () => {
+  calcTotals();
+  const sub     = cart.reduce((s,l) => s + Number(l.qty||0) * Number(l.rate||0), 0);
+  const disc    = Number($('#discInput').value)    || 0;
+  const freight = Number($('#freightInput').value) || 0;
+  const total   = Math.max(0, sub - disc + freight);
+  const advance = Number($('#advanceInput').value) || 0;
+  if (total <= 0) return;
+  if (advance >= total - 0.001) $('#payStatus').value = 'Full Paid';
+  else if (advance > 0)         $('#payStatus').value = 'Half Paid';
+  else                          $('#payStatus').value = 'Unpaid';
+});
+
+['discInput','freightInput'].forEach(id =>
+  $('#'+id).addEventListener('input', () => calcTotals())
+);
+
+$$('.quickfill button').forEach(b => {
+  b.addEventListener('click', () => {
+    const sub     = cart.reduce((s,l) => s + Number(l.qty||0) * Number(l.rate||0), 0);
+    const disc    = Number($('#discInput').value)    || 0;
+    const freight = Number($('#freightInput').value) || 0;
+    const total   = Math.max(0, sub - disc + freight);
+    if (total <= 0) return toast(t('پہلے آئٹم شامل کریں', 'Add items first'));
+    const which = b.dataset.fill;
+    let val = 0;
+    if (which === 'full')    val = total;
+    else if (which === 'half')    val = Math.round(total/2);
+    else if (which === 'quarter') val = Math.round(total/4);
+    $('#advanceInput').value = val;
+    calcTotals();
+    if (val >= total - 0.001) $('#payStatus').value = 'Full Paid';
+    else if (val > 0)         $('#payStatus').value = 'Half Paid';
+    else                      $('#payStatus').value = 'Unpaid';
+  });
+});
+
+/* ============================================================
+   DUPLICATE BILL CHECK
+   ============================================================ */
+function itemSignature(lines){
+  return (lines||[]).map(l =>
+    `${(l.ur||l.name||'').trim()}|${(l.name||'').trim()}|${Number(l.qty)||0}|${Number(l.rate)||0}`
+  ).sort().join('~');
+}
+function isSameDay(isoA, isoB){
+  const a = new Date(isoA), b = new Date(isoB);
+  return a.getFullYear() === b.getFullYear() &&
+         a.getMonth()    === b.getMonth()    &&
+         a.getDate()     === b.getDate();
+}
+function findDuplicateBill(lines, whenIso){
+  const sig = itemSignature(lines);
+  if (!sig) return null;
+  return bills.find(b => isSameDay(b.date, whenIso) && itemSignature(b.items) === sig) || null;
+}
+
+let pendingDuplicate = null;
+function askDuplicate(dupBill, onContinue){
+  pendingDuplicate = onContinue;
+  $('#dupMsg').innerHTML = t(
+    `آج اسی تاریخ پر <b>بل #${dupBill.no}</b> میں بھی یہی آئٹمز موجود ہیں (کل: Rs ${fmt(dupBill.total)})۔ کیا پھر بھی نیا بل بنائیں؟`,
+    `The same items already exist in <b>Bill #${dupBill.no}</b> today (total Rs ${fmt(dupBill.total)}). Create this bill anyway?`
+  );
+  $('#dupConfirmModal').classList.add('open');
+}
+function closeDupConfirm(){ $('#dupConfirmModal').classList.remove('open'); pendingDuplicate = null; }
+$('#dupCancelBtn').addEventListener('click', closeDupConfirm);
+$('#dupOkBtn').addEventListener('click', () => {
+  const cb = pendingDuplicate;
+  closeDupConfirm();
+  if (typeof cb === 'function') cb();
+});
+$('#dupConfirmModal').addEventListener('click', e => {
+  if (e.target.id === 'dupConfirmModal') closeDupConfirm();
+});
+
+/* ============================================================
+   SAVED CUSTOMERS (Name + Phone picker)
+   ============================================================ */
+function savedCustomers(){
+  const map = new Map();
+  bills.forEach(b => {
+    const phone = String(b.phone || '').replace(/\D/g,'');
+    const name  = String(b.customer || '').trim();
+    if (!phone && (!name || name === 'Walk-in Customer')) return;
+    const key = phone || ('n:' + name.toLowerCase());
+    const prev = map.get(key);
+    if (!prev){
+      map.set(key, { name, phone: b.phone || '', date: b.date });
+    } else if (new Date(b.date) > new Date(prev.date)){
+      prev.name = name || prev.name;
+      prev.phone = b.phone || prev.phone;
+      prev.date = b.date;
+    }
+  });
+  return [...map.values()].sort((a,b) => new Date(b.date) - new Date(a.date));
+}
+
+let custSuggestList = [];
+function renderCustSuggest(){
+  const box = $('#custSuggest');
+  if (!box) return;
+  const nameQ  = ($('#custName').value || '').trim().toLowerCase();
+  const phoneQ = ($('#custPhone').value || '').replace(/\D/g,'');
+  if (!nameQ && !phoneQ){ box.classList.remove('show'); box.innerHTML = ''; return; }
+
+  let list = savedCustomers();
+  list = list.filter(c => {
+    const cPhone = String(c.phone||'').replace(/\D/g,'');
+    const cName  = String(c.name||'').toLowerCase();
+    if (phoneQ && cPhone.includes(phoneQ)) return true;
+    if (nameQ  && cName.includes(nameQ))   return true;
+    return false;
+  }).slice(0, 6);
+
+  custSuggestList = list;
+  if (!list.length){ box.classList.remove('show'); box.innerHTML = ''; return; }
+
+  box.innerHTML = `<div class="cust-head">${t('محفوظ کسٹمرز','SAVED CUSTOMERS')}</div>` +
+    list.map((c,i) => `
+      <div class="cust-item" data-idx="${i}">
+        <div class="cust-nm">${c.name || t('نام کے بغیر','No name')}</div>
+        <div class="cust-ph">${c.phone || '—'}</div>
+      </div>`).join('');
+  box.classList.add('show');
+}
+
+$('#custSuggest').addEventListener('click', e => {
+  const it = e.target.closest('.cust-item'); if (!it) return;
+  const c = custSuggestList[Number(it.dataset.idx)];
+  if (!c) return;
+  $('#custName').value  = c.name || '';
+  $('#custPhone').value = String(c.phone || '').replace(/\D/g,'').slice(0,11);
+  $('#custSuggest').classList.remove('show');
+  toast(t('کسٹمر منتخب ✔','Customer selected ✔'), 1200);
+});
+
+$('#custName').addEventListener('focus', renderCustSuggest);
+$('#custName').addEventListener('input', renderCustSuggest);
+$('#custPhone').addEventListener('focus', renderCustSuggest);
+$('#custPhone').addEventListener('input', () => {
+  const el = $('#custPhone');
+  const cleaned = el.value.replace(/\D/g,'').slice(0,11);
+  if (el.value !== cleaned) el.value = cleaned;
+  renderCustSuggest();
+});
+document.addEventListener('click', e => {
+  if (!e.target.closest('#custSuggest') &&
+      !e.target.closest('#custName') &&
+      !e.target.closest('#custPhone')){
+    const box = $('#custSuggest');
+    if (box) box.classList.remove('show');
+  }
+});
+
+/* GENERATE BILL */
+function buildAndSaveBill(){
+  const tt = calcTotals();
+  const rawPhone = $('#custPhone').value.trim();
+  let phone = '';
+  if (rawPhone){
+    phone = normalizePakPhone(rawPhone);
+    if (!phone) return toast(t('فون نمبر 11 ہندسوں کا ہونا چاہیے (03XXXXXXXXX)', 'Phone must be 11 digits (03XXXXXXXXX)'));
+  }
+  if (tt.total <= 0) return toast(t('کل رقم صفر ہے', 'Total is zero'));
+
+  const payMethod = $('#payMethod').value || 'Cash';
+  const payStatus = $('#payStatus').value || 'Unpaid';
+  const bill = {
+    id: uid('bill'),
+    no: nextBillNo(),
+    date: new Date().toISOString(),
+    customer: $('#custName').value.trim() || 'Walk-in Customer',
+    phone,
+    items: JSON.parse(JSON.stringify(cart)),
+    subtotal: tt.sub, discount: tt.disc, freight: tt.freight,
+    total: tt.total, advance: tt.advance, remaining: tt.rem, qty: tt.qty,
+    payMethod, payStatus, synced: false
+  };
+  currentBill = bill;
+  bills.unshift(bill);
+  save(LS_BILLS, bills);
+  renderReceipt(bill);
+  closeSheet('cartSheet');
+  openSheet('receiptSheet');
+  syncBillToFirebase(bill);
+  renderHistory();
+  renderReports();
+  updateSyncBadge();
+  renderCustSuggest();
+}
+
+$('#genBillBtn').addEventListener('click', () => {
+  if (!cart.length) return toast(t('پہلے آئٹم شامل کریں', 'Add an item first'));
+
+  /* phone validation before anything */
+  const rawPhone = $('#custPhone').value.trim();
+  if (rawPhone && !normalizePakPhone(rawPhone)){
+    return toast(t('فون نمبر 11 ہندسوں کا ہونا چاہیے (03XXXXXXXXX)', 'Phone must be 11 digits (03XXXXXXXXX)'));
+  }
+
+  /* duplicate check */
+  const nowIso = new Date().toISOString();
+  const dup = findDuplicateBill(cart, nowIso);
+  if (dup){
+    askDuplicate(dup, buildAndSaveBill);
+    return;
+  }
+  buildAndSaveBill();
+});
+
+/* RECEIPT */
+function billProfit(b){
+  const cogs = (b.items||[]).reduce((s,l) => s + (Number(l.costPrice)||0) * Number(l.qty||0), 0);
+  return Number(b.total||0) - cogs;
+}
+
+function renderReceipt(b){
+  const payMethod = b.payMethod || 'Cash';
+  const payStatus = b.payStatus || (b.remaining > 0 ? 'Unpaid' : 'Full Paid');
+  const advance   = Number(b.advance) || 0;
+  const remaining = Number(b.remaining) || Math.max(0, (b.total||0) - advance);
+
+  const rows = b.items.map((l,i) => `
+    <tr>
+      <td class="c">${i+1}</td>
+      <td>${l.ur || l.name}<div class="sub2">${l.name}</div></td>
+      <td class="c">${fmt(l.qty)}<div class="sub2">${l.unit}</div></td>
+      <td class="r">${fmt(l.rate)}</td>
+      <td class="r">${fmt(l.qty * l.rate)}</td>
+    </tr>`).join('');
+
+  let stampHTML = '';
+  if (payStatus === 'Full Paid')     stampHTML = `<div class="p-stamp">FULL PAID</div>`;
+  else if (payStatus === 'Half Paid') stampHTML = `<div class="p-stamp partial">HALF PAID</div>`;
+  else                                stampHTML = `<div class="p-stamp credit">CREDIT</div>`;
+
+  const pmLabel = {
+    'Cash': t('نقد','Cash'), 'Online / Bank': t('بینک','Online'),
+    'JazzCash': 'JazzCash', 'EasyPaisa': 'EasyPaisa',
+    'Credit / Udhaar': t('ادھار','Credit')
+  }[payMethod] || payMethod;
+
+  const psLabel = {
+    'Full Paid': t('پوری','PAID'),
+    'Half Paid': t('آدھی','HALF'),
+    'Unpaid': t('ادھار','CREDIT')
+  }[payStatus] || payStatus;
+
+  $('#receiptPaper').innerHTML = `
+    ${stampHTML}
+    <div class="p-head">
+      <div class="p-urdu">${settings.shopUr}</div>
+      <div class="p-shop">${settings.shopEn}</div>
+      <div class="p-meta-line">${settings.ownerUr} — ${settings.owner} • ${settings.phone}${settings.phone2 ? ' / '+settings.phone2 : ''}</div>
+      <div class="p-meta-line" style="font-size:8px;color:#64748b;">${settings.address}</div>
+    </div>
+    <div class="p-info">
+      <div>Bill #: <b>${b.no}</b><br>Date: <b>${fmtDate(b.date)}</b></div>
+      <div>Customer: <b>${b.customer}</b>${b.phone ? `<br>Phone: <b>${b.phone}</b>` : ''}</div>
+    </div>
+    <table class="p-items">
+      <thead>
+        <tr>
+          <th class="c" style="width:18px">#</th>
+          <th>${t('تفصیل','Item')}</th>
+          <th class="c" style="width:38px">Qty</th>
+          <th class="r" style="width:46px">Rate</th>
+          <th class="r" style="width:56px">Amount</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <div class="p-totals">
+      <div class="p-tr"><span>${t('کل تعداد','Qty')}</span><b>${fmt(b.qty)}</b></div>
+      <div class="p-tr"><span>Sub Total</span><b>Rs ${fmt(b.subtotal)}</b></div>
+      ${b.discount ? `<div class="p-tr"><span>${t('رعایت','Discount')}</span><b>− Rs ${fmt(b.discount)}</b></div>`:''}
+      ${b.freight  ? `<div class="p-tr"><span>${t('مزدوری','Mazdoori')}</span><b>+ Rs ${fmt(b.freight)}</b></div>`:''}
+      <div class="p-tr grand"><span>${t('کل رقم','TOTAL')}</span><b>Rs ${fmt(b.total)}</b></div>
+      <div class="p-tr paid"><span>${pmLabel} (${psLabel})</span><b>Rs ${fmt(advance)}</b></div>
+      ${remaining > 0 ? `<div class="p-tr due"><span>${t('باقی','Balance')}</span><b>Rs ${fmt(remaining)}</b></div>` : ''}
+    </div>
+    <div class="p-note-line">${settings.footer}</div>
+    <div class="p-note-small">Goods once sold will not be taken back.</div>
+    <div class="p-foot">
+      <div class="sig">${t('دستخط گاہک','Cust Sign')}</div>
+      <div class="sig">${t('دستخط دکاندار','Shop Sign')}</div>
+      <div class="dev">
+        <b>Developer : Khalid Ali</b>
+        WhatsApp : 03003919555
+      </div>
+    </div>`;
+
+  $('#syncBadge').textContent = b.synced ? 'Synced' : 'Not Synced';
+  $('#syncBadge').className = 'badge ' + (b.synced ? 'ok' : 'pend');
+}
+
+$('#printBtn').addEventListener('click', () => {
+  $('#printArea').innerHTML = $('#receiptPaper').outerHTML;
+  window.print();
+});
+
+/* WHATSAPP */
+$('#waBtn').addEventListener('click', () => {
+  if (!currentBill) return toast(t('پہلے بل بنائیں', 'Generate a bill first'));
+  if (!currentBill.phone) return toast(t('کسٹمر کا فون نمبر درج کریں', 'Enter customer phone first'));
+  let phone = String(currentBill.phone).replace(/\D/g, '');
+  if (phone.startsWith('00')) phone = phone.slice(2);
+  if (phone.startsWith('0'))  phone = '92' + phone.slice(1);
+  else if (!phone.startsWith('92')) phone = '92' + phone;
+  if (phone.length < 11) return toast(t('فون نمبر غلط ہے', 'Invalid phone number'));
+  const msg = buildWhatsAppMsg(currentBill);
+  const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+});
+
+function buildWhatsAppMsg(b){
+  const payStatus = b.payStatus || 'Unpaid';
+  const advance   = Number(b.advance) || 0;
+  const remaining = Number(b.remaining) || 0;
+  let L = [];
+  L.push(`*${settings.shopUr}*`);
+  L.push(`_${settings.shopEn}_`);
+  L.push(`${settings.owner}  •  ${settings.phone}`);
+  L.push(`────────────────`);
+  L.push(`*Bill #*: ${b.no}`);
+  L.push(`*Date*: ${fmtDateFull(b.date)}`);
+  L.push(`*Customer*: ${b.customer}`);
+  if (b.phone) L.push(`*Phone*: ${b.phone}`);
+  L.push(`────────────────`);
+  b.items.forEach((l,i) => {
+    L.push(`${i+1}. ${l.ur || l.name}`);
+    L.push(`   ${fmt(l.qty)} ${l.unit} × Rs ${fmt(l.rate)} = Rs ${fmt(l.qty*l.rate)}`);
+  });
+  L.push(`────────────────`);
+  L.push(`Sub Total: Rs ${fmt(b.subtotal)}`);
+  if (b.discount) L.push(`Discount: -Rs ${fmt(b.discount)}`);
+  if (b.freight)  L.push(`Mazdoori: +Rs ${fmt(b.freight)}`);
+  L.push(`*TOTAL: Rs ${fmt(b.total)}*`);
+  L.push(``);
+  L.push(`Paid (${b.payMethod||'Cash'}): Rs ${fmt(advance)}`);
+  if (remaining > 0) L.push(`*Remaining: Rs ${fmt(remaining)}*`);
+  L.push(``);
+  L.push(`*Status: ${payStatus === 'Full Paid' ? '✅ FULL PAID' : payStatus === 'Half Paid' ? '⚠️ HALF PAID' : '❌ CREDIT'}*`);
+  L.push(``);
+  L.push(`${settings.footer}`);
+  L.push(``);
+  L.push(`Developer : Khalid Ali`);
+  L.push(`WhatsApp : 03003919555`);
+  return L.join('\n');
+}
+
+/* JPG */
+$('#jpgBtn').addEventListener('click', async () => {
+  if (typeof html2canvas === 'undefined'){
+    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
+  }
+  toast(t('تصویر بن رہی ہے...', 'Generating image...'), 3000);
+  try{
+    const canvas = await html2canvas($('#receiptPaper'), {
+      backgroundColor:'#ffffff', scale:3, useCORS:true, logging:false
+    });
+    const link = document.createElement('a');
+    link.download = `AlIbrahim-Bill-${currentBill ? currentBill.no : 'receipt'}.jpg`;
+    link.href = canvas.toDataURL('image/jpeg', 0.95);
+    link.click();
+    toast(t('JPG محفوظ ✔', 'JPG saved ✔'));
+  }catch(err){
+    console.error(err);
+    toast(t('تصویر بنانے میں مسئلہ', 'Image failed'));
+  }
+});
+function loadScript(src){
+  return new Promise((res,rej) => {
+    const s = document.createElement('script');
+    s.src = src; s.onload = res; s.onerror = rej;
+    document.head.appendChild(s);
+  });
+}
+
+$('#newBillBtn').addEventListener('click', () => {
+  cart = []; currentBill = null;
+  $('#custName').value = ''; $('#custPhone').value = '';
+  $('#custSuggest').classList.remove('show');
+  $('#discInput').value = 0; $('#freightInput').value = 0; $('#advanceInput').value = 0;
+  $('#payMethod').value = 'Cash'; $('#payStatus').value = 'Full Paid';
+  renderCart(); updateCartBar();
+  closeSheet('receiptSheet');
+  toast(t('نیا بل تیار ہے', 'Ready for new bill'));
+});
+
+$('#syncBtn').addEventListener('click', () => {
+  if (currentBill) syncBillToFirebase(currentBill, true);
+});
+
+/* ITEMS MANAGEMENT */
+$('#addItemBtn').addEventListener('click', async () => {
+  const ur   = $('#newUr').value.trim();
+  const name = $('#newName').value.trim();
+  const unit = $('#newUnit').value.trim() || t('عدد', 'nos');
+  const rate = Number($('#newRate').value) || 0;
+  const cost = Number($('#newCost').value) || 0;
+  const cat  = $('#newCat').value;
+  if (!name && !ur) return toast(t('آئٹم کا نام لکھیں', 'Enter item name'));
+  if (rate <= 0)    return toast(t('فروخت قیمت درج کریں', 'Enter sell price'));
+  if (cost <= 0)    return toast(t('لاگت قیمت درج کریں', 'Enter cost price'));
+  const newIt = { id:uid('it'), name:name||ur, ur:ur||name, unit, rate, costPrice:cost, cat };
+  items.push(newIt);
+  save(LS_ITEMS, items);
+  ['newUr','newName','newUnit','newRate','newCost'].forEach(id => $('#'+id).value = '');
+  renderCats(); renderItems(); renderItemsList();
+  pushItemToFirebase(newIt);
+  toast(t('آئٹم شامل ✔', 'Item added ✔'));
+});
+
+function renderItemsList(){
+  const box = $('#itemsList');
+  if (!items.length){
+    box.innerHTML = `<div class="empty">${t('کوئی آئٹم نہیں', 'No items')}</div>`; return;
+  }
+  box.innerHTML = items.map(i => {
+    const cost = Number(i.costPrice)||0;
+    const margin = i.rate - cost;
+    const costLine = cost > 0
+      ? `<div class="ilist-cost">Cost: Rs ${fmt(cost)}${margin>0?` (+${fmt(margin)})`:''}</div>`
+      : `<div class="ilist-cost miss">⚠ ${t('لاگت سیٹ نہیں','Cost not set')}</div>`;
+    return `
+    <div class="ilist-item" data-id="${i.id}">
+      <div class="ilist-info">
+        <div class="ilist-ur">${i.ur || i.name}</div>
+        <div class="ilist-sub">${i.name} • ${i.unit} • ${i.cat||'Other'}</div>
+      </div>
+      <div class="ilist-prices">
+        <div class="ilist-rate">Rs ${fmt(i.rate)}</div>
+        ${costLine}
+      </div>
+      <button class="iconbtn" data-act="edit">✎</button>
+      <button class="iconbtn danger" data-act="del">✕</button>
+    </div>`;
+  }).join('');
+}
+
+$('#itemsList').addEventListener('click', e => {
+  const btn = e.target.closest('[data-act]'); if (!btn) return;
+  const row = e.target.closest('.ilist-item');
+  const id = row.dataset.id;
+  const it = items.find(x => x.id === id);
+  if (!it) return;
+  if (btn.dataset.act === 'del'){
+    if (confirm(t(`"${it.ur || it.name}" ڈیلیٹ کریں؟`, `Delete "${it.name}"?`))){
+      items = items.filter(x => x.id !== id);
+      save(LS_ITEMS, items);
+      renderCats(); renderItems(); renderItemsList();
+      toast(t('ڈیلیٹ ✔', 'Deleted'));
+    }
+  }
+  if (btn.dataset.act === 'edit'){
+    const nr = prompt(t(`فروخت قیمت (${it.ur || it.name}) — فی ${it.unit}:`, `Sell price for ${it.name} (per ${it.unit}):`), it.rate);
+    if (nr === null) return;
+    if (isNaN(Number(nr)) || Number(nr) <= 0) return toast(t('غلط قیمت', 'Invalid price'));
+    const nc = prompt(t(`لاگت / Cost Price:`, `Cost price:`), it.costPrice || 0);
+    it.rate = Number(nr);
+    it.costPrice = nc === null ? it.costPrice : (Number(nc)||0);
+    save(LS_ITEMS, items);
+    renderItems(); renderItemsList();
+    pushItemToFirebase(it);
+    toast(t('قیمتیں اپڈیٹ ✔', 'Prices updated ✔'));
+  }
+});
+
+/* HISTORY */
+let histSelectMode = false;
+let histSelection  = new Set();
+let pendingDelete  = null;
+let histQuery      = '';
+
+$('#histSearch').addEventListener('input', e => {
+  histQuery = e.target.value.trim().toLowerCase();
+  renderHistory();
+});
+
+function cleanupHistSelection(){
+  if (histSelection.size === 0) return;
+  const validIds = new Set(bills.map(b => b.id));
+  [...histSelection].forEach(id => { if (!validIds.has(id)) histSelection.delete(id); });
+  if (bills.length === 0) histSelectMode = false;
+}
+
+function filterBills(list){
+  if (!histQuery) return list;
+  const q = histQuery;
+  const qDigits = q.replace(/\D/g, '');
+  return list.filter(b => {
+    const phone = String(b.phone || '').replace(/\D/g, '');
+    const noStr = String(b.no);
+    const cust  = String(b.customer || '').toLowerCase();
+    if (qDigits && phone && phone.includes(qDigits)) return true;
+    if (noStr.includes(q) || noStr === q) return true;
+    if (cust.includes(q)) return true;
+    return false;
+  });
+}
+
+function renderHistToolbar(){
+  const tb = $('#histToolbar');
+  const total = bills.length;
+  if (total === 0){ tb.innerHTML = ''; return; }
+  if (!histSelectMode){
+    tb.innerHTML = `
+      <button class="btn dark sm" id="histSelectBtn">${t('☑ منتخب','☑ Select')}</button>
+      <div class="spacer"></div>
+      <div style="font-size:10.5px;color:var(--txt-4);flex-shrink:0;white-space:nowrap;">
+        ${total} ${t('بلز','bills')}
+      </div>`;
+    return;
+  }
+  const n = histSelection.size;
+  const allSelected = n === total && total > 0;
+  tb.innerHTML = `
+    <button class="btn dark sm" id="histCancelBtn">${t('✕ منسوخ','✕ Cancel')}</button>
+    <button class="btn dark sm" id="histSelectAllBtn">
+      ${allSelected ? t('☐ کوئی نہیں','☐ None') : t('☑ سب','☑ All')}
+    </button>
+    <div class="spacer"></div>
+    <div class="hist-sel-info">${n} ${t('منتخب','sel.')}</div>
+    <button class="btn red sm" id="histDeleteBtn"
+            ${n===0?'disabled style="opacity:.45;pointer-events:none;"':''}>
+      🗑 ${n>0?`(${n})`:''}
+    </button>`;
+}
+
+function renderHistory(){
+  cleanupHistSelection();
+  const box = $('#historyList');
+  renderHistToolbar();
+
+  if (!bills.length){
+    box.innerHTML = `<div class="empty">${t('ابھی کوئی بل محفوظ نہیں', 'No bills saved yet')}</div>`;
+    return;
+  }
+  const visible = filterBills(bills);
+  if (!visible.length){
+    box.innerHTML = `<div class="empty">${t('کوئی نتیجہ نہیں', 'No results found')}</div>`;
+    return;
+  }
+
+  box.innerHTML = visible.map(b => {
+    const payStatus = b.payStatus || (b.remaining > 0 ? 'Unpaid' : 'Full Paid');
+    const isSel     = histSelection.has(b.id);
+    const profit    = billProfit(b);
+
+    let payBadge = '';
+    if (payStatus === 'Full Paid') payBadge = `<span class="badge paid">FULL PAID</span>`;
+    else if (payStatus === 'Half Paid') payBadge = `<span class="badge half">HALF</span>`;
+    else payBadge = `<span class="badge due">DUE</span>`;
+
+    const checkHTML = histSelectMode
+      ? `<div class="hist-check ${isSel?'on':''}" data-check="${b.id}">
+           <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+         </div>` : '';
+
+    const delHTML = histSelectMode ? '' : `
+      <div class="hist-del-single" data-del="${b.id}" title="${t('ڈیلیٹ','Delete')}">
+        <svg viewBox="0 0 24 24">
+          <polyline points="3 6 5 6 21 6"/>
+          <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+          <path d="M10 11v6M14 11v6"/>
+          <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/>
+        </svg>
+      </div>`;
+
+    return `
+    <div class="hist-card ${isSel?'selected':''}" data-id="${b.id}">
+      <div class="hist-row-top">
+        ${checkHTML}
+        <div class="hist-main">
+          <div class="hist-top">
+            <div class="hist-no">#${b.no}</div>
+            <div class="hist-cust">${b.customer}</div>
+            ${payBadge}
+            <div class="badge ${b.synced?'ok':'pend'}">${b.synced?'☁':'⏳'}</div>
+          </div>
+          <div class="hist-bottom">
+            <div class="hist-date">${fmtDate(b.date)}</div>
+            <div class="hist-total">Rs ${fmt(b.total)}</div>
+          </div>
+          <div class="hist-phone">
+            ${b.phone ? `
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              ${b.phone}
+            ` : ''}
+            ${profit !== 0 ? `<span class="hist-profit">+ Rs ${fmt(profit)}</span>` : ''}
+          </div>
+        </div>
+        ${delHTML}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+$('#histToolbar').addEventListener('click', e => {
+  if (e.target.closest('#histSelectBtn')){
+    histSelectMode = true; histSelection.clear(); renderHistory();
+    toast(t('☑ بلز منتخب کریں', '☑ Select bills'), 1400); return;
+  }
+  if (e.target.closest('#histCancelBtn')){
+    histSelectMode = false; histSelection.clear(); renderHistory(); return;
+  }
+  if (e.target.closest('#histSelectAllBtn')){
+    const allSelected = histSelection.size === bills.length && bills.length > 0;
+    if (allSelected) histSelection.clear();
+    else bills.forEach(b => histSelection.add(b.id));
+    renderHistory(); return;
+  }
+  if (e.target.closest('#histDeleteBtn')){
+    if (histSelection.size === 0) return;
+    askDeleteBills([...histSelection]); return;
+  }
+});
+
+$('#historyList').addEventListener('click', e => {
+  const check = e.target.closest('[data-check]');
+  if (check){
+    const id = check.dataset.check;
+    if (histSelection.has(id)) histSelection.delete(id);
+    else histSelection.add(id);
+    renderHistory(); return;
+  }
+  const delBtn = e.target.closest('[data-del]');
+  if (delBtn){ askDeleteBills([delBtn.dataset.del]); return; }
+  const card = e.target.closest('.hist-card');
+  if (!card) return;
+  const id = card.dataset.id;
+  if (histSelectMode){
+    if (histSelection.has(id)) histSelection.delete(id);
+    else histSelection.add(id);
+    renderHistory(); return;
+  }
+  const b = bills.find(x => x.id === id);
+  if (!b) return;
+  currentBill = b;
+  renderReceipt(b);
+  openSheet('receiptSheet');
+});
+
+/* DELETE CONFIRM */
+function askDeleteBills(ids){
+  if (!ids || !ids.length) return;
+  if ($('#receiptSheet').classList.contains('open')) closeSheet('receiptSheet');
+  pendingDelete = ids;
+  const n = ids.length;
+  const single = n === 1 ? bills.find(b => b.id === ids[0]) : null;
+  if (single){
+    $('#delTitle').textContent = t('بل ڈیلیٹ کریں؟', 'Delete Bill?');
+    $('#delMsg').innerHTML = t(
+      `بل <b>#${single.no}</b> — <b>${single.customer}</b> ڈیلیٹ کریں؟`,
+      `Delete bill <b>#${single.no}</b> for <b>${single.customer}</b>?`
+    );
+  } else {
+    $('#delTitle').textContent = t('کئی بل ڈیلیٹ کریں؟', 'Delete Multiple Bills?');
+    $('#delMsg').innerHTML = t(
+      `کیا آپ واقعی <b>${n}</b> بلز ڈیلیٹ کرنا چاہتے ہیں؟`,
+      `Are you sure you want to delete <b>${n}</b> bills?`
+    );
+  }
+  $('#delSub').textContent = t('یہ عمل واپس نہیں ہو سکتا۔', 'This action cannot be undone.');
+  $('#delConfirmModal').classList.add('open');
+}
+function closeDelConfirm(){
+  $('#delConfirmModal').classList.remove('open');
+  pendingDelete = null;
+}
+$('#delCancelBtn').addEventListener('click', closeDelConfirm);
+$('#delConfirmBtn').addEventListener('click', () => {
+  if (!pendingDelete) return;
+  const ids = [...pendingDelete];
+  const idSet = new Set(ids);
+  bills = bills.filter(b => !idSet.has(b.id));
+  save(LS_BILLS, bills);
+  histSelection.clear();
+  if (bills.length === 0) histSelectMode = false;
+  if (currentBill && idSet.has(currentBill.id)) currentBill = null;
+  closeDelConfirm();
+  renderHistory();
+  renderReports();
+  updateSyncBadge();
+  renderCustSuggest();
+  toast(t(`${ids.length} بل ڈیلیٹ ہو گئے`, `${ids.length} bill(s) deleted`));
+});
+$('#delConfirmModal').addEventListener('click', e => {
+  if (e.target.id === 'delConfirmModal') closeDelConfirm();
+});
+
+/* REPORTS */
+function periodStart(period){
+  const now = new Date();
+  if (period === 'today'){ const d = new Date(now); d.setHours(0,0,0,0); return d; }
+  if (period === 'week'){ const d = new Date(now); d.setDate(d.getDate() - 6); d.setHours(0,0,0,0); return d; }
+  if (period === 'month') return new Date(now.getFullYear(), now.getMonth(), 1);
+  if (period === 'year')  return new Date(now.getFullYear(), 0, 1);
+  return new Date(0);
+}
+$('#reportTabs').addEventListener('click', e => {
+  const btn = e.target.closest('button'); if (!btn) return;
+  $$('#reportTabs button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  reportPeriod = btn.dataset.period;
+  renderReports();
+});
+
+function renderReports(){
+  const start = periodStart(reportPeriod);
+  const filtered = bills.filter(b => new Date(b.date) >= start);
+
+  let totalSale = 0, totalCost = 0, totalPaid = 0, totalDue = 0;
+  let billCount = filtered.length;
+
+  filtered.forEach(b => {
+    totalSale += Number(b.total) || 0;
+    totalPaid += Number(b.advance) || 0;
+    totalDue  += Number(b.remaining) || 0;
+    const cogs = (b.items||[]).reduce((s,l) => s + (Number(l.costPrice)||0) * Number(l.qty||0), 0);
+    totalCost += cogs;
+  });
+
+  const profit = totalSale - totalCost;
+  const margin = totalSale > 0 ? (profit / totalSale * 100) : 0;
+  const grid = $('#repGrid');
+
+  if (billCount === 0){
+    grid.innerHTML = `<div class="rep-empty" style="grid-column:1/-1">
+      ${t('اس مدت میں کوئی بل نہیں', 'No bills in this period')}
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML = `
+    <div class="rep-card full rep-big">
+      <div class="rep-label">${t('خالص منافع / Net Profit', 'Net Profit')}</div>
+      <div class="rep-val">Rs ${fmt(profit)}</div>
+      <div class="rep-sub">${margin.toFixed(1)}% ${t('مارجن', 'margin')}</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-label">${t('کل سیل', 'Total Sale')}</div>
+      <div class="rep-val gold">Rs ${fmt(totalSale)}</div>
+      <div class="rep-sub">${billCount} ${t('بلز', 'bills')}</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-label">${t('کل لاگت', 'Total Cost')}</div>
+      <div class="rep-val">Rs ${fmt(totalCost)}</div>
+      <div class="rep-sub">COGS</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-label">${t('وصول شدہ', 'Received')}</div>
+      <div class="rep-val green">Rs ${fmt(totalPaid)}</div>
+      <div class="rep-sub">${t('ادا شدہ رقم', 'Paid amount')}</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-label">${t('باقی / ادھار', 'Outstanding')}</div>
+      <div class="rep-val red">Rs ${fmt(totalDue)}</div>
+      <div class="rep-sub">${t('وصول کرنا ہے', 'To collect')}</div>
+    </div>
+  `;
+}
+
+/* SETTINGS */
+function fillSettingsForm(){
+  $('#setShopUr').value  = settings.shopUr;
+  $('#setShopEn').value  = settings.shopEn;
+  $('#setOwner').value   = settings.owner;
+  $('#setPhone').value   = settings.phone;
+  $('#setPhone2').value  = settings.phone2;
+  $('#setAddress').value = settings.address;
+  $('#setFooter').value  = settings.footer;
+}
+
+$('#saveSettingsBtn').addEventListener('click', () => {
+  settings.shopUr  = $('#setShopUr').value.trim()  || DEFAULT_SETTINGS.shopUr;
+  settings.shopEn  = $('#setShopEn').value.trim()  || DEFAULT_SETTINGS.shopEn;
+  settings.owner   = $('#setOwner').value.trim()   || DEFAULT_SETTINGS.owner;
+  settings.phone   = $('#setPhone').value.trim()   || DEFAULT_SETTINGS.phone;
+  settings.phone2  = $('#setPhone2').value.trim();
+  settings.address = $('#setAddress').value.trim() || DEFAULT_SETTINGS.address;
+  settings.footer  = $('#setFooter').value.trim()  || DEFAULT_SETTINGS.footer;
+  save(LS_SET, settings);
+  $('#brandUrdu').textContent = settings.shopUr;
+  $('#brandSub').textContent  = `${settings.owner} • ${settings.phone}`;
+  toast(t('سیٹنگ محفوظ ✔', 'Settings saved ✔'));
+});
+
+$('#resetBtn').addEventListener('click', () => {
+  if (!confirm(t('تمام ڈیٹا ڈیلیٹ ہو جائے گا۔ جاری رکھیں؟', 'All data will be deleted. Continue?'))) return;
+  localStorage.removeItem(LS_ITEMS);
+  localStorage.removeItem(LS_BILLS);
+  localStorage.removeItem(LS_SET);
+  location.reload();
+});
+
+/* ============================================================
+   FIREBASE — DYNAMIC IMPORT
+   ============================================================ */
+let fbDb = null, fbAuth = null, fbApi = null, fbReady = false;
+let syncInProgress = false;
+let cachedUsage = null;
+let lastUsageFetch = 0;
+
+async function initFirebase(){
+  try{
+    const appMod  = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js');
+    const fsMod   = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js');
+    const authMod = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js');
+
+    const fbApp = appMod.initializeApp(FIREBASE_CONFIG);
+    fbDb   = fsMod.getFirestore(fbApp);
+    fbAuth = authMod.getAuth(fbApp);
+
+    fbApi = {
+      collection: fsMod.collection, doc: fsMod.doc,
+      setDoc: fsMod.setDoc, getDocs: fsMod.getDocs,
+      deleteDoc: fsMod.deleteDoc,
+      serverTimestamp: fsMod.serverTimestamp
+    };
+
+    try{ await authMod.signInAnonymously(fbAuth); }catch(e){ console.warn('Auth:', e.message); }
+
+    fbReady = true;
+    $('#netDot').classList.add('on');
+    $('#sbDot').classList.add('on');
+    const sbSync = $('#sbSync');
+    sbSync.textContent = 'CONNECTED';
+    sbSync.className = 'sb-sync ok';
+
+    console.log('[Firebase] Connected ✔');
+
+    setTimeout(autoSyncPendingBills, 800);
+    setTimeout(pushItemsToFirebase, 1500);
+    setTimeout(fetchFirebaseUsage, 2000);
+
+  }catch(err){
+    console.error('[Firebase] Init failed:', err);
+    const sbSync = $('#sbSync');
+    sbSync.textContent = 'OFFLINE';
+    sbSync.className = 'sb-sync off';
+  }
+}
+
+async function autoSyncPendingBills(){
+  if (!fbReady || !fbApi || syncInProgress) return;
+  const pending = bills.filter(b => !b.synced);
+  if (!pending.length){ updateSyncBadge(); return; }
+  syncInProgress = true;
+  let ok = 0;
+  for (const b of pending){
+    if (await syncBillToFirebase(b)) ok++;
+  }
+  syncInProgress = false;
+  updateSyncBadge();
+  if (ok > 0){
+    console.log(`[AutoSync] ${ok} bills synced`);
+    if (!histSelectMode) renderHistory();
+    else renderHistToolbar();
+    setTimeout(fetchFirebaseUsage, 800);
+  }
+}
+
+async function syncBillToFirebase(bill, manual=false){
+  if (!fbReady || !fbApi){
+    if (manual) toast(t('Firebase نہیں لگا — بل موبائل میں محفوظ ہے', 'Firebase not ready — bill saved locally'));
+    return false;
+  }
+  try{
+    const data = { ...bill };
+    delete data.id; /* id is the doc key */
+    await fbApi.setDoc(fbApi.doc(fbDb, 'bills', bill.id), {
+      ...data, createdAt: fbApi.serverTimestamp(), shop: settings.shopEn
+    });
+    bill.synced = true;
+    const idx = bills.findIndex(b => b.id === bill.id);
+    if (idx > -1){ bills[idx].synced = true; save(LS_BILLS, bills); }
+    if (currentBill && currentBill.id === bill.id){
+      $('#syncBadge').textContent = 'Synced';
+      $('#syncBadge').className = 'badge ok';
+    }
+    updateSyncBadge();
+    if (manual) toast(t('کلاؤڈ میں محفوظ ✔', 'Saved to cloud ✔'));
+    return true;
+  }catch(err){
+    console.error('Sync error:', err);
+    if (manual) toast(t('Sync ناکام — بعد میں دوبارہ کوشش', 'Sync failed — will retry'));
+    return false;
+  }
+}
+
+function updateSyncBadge(){
+  const pending = bills.filter(b => !b.synced).length;
+  const badge = $('#syncPendingBadge');
+  const btn   = $('#syncBadgeBtn');
+  if (pending > 0){
+    badge.textContent = pending > 9 ? '9+' : pending;
+    badge.classList.add('show');
+    btn.style.display = 'grid';
+  } else {
+    badge.classList.remove('show');
+    btn.style.display = 'none';
+  }
+}
+
+$('#syncBadgeBtn').addEventListener('click', () => {
+  if (!fbReady) return toast(t('Firebase نہیں لگا', 'Firebase not ready'));
+  toast(t('Sync جاری ہے...', 'Syncing...'), 2000);
+  autoSyncPendingBills();
+});
+
+async function pushItemToFirebase(item){
+  if (!fbReady || !fbApi || !item) return;
+  try{ await fbApi.setDoc(fbApi.doc(fbDb, 'items', item.id), item); }
+  catch(e){ console.error(e); }
+}
+
+async function pushItemsToFirebase(){
+  if (!fbReady || !fbApi) return;
+  try{
+    for (const it of items) await fbApi.setDoc(fbApi.doc(fbDb, 'items', it.id), it);
+    console.log('[Firebase] Items pushed');
+    setTimeout(fetchFirebaseUsage, 800);
+  }catch(e){ console.error(e); }
+}
+
+async function pullItemsFromFirebase(){
+  if (!fbReady || !fbApi) return toast(t('Firebase نہیں لگا', 'Firebase not ready'));
+  try{
+    const snap = await fbApi.getDocs(fbApi.collection(fbDb, 'items'));
+    if (snap.empty) return toast(t('کلاؤڈ میں کوئی آئٹم نہیں', 'No items in cloud'));
+    items = snap.docs.map(d => ({ id:d.id, ...d.data() }));
+    items = items.map(i => ({ ...i, costPrice: Number(i.costPrice)||0 }));
+    save(LS_ITEMS, items);
+    renderCats(); renderItems(); renderItemsList();
+    toast(t('آئٹمز آ گئے ✔', 'Items pulled ✔'));
+  }catch(e){
+    console.error(e);
+    toast(t('لانے میں مسئلہ', 'Pull failed'));
+  }
+}
+
+$('#syncAllBtn').addEventListener('click', async () => {
+  if (!fbReady) return toast(t('Firebase نہیں لگا', 'Firebase not ready'));
+  toast(t('Sync جاری ہے...', 'Syncing...'), 2000);
+  await pushItemsToFirebase();
+  await autoSyncPendingBills();
+  const pending = bills.filter(b => !b.synced).length;
+  if (pending === 0) toast(t('سب Sync ✔', 'All synced ✔'));
+  else toast(t(`${pending} بل باقی`, `${pending} pending`));
+});
+
+$('#pullBtn').addEventListener('click', pullItemsFromFirebase);
+
+/* ============================================================
+   STORAGE USAGE INDICATOR
+   ============================================================ */
+function updateStorageBar(usedBytes){
+  const pct = Math.min(100, (usedBytes / FIREBASE_LIMIT_BYTES) * 100);
+  const fill = $('#sbFill');
+  const used = $('#sbUsed');
+
+  fill.style.width = Math.max(2, pct) + '%';
+  fill.classList.remove('warn','danger');
+  if (pct > 85) fill.classList.add('danger');
+  else if (pct > 60) fill.classList.add('warn');
+
+  used.textContent = fmtBytes(usedBytes);
+}
+
+function estimateLocalBytes(){
+  let total = 0;
+  [LS_ITEMS, LS_BILLS, LS_SET].forEach(k => {
+    const v = localStorage.getItem(k);
+    if (v) total += new Blob([v]).size;
+  });
+  return total;
+}
+
+async function fetchFirebaseUsage(){
+  if (!fbReady || !fbApi){
+    updateStorageBar(estimateLocalBytes());
+    return;
+  }
+  const now = Date.now();
+  if (cachedUsage !== null && now - lastUsageFetch < 60000){
+    updateStorageBar(cachedUsage);
+    return;
+  }
+  try{
+    const billsSnap = await fbApi.getDocs(fbApi.collection(fbDb, 'bills'));
+    const itemsSnap = await fbApi.getDocs(fbApi.collection(fbDb, 'items'));
+
+    const billsBytes = billsSnap.size * 1600;
+    const itemsBytes = itemsSnap.size * 250;
+    const overhead   = 50000;
+
+    const totalBytes = (billsSnap.size + itemsSnap.size > 0)
+      ? billsBytes + itemsBytes + overhead
+      : estimateLocalBytes();
+
+    cachedUsage = totalBytes;
+    lastUsageFetch = now;
+    updateStorageBar(totalBytes);
+  }catch(e){
+    console.warn('[Storage] fetch failed', e);
+    updateStorageBar(estimateLocalBytes());
+  }
+}
+
+setInterval(fetchFirebaseUsage, 5 * 60 * 1000);
+
+window.addEventListener('online', () => {
+  console.log('[Net] Online — retrying sync');
+  setTimeout(autoSyncPendingBills, 500);
+  setTimeout(fetchFirebaseUsage, 1500);
+});
+
+setInterval(() => {
+  if (fbReady && !syncInProgress) autoSyncPendingBills();
+}, 30000);
+
+/* ============================================================
+   INIT
+   ============================================================ */
+(function boot(){
+  applyLanguage(LANG);
+  fillSettingsForm();
+  updateCartBar();
+  updateSyncBadge();
+  renderReports();
+
+  updateStorageBar(estimateLocalBytes());
+
+  $('#brandUrdu').textContent = settings.shopUr;
+  $('#brandSub').textContent  = `${settings.owner} • ${settings.phone}`;
+
+  initFirebase();
+})();
+
+window.addEventListener('popstate', () => {
+  if ($('#dupConfirmModal').classList.contains('open')){ closeDupConfirm(); history.pushState(null, ''); return; }
+  if ($('#delConfirmModal').classList.contains('open')){ closeDelConfirm(); history.pushState(null, ''); return; }
+  if ($('#priceModal').classList.contains('open')){ closePriceModal(); history.pushState(null, ''); return; }
+  if ($('#addModal').classList.contains('open')){ closeAddModal(); history.pushState(null, ''); return; }
+  const open = $$('.sheet.open');
+  if (open.length){
+    open[open.length-1].classList.remove('open');
+    history.pushState(null, '');
+    return;
+  }
+  if (histSelectMode){
+    histSelectMode = false; histSelection.clear(); renderHistory();
+    history.pushState(null, '');
+  }
+});
+history.pushState(null, '');
+</script>
+
+</body>
+</html>
