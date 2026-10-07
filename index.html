@@ -813,6 +813,7 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
         </div>
         <button class="btn green" id="syncAllBtn" data-ur="☁ ابھی Sync کریں" data-en="☁ Sync Now">☁ ابھی Sync کریں</button>
         <div style="height:9px"></div>
+        <button class="btn dark" id="logoutBtn" style="margin-bottom:9px;">🔓 Logout</button>
         <button class="btn dark" id="pullBtn" data-ur="⬇ Firebase سے آئٹمز لائیں" data-en="⬇ Pull Items from Firebase">⬇ Firebase سے آئٹمز لائیں</button>
       </div>
       <div class="card">
@@ -1070,6 +1071,24 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
 
 <div id="printArea"></div>
 
+<div id="loginOverlay" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(5,8,18,.96);
+     align-items:center;justify-content:center;padding:22px;">
+  <div style="width:100%;max-width:340px;background:#131a2e;border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:22px;
+              font-family:system-ui,sans-serif;color:#e5e7eb;">
+    <div style="font-size:18px;font-weight:700;margin-bottom:4px;">🔐 Shop Login</div>
+    <div style="font-size:12px;color:#9ca3af;margin-bottom:16px;line-height:1.6;">
+      Sirf ek baar login karein — is device par yaad rahega. / Login once — remembered on this device.</div>
+    <input id="loginEmail" type="email" autocomplete="username" placeholder="Email"
+           style="width:100%;box-sizing:border-box;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.15);
+                  background:#0a0e1a;color:#fff;font-size:14px;margin-bottom:10px;">
+    <input id="loginPass" type="password" autocomplete="current-password" placeholder="Password"
+           style="width:100%;box-sizing:border-box;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.15);
+                  background:#0a0e1a;color:#fff;font-size:14px;margin-bottom:10px;">
+    <div id="loginErr" style="color:#f87171;font-size:12px;min-height:16px;margin-bottom:8px;"></div>
+    <button id="loginBtn" style="width:100%;border:0;border-radius:12px;padding:13px;font-size:14px;font-weight:700;
+            background:linear-gradient(135deg,#fbbf24,#d97706);color:#1c1917;">Login</button>
+  </div>
+</div>
 <script type="module">
 /* ============================================================
    AL IBRAHIM POS — v3.3
@@ -2474,7 +2493,35 @@ $('#resetBtn').addEventListener('click', async () => {
 /* ============================================================
    FIREBASE
    ============================================================ */
-let fbDb = null, fbAuth = null, fbApi = null, fbReady = false;
+/* false = login nahi maangega (open rules). true = Email/Password login zaroori */
+const REQUIRE_LOGIN = false;
+let fbDb = null, fbAuth = null, fbApi = null, fbReady = false, fbAuthApi = null;
+
+function showLoginAndWait(){
+  return new Promise(resolve => {
+    const ov = $('#loginOverlay'), em = $('#loginEmail'), pw = $('#loginPass'),
+          btn = $('#loginBtn'), er = $('#loginErr');
+    ov.style.display = 'flex';
+    const go = async () => {
+      er.textContent = '';
+      if (!em.value.trim() || !pw.value) { er.textContent = 'Email aur password likhein'; return; }
+      btn.disabled = true; btn.textContent = '...';
+      try{
+        await fbAuthApi.signInWithEmailAndPassword(fbAuth, em.value.trim(), pw.value);
+        pw.value = '';
+        ov.style.display = 'none';
+        resolve();
+      }catch(e){
+        const m = String(e.code || e.message);
+        er.textContent = /invalid|wrong|user-not-found|credential/.test(m) ? 'Email ya password ghalat hai'
+                       : /network/.test(m) ? 'Internet nahi hai' : m;
+        btn.disabled = false; btn.textContent = 'Login';
+      }
+    };
+    btn.onclick = go;
+    pw.onkeydown = e => { if (e.key === 'Enter') go(); };
+  });
+}
 let syncInProgress = false;
 let cachedUsage = null;
 let lastUsageFetch = 0;
@@ -2497,6 +2544,7 @@ async function initFirebase(){
     fbAuth = authMod.getAuth(fbApp);
 
     fbApi = {
+      /* auth helpers live in fbAuthApi */
       collection: fsMod.collection, doc: fsMod.doc,
       setDoc: fsMod.setDoc, getDocs: fsMod.getDocs,
       deleteDoc: fsMod.deleteDoc,
@@ -2505,7 +2553,16 @@ async function initFirebase(){
       serverTimestamp: fsMod.serverTimestamp
     };
 
-    try{ await authMod.signInAnonymously(fbAuth); }catch(e){ console.warn('Auth:', e.message); }
+    fbAuthApi = authMod;
+    try{ await fbAuth.authStateReady(); }catch(e){ console.warn('Auth ready:', e.message); }
+    if (REQUIRE_LOGIN){
+      if (!fbAuth.currentUser || fbAuth.currentUser.isAnonymous){
+        const sb = $('#sbSync'); if (sb){ sb.textContent = 'LOGIN'; sb.className = 'sb-sync off'; }
+        await showLoginAndWait();
+      }
+    } else if (!fbAuth.currentUser){
+      try{ await authMod.signInAnonymously(fbAuth); }catch(e){ console.warn('Anon auth skipped:', e.message); }
+    }
 
     fbReady = true;
     $('#netDot').classList.add('on');
@@ -2804,6 +2861,11 @@ $('#syncAllBtn').addEventListener('click', async () => {
 });
 
 $('#pullBtn').addEventListener('click', pullItemsFromFirebase);
+$('#logoutBtn').addEventListener('click', async () => {
+  if (!confirm('Logout karein? Sync band ho jayega jab tak dobara login na ho.')) return;
+  try{ if (fbAuthApi && fbAuth) await fbAuthApi.signOut(fbAuth); }catch(e){}
+  location.reload();
+});
 
 /* ---------- STORAGE ---------- */
 function updateStorageBar(usedBytes){
