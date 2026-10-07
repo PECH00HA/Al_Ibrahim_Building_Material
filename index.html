@@ -43,7 +43,8 @@ html,body{height:100%;margin:0;padding:0;}
 body{font-family:'Poppins',system-ui,sans-serif;background:var(--bg-1);color:var(--txt);
   display:flex;justify-content:center;overflow:hidden;transition:background .4s ease,color .3s ease;position:relative;}
 input,select,button,textarea{font-family:inherit;color:inherit;}
-body::before,body::after{content:'';position:fixed;border-radius:50%;filter:blur(110px);
+/* Decorative blobs — radial-gradients are already soft, no CSS blur filter needed (perf win) */
+body::before,body::after{content:'';position:fixed;border-radius:50%;
   pointer-events:none;z-index:0;transition:background .4s ease;}
 body::before{width:380px;height:380px;top:-90px;left:-90px;
   background:radial-gradient(circle,rgba(251,191,36,.38),transparent 68%);}
@@ -54,15 +55,14 @@ body.light::after{background:radial-gradient(circle,rgba(99,102,241,.42),transpa
 .app{position:relative;z-index:1;width:100%;max-width:460px;height:100dvh;
   display:flex;flex-direction:column;overflow:hidden;
   background:linear-gradient(180deg,rgba(10,14,26,.55),rgba(10,14,26,.35));
-  backdrop-filter:blur(24px) saturate(140%);-webkit-backdrop-filter:blur(24px) saturate(140%);
   transition:background .4s ease;}
 body.light .app{background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,.18));}
 
 /* APP BAR */
 .appbar{flex-shrink:0;display:flex;align-items:center;gap:8px;padding:11px 10px;
-  background:var(--glass);backdrop-filter:blur(20px) saturate(160%);
-  -webkit-backdrop-filter:blur(20px) saturate(160%);
-  border-bottom:1px solid var(--glass-border);box-shadow:var(--glass-hl);}
+  background:var(--glass);
+  border-bottom:1px solid var(--glass-border);box-shadow:var(--glass-hl);
+  transform:translateZ(0);}
 .logo{width:40px;height:40px;border-radius:13px;flex-shrink:0;
   background:linear-gradient(135deg,var(--gold),var(--gold-2));
   display:grid;place-items:center;font-weight:700;font-size:12px;color:#1c1917;
@@ -97,11 +97,11 @@ body.light .iconbar.themebtn{color:var(--gold);}
 .storage-bar{
   flex-shrink:0;height:20px;
   background:var(--glass);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid var(--glass-border);
   display:flex;align-items:center;gap:7px;
   padding:0 12px;font-size:8.5px;font-weight:600;color:var(--txt-3);
   transition:background .4s ease;
+  transform:translateZ(0);
 }
 .storage-bar .sb-dot{
   width:6px;height:6px;border-radius:50%;
@@ -136,14 +136,15 @@ body.light .storage-bar .sb-track{background:rgba(15,23,42,.08);}
 
 .screens{flex:1;position:relative;overflow:hidden;}
 .screen{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;
-  padding:12px 12px 190px;display:none;}
+  padding:12px 12px 190px;display:none;
+  -webkit-overflow-scrolling:touch;
+  contain:content;}
 .screen.active{display:block;animation:fade .2s ease;}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .screen::-webkit-scrollbar{width:0;}
 
 /* SEARCH */
 .searchwrap{display:flex;align-items:center;gap:9px;background:var(--glass-2);
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   border:1px solid var(--glass-border);box-shadow:var(--glass-hl);
   border-radius:14px;padding:11px 13px;margin-bottom:11px;transition:border-color .2s;}
 .searchwrap:focus-within{border-color:var(--gold);}
@@ -153,18 +154,19 @@ body.light .storage-bar .sb-track{background:rgba(15,23,42,.08);}
 .searchwrap input::placeholder{color:var(--txt-4);}
 
 /* CHIPS */
-.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:11px;scrollbar-width:none;}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:11px;scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;}
 .chips::-webkit-scrollbar{display:none;}
 .chip{flex-shrink:0;padding:7px 15px;border-radius:20px;font-size:12px;font-weight:500;
-  background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  background:var(--glass);
   border:1px solid var(--glass-border);color:var(--txt-3);cursor:pointer;transition:.18s;}
 .chip.active{background:linear-gradient(135deg,var(--gold),var(--gold-2));
   color:#1c1917;border-color:transparent;font-weight:600;box-shadow:0 4px 16px var(--gold-glow);}
 
 /* ITEM GRID */
 .item-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.item-card{background:var(--glass-2);backdrop-filter:blur(16px) saturate(150%);
-  -webkit-backdrop-filter:blur(16px) saturate(150%);border:1px solid var(--glass-border);
+.item-card{background:var(--glass-2);
+  border:1px solid var(--glass-border);
   box-shadow:var(--glass-hl),var(--glass-shadow);border-radius:16px;padding:12px 12px 11px;
   cursor:pointer;transition:.18s;position:relative;overflow:hidden;}
 .item-card::after{content:'';position:absolute;right:-30px;top:-30px;width:70px;height:70px;
@@ -185,8 +187,8 @@ body.light .storage-bar .sb-track{background:rgba(15,23,42,.08);}
   font-family:'Noto Nastaliq Urdu',serif;line-height:2.2;}
 
 /* CARDS */
-.card{background:var(--glass);backdrop-filter:blur(18px) saturate(150%);
-  -webkit-backdrop-filter:blur(18px) saturate(150%);border:1px solid var(--glass-border);
+.card{background:var(--glass);
+  border:1px solid var(--glass-border);
   box-shadow:var(--glass-hl),var(--glass-shadow);border-radius:16px;padding:13px;
   margin-bottom:12px;}
 .card-title{font-size:12.5px;font-weight:600;color:var(--gold);margin-bottom:11px;
@@ -195,8 +197,8 @@ body.light .storage-bar .sb-track{background:rgba(15,23,42,.08);}
   background:linear-gradient(180deg,var(--gold),var(--gold-2));}
 
 /* INPUTS */
-input,select{width:100%;background:var(--glass-2);backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);border:1px solid var(--glass-border-2);
+input,select{width:100%;background:var(--glass-2);
+  border:1px solid var(--glass-border-2);
   border-radius:11px;padding:11px 12px;color:var(--txt);font-size:13px;outline:0;
   transition:.18s;box-shadow:var(--glass-hl);-webkit-appearance:none;appearance:none;}
 input:focus,select:focus{border-color:var(--gold);
@@ -216,7 +218,7 @@ body.light select option{background:#fff;color:#0f172a;}
 .btn.primary{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#1c1917;
   box-shadow:0 8px 24px var(--gold-glow),inset 0 1px 0 rgba(255,255,255,.4);}
 .btn.dark{background:var(--glass-2);border:1px solid var(--glass-border-2);color:var(--txt-2);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:var(--glass-hl);}
+  box-shadow:var(--glass-hl);}
 .btn.green{background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;
   box-shadow:0 8px 24px rgba(34,197,94,.3),inset 0 1px 0 rgba(255,255,255,.3);}
 .btn.wa{background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;
@@ -249,7 +251,7 @@ body.light select option{background:#fff;color:#0f172a;}
   background:linear-gradient(135deg,var(--gold),var(--gold-2));border-radius:16px;
   padding:12px 16px;display:none;align-items:center;justify-content:space-between;
   color:#1c1917;box-shadow:0 12px 36px var(--gold-glow),inset 0 1px 0 rgba(255,255,255,.4);
-  cursor:pointer;transition:.15s;}
+  cursor:pointer;transition:.15s;transform:translateZ(0);}
 .cartbar.show{display:flex;animation:pop .25s cubic-bezier(.34,1.56,.64,1);}
 .cartbar:active{transform:scale(.98);}
 @keyframes pop{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
@@ -260,10 +262,9 @@ body.light select option{background:#fff;color:#0f172a;}
 
 /* BOTTOM NAV */
 .bottomnav{position:absolute;bottom:0;left:0;right:0;height:62px;z-index:50;
-  background:var(--glass);backdrop-filter:blur(24px) saturate(160%);
-  -webkit-backdrop-filter:blur(24px) saturate(160%);border-top:1px solid var(--glass-border);
+  background:var(--glass);border-top:1px solid var(--glass-border);
   box-shadow:var(--glass-hl);display:flex;align-items:stretch;
-  padding-bottom:env(safe-area-inset-bottom);}
+  padding-bottom:env(safe-area-inset-bottom);transform:translateZ(0);}
 .navbtn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:3px;background:none;border:0;color:var(--txt-4);font-size:8.5px;font-weight:500;
   cursor:pointer;transition:.18s;position:relative;padding:0 2px;}
@@ -276,23 +277,24 @@ body.light select option{background:#fff;color:#0f172a;}
 
 /* SHEETS */
 .sheet{position:absolute;inset:0;z-index:100;
-  background:linear-gradient(180deg,rgba(10,14,26,.85),rgba(10,14,26,.75));
-  backdrop-filter:blur(28px) saturate(150%);-webkit-backdrop-filter:blur(28px) saturate(150%);
+  background:linear-gradient(180deg,rgba(10,14,26,.98),rgba(10,14,26,.96));
   display:flex;flex-direction:column;transform:translateY(101%);
-  transition:transform .32s cubic-bezier(.4,0,.2,1);visibility:hidden;}
-body.light .sheet{background:linear-gradient(180deg,rgba(255,255,255,.65),rgba(255,255,255,.5));}
+  transition:transform .32s cubic-bezier(.4,0,.2,1);visibility:hidden;
+  will-change:transform;}
+body.light .sheet{background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(255,255,255,.96));}
 .sheet.open{transform:translateY(0);visibility:visible;}
 .sheet-head{flex-shrink:0;display:flex;align-items:center;gap:11px;padding:12px 14px;
   background:var(--glass);border-bottom:1px solid var(--glass-border);box-shadow:var(--glass-hl);}
 .sheet-title{flex:1;font-size:14.5px;font-weight:600;color:var(--txt);}
-.sheet-body{flex:1;overflow-y:auto;padding:13px 14px 20px;}
+.sheet-body{flex:1;overflow-y:auto;padding:13px 14px 20px;
+  -webkit-overflow-scrolling:touch;contain:content;}
 .sheet-body::-webkit-scrollbar{width:0;}
 .sheet-foot{flex-shrink:0;padding:12px 14px calc(12px + env(safe-area-inset-bottom));
   background:var(--glass);border-top:1px solid var(--glass-border);box-shadow:var(--glass-hl);}
 
 /* CART ITEM */
-.citem{background:var(--glass-2);backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);border:1px solid var(--glass-border);
+.citem{background:var(--glass-2);
+  border:1px solid var(--glass-border);
   box-shadow:var(--glass-hl);border-radius:14px;padding:11px;margin-bottom:9px;}
 .citem-top{display:flex;align-items:center;gap:8px;margin-bottom:9px;}
 .citem-name{flex:1;font-family:'Noto Nastaliq Urdu',serif;font-size:15px;line-height:1.9;
@@ -364,19 +366,18 @@ body.light .sheet{background:linear-gradient(180deg,rgba(255,255,255,.65),rgba(2
 .quickfill button:active{transform:scale(.94);background:var(--gold-soft);color:var(--gold);}
 
 /* ADD-ITEM MODAL */
-.am-bg{position:absolute;inset:0;z-index:200;background:rgba(0,0,0,.55);
-  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+.am-bg{position:absolute;inset:0;z-index:200;background:rgba(0,0,0,.65);
   display:flex;align-items:center;justify-content:center;padding:20px;
   opacity:0;pointer-events:none;transition:opacity .22s;}
-body.light .am-bg{background:rgba(15,23,42,.35);}
+body.light .am-bg{background:rgba(15,23,42,.45);}
 .am-bg.open{opacity:1;pointer-events:auto;}
 .am-box{width:100%;max-width:360px;
   background:linear-gradient(160deg,var(--am-bg1),var(--am-bg2));
-  backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);
   border:1px solid var(--am-border);border-radius:20px;padding:18px;
   box-shadow:var(--am-shadow),var(--am-hl);
   transform:translateY(20px) scale(.96);
-  transition:transform .28s cubic-bezier(.34,1.56,.64,1),background .35s ease,border-color .3s ease;}
+  transition:transform .28s cubic-bezier(.34,1.56,.64,1),background .35s ease,border-color .3s ease;
+  will-change:transform;}
 .am-bg.open .am-box{transform:translateY(0) scale(1);}
 .am-head{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
 .am-icon{width:44px;height:44px;border-radius:13px;flex-shrink:0;
@@ -468,11 +469,11 @@ table.p-items td.r,table.p-items th.r{text-align:right;}
 
 /* TOAST */
 .toast{position:absolute;left:50%;bottom:150px;transform:translate(-50%,20px);
-  background:var(--glass-3);backdrop-filter:blur(20px) saturate(160%);
-  -webkit-backdrop-filter:blur(20px) saturate(160%);
+  background:var(--glass-3);
   border:1px solid var(--glass-border-2);box-shadow:var(--glass-hl),var(--glass-shadow);
   color:var(--txt);padding:10px 20px;border-radius:30px;font-size:12.5px;font-weight:500;
-  z-index:500;opacity:0;pointer-events:none;transition:.25s;white-space:nowrap;max-width:90%;}
+  z-index:500;opacity:0;pointer-events:none;transition:.25s;white-space:nowrap;max-width:90%;
+  will-change:transform,opacity;}
 .toast.show{opacity:1;transform:translate(-50%,0);}
 
 /* HISTORY */
@@ -490,8 +491,8 @@ body.light .hist-toolbar{background:linear-gradient(180deg,var(--bg-1) 0%,var(--
   border:1px solid rgba(251,191,36,.28);border-radius:10px;
   display:flex;align-items:center;gap:5px;flex-shrink:0;white-space:nowrap;}
 .hist-sel-info::before{content:'●';font-size:8px;color:var(--gold);}
-.hist-card{background:var(--glass-2);backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);border:1px solid var(--glass-border);
+.hist-card{background:var(--glass-2);
+  border:1px solid var(--glass-border);
   box-shadow:var(--glass-hl);border-radius:14px;padding:11px;margin-bottom:9px;
   cursor:pointer;transition:.14s;position:relative;overflow:hidden;}
 .hist-card:active{transform:scale(.985);background:var(--glass-3);}
@@ -539,7 +540,8 @@ body.light .hist-profit{color:#15803d;}
   stroke-linecap:round;stroke-linejoin:round;}
 
 /* REPORTS */
-.report-tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;}
+.report-tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;
+  -webkit-overflow-scrolling:touch;}
 .report-tabs::-webkit-scrollbar{display:none;}
 .report-tabs button{flex-shrink:0;padding:8px 14px;border-radius:11px;
   background:var(--glass-2);border:1px solid var(--glass-border-2);color:var(--txt-3);
@@ -568,19 +570,18 @@ body.light .rep-card .rep-val.green{color:#16a34a;}
   font-family:'Noto Nastaliq Urdu',serif;line-height:2.1;}
 
 /* CONFIRM MODAL */
-.cf-bg{position:absolute;inset:0;z-index:300;background:rgba(0,0,0,.6);
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+.cf-bg{position:absolute;inset:0;z-index:300;background:rgba(0,0,0,.7);
   display:flex;align-items:center;justify-content:center;padding:20px;
   opacity:0;pointer-events:none;transition:.22s;}
-body.light .cf-bg{background:rgba(15,23,42,.4);}
+body.light .cf-bg{background:rgba(15,23,42,.5);}
 .cf-bg.open{opacity:1;pointer-events:auto;}
 .cf-box{width:100%;max-width:340px;
   background:linear-gradient(160deg,var(--am-bg1),var(--am-bg2));
-  backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);
   border:1px solid var(--am-border);border-radius:20px;padding:20px 18px 16px;
   box-shadow:var(--am-shadow),var(--am-hl);
   transform:translateY(20px) scale(.94);
-  transition:.28s cubic-bezier(.34,1.56,.64,1);text-align:center;}
+  transition:.28s cubic-bezier(.34,1.56,.64,1);text-align:center;
+  will-change:transform;}
 .cf-bg.open .cf-box{transform:translateY(0) scale(1);}
 .cf-icon{width:58px;height:58px;border-radius:18px;margin:0 auto 14px;
   background:linear-gradient(135deg,rgba(239,68,68,.22),rgba(185,28,28,.14));
@@ -1028,10 +1029,11 @@ body.light .cf-bg{background:rgba(15,23,42,.4);}
 
 <script type="module">
 /* ============================================================
-   AL IBRAHIM POS — v3.1
+   AL IBRAHIM POS — v3.2
    Firebase + Storage Indicator + WhatsApp + Reports
    Duplicate check • 12-hour time • Price setup guard
    Pakistani phone validation + saved customer picker
+   Item sync: push on add/edit/setup • self-delete • one-time init
    ============================================================ */
 
 /* ---------- FIREBASE CONFIG ---------- */
@@ -1069,6 +1071,7 @@ const $$ = (s, r=document) => [...r.querySelectorAll(s)];
 const LS_ITEMS = 'aib_items_v4';
 const LS_BILLS = 'aib_bills_v4';
 const LS_SET   = 'aib_settings_v4';
+const LS_FB_ITEMS_INIT = 'aib_fb_items_init';
 
 function load(k, fb){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):fb; }catch(e){ return fb; } }
 function save(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
@@ -1997,6 +2000,7 @@ $('#itemsList').addEventListener('click', e => {
     if (confirm(t(`"${it.ur || it.name}" ڈیلیٹ کریں؟`, `Delete "${it.name}"?`))){
       items = items.filter(x => x.id !== id);
       save(LS_ITEMS, items);
+      deleteItemFromFirebase(id);        /* self-delete from Firebase */
       renderCats(); renderItems(); renderItemsList();
       toast(t('ڈیلیٹ ✔', 'Deleted'));
     }
@@ -2340,6 +2344,7 @@ $('#resetBtn').addEventListener('click', () => {
   localStorage.removeItem(LS_ITEMS);
   localStorage.removeItem(LS_BILLS);
   localStorage.removeItem(LS_SET);
+  localStorage.removeItem(LS_FB_ITEMS_INIT);   /* allow re-seed on next launch */
   location.reload();
 });
 
@@ -2380,7 +2385,7 @@ async function initFirebase(){
     console.log('[Firebase] Connected ✔');
 
     setTimeout(autoSyncPendingBills, 800);
-    setTimeout(pushItemsToFirebase, 1500);
+    setTimeout(initItemsSync, 1500);     /* one-time only — never overwrites cloud */
     setTimeout(fetchFirebaseUsage, 2000);
 
   }catch(err){
@@ -2458,19 +2463,74 @@ $('#syncBadgeBtn').addEventListener('click', () => {
   autoSyncPendingBills();
 });
 
+/* ---------- ITEM SYNC: push one • delete one • one-time init ---------- */
+
+/* Push a single item (with rate + costPrice) to Firebase.
+   Called on: add new item, price setup save, manual price edit. */
 async function pushItemToFirebase(item){
   if (!fbReady || !fbApi || !item) return;
-  try{ await fbApi.setDoc(fbApi.doc(fbDb, 'items', item.id), item); }
-  catch(e){ console.error(e); }
+  try{
+    await fbApi.setDoc(fbApi.doc(fbDb, 'items', item.id), {
+      id:         item.id,
+      name:       item.name,
+      ur:         item.ur,
+      unit:       item.unit,
+      cat:        item.cat || 'Other',
+      rate:       Number(item.rate) || 0,       /* sell price  */
+      costPrice:  Number(item.costPrice) || 0,  /* cost price  */
+      updatedAt:  Date.now()
+    });
+    console.log('[Firebase] Item saved:', item.name, '| sell:', item.rate, '| cost:', item.costPrice);
+  }catch(e){ console.error('[Firebase] push item failed:', e); }
 }
 
-async function pushItemsToFirebase(){
-  if (!fbReady || !fbApi) return;
+/* Delete a single item from Firebase (self-delete). */
+async function deleteItemFromFirebase(id){
+  if (!fbReady || !fbApi || !id) return;
   try{
-    for (const it of items) await fbApi.setDoc(fbApi.doc(fbDb, 'items', it.id), it);
-    console.log('[Firebase] Items pushed');
-    setTimeout(fetchFirebaseUsage, 800);
-  }catch(e){ console.error(e); }
+    await fbApi.deleteDoc(fbApi.doc(fbDb, 'items', id));
+    console.log('[Firebase] Item deleted:', id);
+  }catch(e){ console.error('[Firebase] delete item failed:', e); }
+}
+
+/* One-time init sync. Only runs the first time the app is opened on a device.
+   - If Firebase is empty  → push local items once.
+   - If Firebase has data  → pull them down (never overwrite cloud with stale local).
+   After this runs once, we never touch Firebase items automatically again. */
+async function initItemsSync(){
+  if (!fbReady || !fbApi) return;
+  if (localStorage.getItem(LS_FB_ITEMS_INIT) === '1') return;
+
+  try{
+    const snap = await fbApi.getDocs(fbApi.collection(fbDb, 'items'));
+
+    if (snap.empty){
+      /* Firebase empty → seed it with what we have locally (one time only) */
+      for (const it of items) await pushItemToFirebase(it);
+      console.log('[InitSync] Seeded Firebase with local items');
+    } else {
+      /* Firebase has data → adopt it as the source of truth */
+      items = snap.docs.map(d => {
+        const v = d.data() || {};
+        return {
+          id:        d.id,
+          name:      v.name || '',
+          ur:        v.ur   || v.name || '',
+          unit:      v.unit || '',
+          cat:       v.cat  || 'Other',
+          rate:      Number(v.rate) || 0,
+          costPrice: Number(v.costPrice) || 0
+        };
+      });
+      save(LS_ITEMS, items);
+      renderCats(); renderItems(); renderItemsList();
+      console.log('[InitSync] Pulled', items.length, 'items from Firebase');
+    }
+
+    localStorage.setItem(LS_FB_ITEMS_INIT, '1');
+  }catch(e){
+    console.error('[InitSync] failed:', e);
+  }
 }
 
 async function pullItemsFromFirebase(){
@@ -2478,9 +2538,20 @@ async function pullItemsFromFirebase(){
   try{
     const snap = await fbApi.getDocs(fbApi.collection(fbDb, 'items'));
     if (snap.empty) return toast(t('کلاؤڈ میں کوئی آئٹم نہیں', 'No items in cloud'));
-    items = snap.docs.map(d => ({ id:d.id, ...d.data() }));
-    items = items.map(i => ({ ...i, costPrice: Number(i.costPrice)||0 }));
+    items = snap.docs.map(d => {
+      const v = d.data() || {};
+      return {
+        id:        d.id,
+        name:      v.name || '',
+        ur:        v.ur   || v.name || '',
+        unit:      v.unit || '',
+        cat:       v.cat  || 'Other',
+        rate:      Number(v.rate) || 0,
+        costPrice: Number(v.costPrice) || 0
+      };
+    });
     save(LS_ITEMS, items);
+    localStorage.setItem(LS_FB_ITEMS_INIT, '1');
     renderCats(); renderItems(); renderItemsList();
     toast(t('آئٹمز آ گئے ✔', 'Items pulled ✔'));
   }catch(e){
@@ -2492,7 +2563,8 @@ async function pullItemsFromFirebase(){
 $('#syncAllBtn').addEventListener('click', async () => {
   if (!fbReady) return toast(t('Firebase نہیں لگا', 'Firebase not ready'));
   toast(t('Sync جاری ہے...', 'Syncing...'), 2000);
-  await pushItemsToFirebase();
+  /* push current local items once (manual) */
+  for (const it of items) await pushItemToFirebase(it);
   await autoSyncPendingBills();
   const pending = bills.filter(b => !b.synced).length;
   if (pending === 0) toast(t('سب Sync ✔', 'All synced ✔'));
