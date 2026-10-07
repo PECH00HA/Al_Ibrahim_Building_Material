@@ -403,10 +403,10 @@ body.light .am-bg{background:rgba(15,23,42,.45);}
 .paper{position:relative;width:100%;max-width:320px;background:#ffffff;color:#0f172a;
   border-radius:8px;padding:12px 11px 12px;font-family:'Poppins',sans-serif;font-weight:500;
   box-shadow:0 14px 40px rgba(0,0,0,.4);overflow:hidden;font-size:10.5px;line-height:1.4;}
-.p-stamp{position:absolute;top:6px;right:6px;
-  padding:3px 8px;border:2px solid #b91c1c;border-radius:5px;
+.p-stamp{display:table;margin:0 auto 3px;
+  padding:2px 8px;border:2px solid #b91c1c;border-radius:5px;
   color:#b91c1c;font-weight:900;font-size:11px;letter-spacing:1.5px;
-  text-transform:uppercase;transform:rotate(-8deg);
+  text-transform:uppercase;transform:rotate(-3deg);
   background:rgba(255,255,255,.85);opacity:.9;}
 .p-stamp.partial{border-color:#c2410c;color:#c2410c;}
 .p-stamp.credit{border-color:#a16207;color:#a16207;}
@@ -585,13 +585,14 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
 #printArea{display:none;}
 
 @media print{
-  @page{ size: 74.5mm 132.5mm; margin: 0; }
+  @page{ size: 211.3pt 375.5pt; margin: 0; }
 
   html,body{
     margin:0 !important; padding:0 !important;
     background:#fff !important; color:#000 !important;
     display:block !important; overflow:visible !important;
-    width:74.5mm !important;
+    width:211.3pt !important; height:auto !important; min-height:0 !important;
+    -webkit-text-size-adjust:100%; text-size-adjust:100%;
   }
   body::before,body::after{display:none !important;}
   .app{display:none !important;}
@@ -599,16 +600,16 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
   #printArea{
     display:block !important;
     margin:0 !important; padding:0 !important;
-    width:74.5mm !important;
+    width:211.3pt !important;
   }
   #printArea .paper-wrap{
     padding:0 !important; margin:0 !important;
     min-height:0 !important; display:block !important;
   }
   #printArea .paper{
-    width:74.5mm !important;
-    max-width:74.5mm !important;
-    min-height:132.5mm !important;
+    width:211.3pt !important;
+    max-width:211.3pt !important;
+    min-height:0 !important;
     padding:1.5mm 2mm !important;
     margin:0 !important;
     border-radius:0 !important;
@@ -670,10 +671,14 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
   /* Stamp */
   #printArea .p-stamp{
     font-weight:900 !important;border-width:1.5px !important;
-    font-size:9px !important;padding:1.5px 5px !important;
-    top:3px !important;right:3px !important;
+    font-size:8px !important;padding:1px 5px !important;
+    margin-bottom:1.5px !important;
     -webkit-print-color-adjust:exact;print-color-adjust:exact;
   }
+
+  /* Page breaks (only matters if a bill is too long for one page) */
+  #printArea table.p-items tr{break-inside:avoid;page-break-inside:avoid;}
+  #printArea .p-bottom{break-inside:avoid;page-break-inside:avoid;}
 
   /* Footer + signatures */
   #printArea .p-foot{
@@ -1931,6 +1936,7 @@ function renderReceipt(b){
       </thead>
       <tbody>${rows}</tbody>
     </table>
+    <div class="p-bottom">
     <div class="p-totals">
       <div class="p-tr"><span>${t('کل تعداد','Qty')}</span><b>${fmt(b.qty)}</b></div>
       <div class="p-tr"><span>Sub Total</span><b>Rs ${fmt(b.subtotal)}</b></div>
@@ -1949,14 +1955,54 @@ function renderReceipt(b){
         <b>Developer : Khalid Ali</b>
         WhatsApp : 03003919555
       </div>
+    </div>
     </div>`;
 
   $('#syncBadge').textContent = b.synced ? 'Synced' : 'Not Synced';
   $('#syncBadge').className = 'badge ' + (b.synced ? 'ok' : 'pend');
 }
 
-$('#printBtn').addEventListener('click', () => {
-  $('#printArea').innerHTML = $('#receiptPaper').outerHTML;
+/* Print page = 211.3 x 375.5 pt. Lambi bill ho to ek page me fit karne ke liye zoom (min 60%). */
+const PRINT_W_PT = 211.3, PRINT_H_PT = 375.5, PRINT_MIN_ZOOM = 0.6;
+function measurePrintHeight(node, widthPt){
+  let css = '';
+  for (const sh of document.styleSheets){
+    let rules; try{ rules = sh.cssRules; }catch(e){ continue; }
+    for (const r of rules){
+      if (r.media && r.media.mediaText === 'print'){
+        for (const x of r.cssRules)
+          if (x.selectorText && x.selectorText.startsWith('#printArea')) css += x.cssText;
+      }
+    }
+  }
+  const box = document.createElement('div');
+  box.id = 'measureBox';
+  box.style.cssText = `position:absolute;left:-9999px;top:0;visibility:hidden;width:${widthPt}pt;`;
+  const st = document.createElement('style');
+  st.textContent = css.replace(/#printArea/g, '#measureBox');
+  const c = node.cloneNode(true);
+  c.style.setProperty('width', widthPt + 'pt', 'important');
+  c.style.setProperty('max-width', widthPt + 'pt', 'important');
+  box.append(st, c);
+  document.body.append(box);
+  const h = c.scrollHeight * 72 / 96;          /* px -> pt */
+  box.remove();
+  return h;
+}
+$('#printBtn').addEventListener('click', async () => {
+  const src = $('#receiptPaper');
+  if (!src || !src.firstElementChild) return toast(t('پہلے بل بنائیں', 'Generate a bill first'));
+  try{ await document.fonts.ready; }catch(e){}
+  const clone = src.cloneNode(true);
+  clone.removeAttribute('id');                 /* duplicate id nahi */
+  const h = measurePrintHeight(clone, PRINT_W_PT);
+  if (h > PRINT_H_PT){
+    const z = Math.max(PRINT_MIN_ZOOM, (PRINT_H_PT / h) * 0.97);
+    clone.style.zoom = z;
+    clone.style.setProperty('width', (PRINT_W_PT / z) + 'pt', 'important');
+    clone.style.setProperty('max-width', (PRINT_W_PT / z) + 'pt', 'important');
+  }
+  $('#printArea').replaceChildren(clone);
   window.print();
 });
 
