@@ -604,6 +604,27 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
 /* ============================================================
    PRINT  —  EXACT PAGE SIZE: 74.5 × 132.5 mm  (211.3 × 375.5 pt)
    ============================================================ */
+/* ===== DESKTOP PC MODE (button se on/off) ===== */
+.iconbar.deskbtn.on{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#1c1917;border-color:transparent;}
+.appbar .iconbar.deskbtn{width:auto !important;min-width:34px;padding:0 8px !important;display:flex;align-items:center;justify-content:center;gap:4px;font-size:10px;font-weight:700;letter-spacing:.5px;}
+.appbar .iconbar.deskbtn svg{width:15px !important;height:15px !important;}
+@media(max-width:360px){.appbar .iconbar.deskbtn{width:30px !important;min-width:30px;padding:0 !important;}.appbar .iconbar.deskbtn span{display:none;}}
+body.desktop .app{max-width:1280px;}
+body.desktop .screen{padding:18px 24px 190px;}
+body.desktop .item-grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;}
+body.desktop .screen:not(#screen-pos) > *{max-width:900px;margin-left:auto;margin-right:auto;}
+body.desktop .rep-grid{grid-template-columns:repeat(4,1fr);}
+body.desktop .sheet{left:auto;width:min(560px,100%);transform:translateX(101%);box-shadow:-16px 0 50px rgba(0,0,0,.45);}
+body.desktop .sheet.open{transform:none;}
+body.desktop .cartbar{left:0;right:0;margin:0 auto;width:min(560px,calc(100% - 24px));}
+body.desktop .bottomnav{left:0;right:0;margin:0 auto;max-width:720px;border-radius:16px 16px 0 0;}
+@media(max-width:700px){
+  body.desktop .screen{padding:12px 12px 190px;}
+  body.desktop .item-grid{grid-template-columns:1fr 1fr;gap:10px;}
+  body.desktop .rep-grid{grid-template-columns:1fr 1fr;}
+  body.desktop .sheet{width:100%;}
+}
+
 #printArea{display:none;}
 
 @media print{
@@ -772,6 +793,9 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
       <div class="sub"  id="brandSub">Muhammad Ishaq • 0331-1303120</div>
     </div>
     <button class="iconbar langbtn" id="langBtn" title="Urdu / English">UR</button>
+    <button class="iconbar deskbtn" id="deskBtn" title="Desktop PC / Mobile">
+      <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><span>PC</span>
+    </button>
     <button class="iconbar themebtn" id="themeBtn" title="Day / Night">
       <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       <svg class="sun"  viewBox="0 0 24 24">
@@ -1064,7 +1088,7 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
   <div class="am-bg" id="addModal">
     <div class="am-box" id="addModalBox">
       <div class="am-head">
-        <div class="am-icon" id="mIcon">₹</div>
+        <div class="am-icon" id="mIcon">Rs</div>
         <div class="am-title-wrap">
           <div class="am-title" id="mTitleUr">سیمنٹ</div>
           <div class="am-sub" id="mTitleEn">Cement</div>
@@ -1098,7 +1122,7 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
   <div class="am-bg" id="priceModal">
     <div class="am-box" style="max-width:340px;">
       <div class="am-head">
-        <div class="am-icon" id="pmIcon">₹</div>
+        <div class="am-icon" id="pmIcon">Rs</div>
         <div class="am-title-wrap">
           <div class="am-title" id="pmTitleUr">سیمنٹ</div>
           <div class="am-sub" id="pmTitleEn">Cement</div>
@@ -1126,6 +1150,37 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
       <div class="am-actions">
         <button class="btn dark" id="pmCancelBtn" data-ur="منسوخ" data-en="Cancel">منسوخ</button>
         <button class="btn primary" id="pmSaveBtn" data-ur="محفوظ کریں" data-en="Save Setup">محفوظ کریں</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="am-bg" id="payModal">
+    <div class="am-box" style="max-width:340px;">
+      <div class="am-head">
+        <div class="am-icon">Rs</div>
+        <div class="am-title-wrap">
+          <div class="am-title" id="payTitleUr">وصولی</div>
+          <div class="am-sub" id="payTitleEn">Receive Payment</div>
+        </div>
+      </div>
+      <div class="am-grid" style="grid-template-columns:1fr 1fr;">
+        <div class="am-field">
+          <label data-ur="باقی رقم (Rs)" data-en="Due (Rs)">باقی رقم (Rs)</label>
+          <div class="am-rate" id="payDue" style="display:flex;align-items:center;justify-content:center;min-height:46px;">Rs 0</div>
+        </div>
+        <div class="am-field">
+          <label data-ur="وصول رقم (Rs)" data-en="Amount Received (Rs)">وصول رقم (Rs)</label>
+          <input id="payAmt" class="am-rate" type="text" inputmode="decimal" pattern="[0-9]*[.]?[0-9]*" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" name="pay_digits" placeholder="0" />
+        </div>
+      </div>
+      <div class="am-total">
+        <span data-ur="ادائیگی کے بعد باقی" data-en="Due after payment">ادائیگی کے بعد باقی</span>
+        <b id="payAfter">Rs 0</b>
+      </div>
+      <div class="am-actions" style="grid-template-columns:1fr 1fr 1.4fr;">
+        <button class="btn dark" id="payCancelBtn" data-ur="منسوخ" data-en="Cancel">منسوخ</button>
+        <button class="btn dark" id="payFullBtn" data-ur="پوری رقم" data-en="Full">پوری رقم</button>
+        <button class="btn primary" id="payConfirmBtn" data-ur="وصول کریں" data-en="Receive">وصول کریں</button>
       </div>
     </div>
   </div>
@@ -1438,6 +1493,38 @@ $('#themeBtn').addEventListener('click', () => {
   toast(isLight ? '☀️ Day Mode' : '🌙 Night Mode');
 });
 
+/* ---------- DESKTOP PC MODE ---------- */
+const LS_DESK = 'aib_desktop';
+function applyDesktop(on){
+  document.body.classList.toggle('desktop', on);
+  $('#deskBtn').classList.toggle('on', on);
+  try{ localStorage.setItem(LS_DESK, on ? '1' : '0'); }catch(e){}
+}
+$('#deskBtn').addEventListener('click', () => {
+  const on = !document.body.classList.contains('desktop');
+  applyDesktop(on);
+  toast(on ? t('🖥 ڈیسک ٹاپ موڈ', '🖥 Desktop PC mode') : t('📱 موبائل موڈ', '📱 Mobile mode'));
+});
+try{ if (localStorage.getItem(LS_DESK) === '1') applyDesktop(true); }catch(e){}
+
+/* PC: mouse wheel se focused number box ki value na badle */
+document.addEventListener('wheel', () => {
+  const a = document.activeElement;
+  if (a && a.tagName === 'INPUT' && a.type === 'number') a.blur();
+}, { passive: true });
+
+/* PC: Esc se popup / sheet band */
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  if ($('#dupConfirmModal').classList.contains('open')) return closeDupConfirm();
+  if ($('#delConfirmModal').classList.contains('open')) return closeDelConfirm();
+  if ($('#payModal').classList.contains('open'))        return closePayModal();
+  if ($('#priceModal').classList.contains('open'))      return closePriceModal();
+  if ($('#addModal').classList.contains('open'))        return closeAddModal();
+  const open = $$('.sheet.open');
+  if (open.length) open[open.length - 1].classList.remove('open');
+});
+
 /* ---------- NAV ---------- */
 $$('.navbtn').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -1573,7 +1660,7 @@ $('#mConfirmBtn').addEventListener('click', () => {
   if (qty <= 0)  return toast(t('تعداد درج کریں', 'Enter quantity'));
   if (rate <= 0) return toast(t('ریٹ درج کریں', 'Enter rate'));
   if (modalItem){
-    const ex = cart.find(l => l.id === modalItem.id && Number(l.rate) === rate);
+    const ex = cart.find(l => l.id === modalItem.id && Number(l.rate) === rate && (Number(l.costPrice)||0) === (Number(modalItem.costPrice)||0));
     if (ex) ex.qty = Number(ex.qty) + qty;
     else cart.push({ id: modalItem.id, name: modalItem.name, ur: modalItem.ur,
       unit: modalItem.unit, rate, costPrice: Number(modalItem.costPrice)||0, qty });
@@ -1938,6 +2025,37 @@ $('#custSuggest').addEventListener('click', e => {
   toast(t('کسٹمر منتخب ✔','Customer selected ✔'), 1200);
 });
 
+/* Keyboard kabhi khud band na ho: customer fields se focus tabhi hate jab user ne khud kahin aur tap kiya ho */
+let lastTapAt = 0, custEnterDone = false;
+['pointerdown','touchstart','mousedown'].forEach(ev =>
+  document.addEventListener(ev, e => {
+    if (!e.target.closest('#custName') && !e.target.closest('#custPhone')) lastTapAt = Date.now();
+  }, true));
+['custName','custPhone'].forEach(id => {
+  const el = document.getElementById(id);
+  el.setAttribute('autocomplete','off');
+  el.setAttribute('autocorrect','off');
+  el.setAttribute('spellcheck','false');
+  el.addEventListener('keydown', e => {
+    if (e.key !== 'Enter') return;
+    e.preventDefault();
+    if (id === 'custName') document.getElementById('custPhone').focus();
+    else { custEnterDone = true; el.blur(); }
+  });
+  el.addEventListener('blur', () => {
+    if (custEnterDone){ custEnterDone = false; return; }
+    if (Date.now() - lastTapAt < 600) return;                       /* user ne khud kahin aur tap kiya */
+    if (!$('#cartSheet').classList.contains('open')) return;
+    if ($$('.am-bg.open, .cf-bg.open').length) return;
+    setTimeout(() => {
+      if (document.activeElement !== el && !document.activeElement.matches('input,select,textarea'))
+        el.focus({ preventScroll: true });
+    }, 0);
+  });
+});
+/* Saved customer par tap karne se keyboard band na ho */
+$('#custSuggest').addEventListener('pointerdown', e => e.preventDefault());
+$('#custSuggest').addEventListener('mousedown', e => e.preventDefault());
 $('#custName').addEventListener('focus', renderCustSuggest);
 $('#custName').addEventListener('input', renderCustSuggest);
 $('#custPhone').addEventListener('focus', renderCustSuggest);
@@ -2165,13 +2283,47 @@ function renderReceipt(b){
 }
 
 /* ---------- RECEIVE LATER PAYMENT (Outstanding kam karne ke liye) ---------- */
+let payBill = null;
 function addPaymentToBill(b){
   if (!b) return;
   const due = Number(b.remaining) || 0;
   if (due <= 0) return toast(t('اس بل کی پوری رقم وصول ہے', 'This bill is fully paid'));
-  const raw = prompt(t(`باقی Rs ${fmt(due)} — کتنی رقم وصول ہوئی؟`, `Due Rs ${fmt(due)} — amount received?`), due);
-  if (raw === null) return;
-  const amt = Number(raw);
+  payBill = b;
+  $('#payTitleUr').textContent = `${t('وصولی', 'Receive Payment')} — #${b.no}`;
+  $('#payTitleEn').textContent = b.customer || '';
+  $('#payDue').textContent = 'Rs ' + fmt(due);
+  $('#payAmt').value = '';
+  updatePayModal();
+  $('#payModal').classList.add('open');
+  setTimeout(() => { $('#payAmt').focus(); }, 220);
+}
+function closePayModal(){ $('#payModal').classList.remove('open'); payBill = null; }
+function updatePayModal(){
+  if (!payBill) return;
+  const due = Number(payBill.remaining) || 0;
+  const amt = Math.min(Number($('#payAmt').value) || 0, due);
+  $('#payAfter').textContent = 'Rs ' + fmt(r2(Math.max(0, due - amt)));
+}
+$('#payAmt').addEventListener('input', () => {
+  const el = $('#payAmt');
+  let v = el.value.replace(/[^0-9.]/g, '');
+  const i = v.indexOf('.');
+  if (i !== -1) v = v.slice(0, i + 1) + v.slice(i + 1).replace(/\./g, '');
+  if (v !== el.value) el.value = v;
+  updatePayModal();
+});
+$('#payAmt').addEventListener('keydown', e => { if (e.key === 'Enter'){ e.preventDefault(); $('#payConfirmBtn').click(); } });
+$('#payFullBtn').addEventListener('click', () => {
+  if (!payBill) return;
+  $('#payAmt').value = String(Number(payBill.remaining) || 0);
+  updatePayModal();
+});
+$('#payCancelBtn').addEventListener('click', closePayModal);
+$('#payModal').addEventListener('click', e => { if (e.target.id === 'payModal') closePayModal(); });
+$('#payConfirmBtn').addEventListener('click', () => {
+  const b = payBill; if (!b) return;
+  const due = Number(b.remaining) || 0;
+  const amt = Number($('#payAmt').value);
   if (!(amt > 0)) return toast(t('غلط رقم', 'Invalid amount'));
   const pay = Math.min(amt, due);
   b.advance   = (Number(b.advance) || 0) + pay;
@@ -2181,12 +2333,13 @@ function addPaymentToBill(b){
   b.payments  = [...(b.payments || []), { date: new Date().toISOString(), amount: pay }];
   b.updatedAt = Date.now();
   b.synced    = false;
+  closePayModal();
   save(LS_BILLS, bills);
   renderReceipt(b); renderHistory(); renderReports(); updateSyncBadge();
   syncBillToFirebase(b);
   toast(amt > due ? t(`Rs ${fmt(pay)} درج (باقی سے زیادہ رقم کم کر دی)`, `Rs ${fmt(pay)} recorded (capped at due)`)
                   : t('وصولی درج ✔', 'Payment recorded ✔'));
-}
+});
 $('#recvBtn').addEventListener('click', () => addPaymentToBill(currentBill));
 
 /* Print page = 211.3 x 375.5 pt. Lambi bill ho to ek page me fit karne ke liye zoom (min 60%). */
@@ -3414,6 +3567,7 @@ setInterval(() => {
 window.addEventListener('popstate', () => {
   if ($('#dupConfirmModal').classList.contains('open')){ closeDupConfirm(); history.pushState(null, ''); return; }
   if ($('#delConfirmModal').classList.contains('open')){ closeDelConfirm(); history.pushState(null, ''); return; }
+  if ($('#payModal').classList.contains('open')){ closePayModal(); history.pushState(null, ''); return; }
   if ($('#priceModal').classList.contains('open')){ closePriceModal(); history.pushState(null, ''); return; }
   if ($('#addModal').classList.contains('open')){ closeAddModal(); history.pushState(null, ''); return; }
   const open = $$('.sheet.open');
