@@ -57,15 +57,32 @@ body.light::after{background:radial-gradient(circle,rgba(99,102,241,.42),transpa
   transition:background .4s ease;}
 body.light .app{background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,.18));}
 
-/* APP BAR */
+/* APP BAR — Design 1: Emerald & Gold Calligraphy */
+.appbar{flex-shrink:0;display:flex;align-items:center;gap:8px;padding:10px 10px 11px;
+  background:linear-gradient(118deg,#064e3b 0%,#047857 52%,#065f46 100%);
+  border-bottom:2px solid #d6ad55;box-shadow:0 4px 15px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.13);
+  transform:translateZ(0);position:relative;isolation:isolate;}
+.appbar::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;opacity:.14;
+  background:repeating-linear-gradient(135deg,transparent 0 12px,rgba(255,255,255,.22) 12px 13px);}
+.appbar::after{content:"";position:absolute;left:10px;right:10px;bottom:3px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(245,211,128,.8),transparent);pointer-events:none;}
+.brand{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:1px;}
+.brand .urdu{font-family:'Noto Nastaliq Urdu',serif;font-size:15px;line-height:2.05;
+  color:#fff0b3;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  margin:0;text-shadow:0 1px 2px rgba(0,0,0,.2);}
+.brand .sub{font-size:9px;color:rgba(255,255,255,.88);letter-spacing:.25px;line-height:1.45;
+  margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.appbar .iconbar{background:rgba(255,255,255,.12);border:1px solid rgba(255,238,184,.35);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12);color:#fff0b3;}
+.appbar .langbtn{color:#fff0b3;}
+.appbar .sync-badge{box-shadow:0 0 0 2px #047857;}
+body.light .appbar{background:linear-gradient(118deg,#064e3b 0%,#047857 52%,#065f46 100%);}
+@media(max-width:360px){.appbar{gap:6px;padding:8px 7px 10px}.brand .urdu{font-size:13px}}
+
 .appbar{flex-shrink:0;display:flex;align-items:center;gap:8px;padding:11px 10px;
   background:var(--glass);
   border-bottom:1px solid var(--glass-border);box-shadow:var(--glass-hl);
   transform:translateZ(0);}
-.logo{width:40px;height:40px;border-radius:13px;flex-shrink:0;
-  background:linear-gradient(135deg,var(--gold),var(--gold-2));
-  display:grid;place-items:center;font-weight:700;font-size:12px;color:#1c1917;
-  letter-spacing:.5px;box-shadow:0 6px 20px var(--gold-glow),inset 0 1px 0 rgba(255,255,255,.4);}
 .brand{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:2px;}
 .brand .urdu{font-family:'Noto Nastaliq Urdu',serif;font-size:13.5px;line-height:1.9;
   color:var(--gold);font-weight:600;white-space:nowrap;overflow:hidden;
@@ -691,13 +708,60 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
   }
   #printArea .p-foot .dev b{font-weight:900 !important;font-size:6.5px !important;}
 }
+
+/* HEADER READABILITY FIX — strong owner/contact contrast + building-material emblem */
+.appbar{
+  background:linear-gradient(118deg,#064e3b 0%,#047857 52%,#065f46 100%) !important;
+  border-bottom:2px solid #d6ad55 !important;
+  gap:8px !important;
+}
+.appbar .brand{min-width:0 !important;flex:1 1 auto !important;gap:3px !important;}
+.appbar .brand .urdu{
+  color:#fff7d6 !important;font-weight:800 !important;
+  text-shadow:0 1px 3px rgba(0,0,0,.6) !important;
+  font-size:14px !important;line-height:1.9 !important;
+}
+.appbar .brand .sub{
+  color:#ffffff !important;opacity:1 !important;
+  font-size:10.5px !important;font-weight:700 !important;
+  letter-spacing:.15px !important;line-height:1.45 !important;
+  text-shadow:0 1px 3px rgba(0,0,0,.7) !important;
+  white-space:normal !important;overflow:visible !important;text-overflow:clip !important;
+}
+.appbar .logo{
+  width:44px !important;height:44px !important;min-width:44px !important;flex-shrink:0 !important;
+  padding:4px !important;border-radius:12px !important;
+  background:linear-gradient(145deg,#fff9df,#e8c66f 60%,#c18a28) !important;
+  border:1.5px solid #fff0b3 !important;
+  box-shadow:0 3px 10px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.85) !important;
+  display:grid !important;place-items:center !important;
+}
+.appbar .logo svg{display:block !important;width:100% !important;height:100% !important;}
+.appbar .iconbar{flex-shrink:0 !important;}
+@media(max-width:360px){
+ .appbar{gap:5px !important;padding:8px 6px 10px !important;}
+ .appbar .logo{width:38px !important;height:38px !important;min-width:38px !important;padding:3px !important;}
+ .appbar .brand .urdu{font-size:12px !important;}
+ .appbar .brand .sub{font-size:9.5px !important;}
+ .appbar .iconbar{width:30px !important;height:30px !important;}
+ .appbar .langbtn{min-width:30px !important;padding:0 5px !important;}
+}
+
 </style>
 </head>
 <body>
 <div class="app" id="app">
 
   <header class="appbar">
-    <div class="logo">AIB</div>
+    <div class="logo" aria-label="Building Material Logo" title="Building Material & Supplier">
+      <svg viewBox="0 0 48 48" role="img" aria-hidden="true">
+        <path d="M5 22 24 8l19 14" fill="none" stroke="#064e3b" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M10 21v20h28V21" fill="#fff8dc" stroke="#064e3b" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M18 41V28h12v13" fill="#d6ad55" stroke="#064e3b" stroke-width="2"/>
+        <path d="M13 25h5m12 0h5M13 31h3m16 0h3M13 36h3m16 0h3" stroke="#a16207" stroke-width="2" stroke-linecap="round"/>
+        <path d="M5 43h38" stroke="#064e3b" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+    </div>
     <div class="brand">
       <div class="urdu" id="brandUrdu">الابراہیم بلڈنگ میٹریل اینڈ سپلائر</div>
       <div class="sub"  id="brandSub">Muhammad Ishaq • 0331-1303120</div>
@@ -962,6 +1026,7 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
         <button class="btn wa"    id="waBtn"     data-ur="📱 واٹس" data-en="📱 WA">📱 واٹس</button>
         <button class="btn green" id="syncBtn"   data-ur="☁ Sync" data-en="☁ Sync">☁ Sync</button>
       </div>
+      <button class="btn dark" id="recvBtn" style="display:none;width:100%;margin-bottom:9px;" data-ur="💵 باقی رقم وصول کریں" data-en="💵 Receive Payment">💵 باقی رقم وصول کریں</button>
       <button class="btn primary big" id="newBillBtn" data-ur="نیا بل شروع کریں" data-en="START NEW BILL">نیا بل شروع کریں</button>
     </div>
   </div>
@@ -1096,7 +1161,7 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
 </div>
 <script type="module">
 /* ============================================================
-   AL IBRAHIM POS — v3.3
+   AL IBRAHIM POS — v3.4 (bug-fix build)
    Firebase + Storage Indicator + WhatsApp + Reports
    Duplicate check • 12-hour time • Price setup guard
    Pakistani phone validation + saved customer picker
@@ -1138,6 +1203,13 @@ const LS_ITEMS = 'aib_items_v4';
 const LS_BILLS = 'aib_bills_v4';
 const LS_SET   = 'aib_settings_v4';
 const LS_FB_ITEMS_INIT = 'aib_fb_items_init';
+const DEVICE_ID = (() => {
+  try{
+    let d = localStorage.getItem('aib_device_id');
+    if (!d){ d = 'dev_' + Date.now().toString(36) + Math.random().toString(36).slice(2,8); localStorage.setItem('aib_device_id', d); }
+    return d;
+  }catch(e){ return 'dev_' + Math.random().toString(36).slice(2,10); }
+})();
 
 function load(k, fb){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):fb; }catch(e){ return fb; } }
 function save(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
@@ -1341,7 +1413,7 @@ function renderCats(){
   const cats = ['All', ...new Set(items.map(i => i.cat).filter(Boolean))];
   $('#catChips').innerHTML = cats.map(c => {
     const label = c === 'All' ? t('سب', 'All') : c;
-    return `<button class="chip ${c===activeCat?'active':''}" data-cat="${c}">${label}</button>`;
+    return `<button class="chip ${c===activeCat?'active':''}" data-cat="${escHTML(c)}">${label}</button>`;
   }).join('');
 }
 $('#catChips').addEventListener('click', e => {
@@ -1562,12 +1634,27 @@ $('#mAddBtn').addEventListener('click', () => {
 });
 
 /* ---------- TOTALS ---------- */
+/* advManual=false: "Paid" amount status select ke mutabiq khud chalta hai (cart badalne par bhi).
+   advManual=true : user ne khud amount likha/quick-fill dabaya — status amount se nikalta hai. */
+let advManual = false;
+function payStatusFor(total, advance){
+  if (total > 0 && advance >= total - 0.001) return 'Full Paid';
+  if (advance > 0) return 'Half Paid';
+  return 'Unpaid';
+}
 function calcTotals(){
   const sub     = cart.reduce((s,l) => s + Number(l.qty||0) * Number(l.rate||0), 0);
   const disc    = Number($('#discInput').value)    || 0;
   const freight = Number($('#freightInput').value) || 0;
-  const advance = Number($('#advanceInput').value) || 0;
   const total = Math.max(0, sub - disc + freight);
+  if (!advManual){
+    const st = $('#payStatus').value;
+    $('#advanceInput').value = st === 'Full Paid' ? Math.round(total)
+                             : st === 'Half Paid' ? Math.round(total / 2) : 0;
+  } else if (total > 0){
+    $('#payStatus').value = payStatusFor(total, Math.min(Number($('#advanceInput').value) || 0, total));
+  }
+  const advance = Math.min(Math.max(0, Number($('#advanceInput').value) || 0), total);  /* total se zyada nahi */
   const rem   = Math.max(0, total - advance);
   const qty   = cart.reduce((s,l) => s + Number(l.qty||0), 0);
   $('#tItems').textContent = fmt(qty);
@@ -1602,28 +1689,13 @@ function updatePayPreview(total, advance, rem){
 }
 
 $('#payStatus').addEventListener('change', () => {
-  const sub     = cart.reduce((s,l) => s + Number(l.qty||0) * Number(l.rate||0), 0);
-  const disc    = Number($('#discInput').value)    || 0;
-  const freight = Number($('#freightInput').value) || 0;
-  const total   = Math.max(0, sub - disc + freight);
-  const st = $('#payStatus').value;
-  if (st === 'Full Paid')       $('#advanceInput').value = Math.round(total);
-  else if (st === 'Half Paid')  $('#advanceInput').value = Math.round(total / 2);
-  else                          $('#advanceInput').value = 0;
+  advManual = false;
   calcTotals();
 });
 
 $('#advanceInput').addEventListener('input', () => {
+  advManual = true;
   calcTotals();
-  const sub     = cart.reduce((s,l) => s + Number(l.qty||0) * Number(l.rate||0), 0);
-  const disc    = Number($('#discInput').value)    || 0;
-  const freight = Number($('#freightInput').value) || 0;
-  const total   = Math.max(0, sub - disc + freight);
-  const advance = Number($('#advanceInput').value) || 0;
-  if (total <= 0) return;
-  if (advance >= total - 0.001) $('#payStatus').value = 'Full Paid';
-  else if (advance > 0)         $('#payStatus').value = 'Half Paid';
-  else                          $('#payStatus').value = 'Unpaid';
 });
 
 ['discInput','freightInput'].forEach(id =>
@@ -1643,10 +1715,8 @@ $$('.quickfill button').forEach(b => {
     else if (which === 'half')    val = Math.round(total/2);
     else if (which === 'quarter') val = Math.round(total/4);
     $('#advanceInput').value = val;
+    advManual = true;
     calcTotals();
-    if (val >= total - 0.001) $('#payStatus').value = 'Full Paid';
-    else if (val > 0)         $('#payStatus').value = 'Half Paid';
-    else                      $('#payStatus').value = 'Unpaid';
   });
 });
 
@@ -1778,7 +1848,7 @@ async function reserveBillNo(){
     const snap = await tx.get(ref);
     const c = Math.max(snap.exists() ? Number(snap.data().last)||0 : 0, maxKnown);
     const no = Math.max(c + 1, localNext);
-    tx.set(ref, { last: no, updatedAt: Date.now() });
+    tx.set(ref, { last: no, lastBy: DEVICE_ID, updatedAt: Date.now() });
     return no;
   });
   try{
@@ -1800,8 +1870,11 @@ async function ensureUniqueBillNo(bill){
     const snap = await tx.get(ref);
     const c = Math.max(snap.exists() ? Number(snap.data().last)||0 : 0, maxKnown);
     const mine = Number(bill.no)||0;
-    const final = mine > c ? mine : c + 1;
-    tx.set(ref, { last: Math.max(c, final), updatedAt: Date.now() });
+    const cd = snap.exists() ? snap.data() : {};
+    /* counter par ye number isi device ne (timeout wali transaction se) liya tha — renumber nahi karna */
+    const ours = cd.lastBy === DEVICE_ID && Number(cd.last) === mine;
+    const final = (mine > c || ours) ? mine : c + 1;
+    tx.set(ref, { last: Math.max(c, final), lastBy: DEVICE_ID, updatedAt: Date.now() });
     return final;
   });
   if (no !== bill.no){
@@ -1830,7 +1903,7 @@ async function _buildAndSaveBill(){
   if (tt.total <= 0) return toast(t('کل رقم صفر ہے', 'Total is zero'));
 
   const payMethod = $('#payMethod').value || 'Cash';
-  const payStatus = $('#payStatus').value || 'Unpaid';
+  const payStatus = payStatusFor(tt.total, tt.advance);   /* hamesha asli amount se */
   const rsv = await reserveBillNo();
   const bill = {
     id: uid('bill'),
@@ -1877,7 +1950,10 @@ $('#genBillBtn').addEventListener('click', () => {
 /* ---------- RECEIPT ---------- */
 function billProfit(b){
   const cogs = (b.items||[]).reduce((s,l) => s + (Number(l.costPrice)||0) * Number(l.qty||0), 0);
-  return Number(b.total||0) - cogs;
+  return Number(b.total||0) - Number(b.freight||0) - cogs;   /* mazdoori profit nahi */
+}
+function billMissingCost(b){
+  return (b.items||[]).some(l => !(Number(l.costPrice) > 0));
 }
 
 function renderReceipt(b){
@@ -1915,10 +1991,10 @@ function renderReceipt(b){
   $('#receiptPaper').innerHTML = `
     ${stampHTML}
     <div class="p-head">
-      <div class="p-urdu">${settings.shopUr}</div>
-      <div class="p-shop">${settings.shopEn}</div>
-      <div class="p-meta-line">${settings.ownerUr} — ${settings.owner} • ${settings.phone}${settings.phone2 ? ' / '+settings.phone2 : ''}</div>
-      <div class="p-meta-line" style="font-size:8px;color:#64748b;">${settings.address}</div>
+      <div class="p-urdu">${escHTML(settings.shopUr)}</div>
+      <div class="p-shop">${escHTML(settings.shopEn)}</div>
+      <div class="p-meta-line">${escHTML(settings.ownerUr)} — ${escHTML(settings.owner)} • ${escHTML(settings.phone)}${settings.phone2 ? ' / '+escHTML(settings.phone2) : ''}</div>
+      <div class="p-meta-line" style="font-size:8px;color:#64748b;">${escHTML(settings.address)}</div>
     </div>
     <div class="p-info">
       <div>Bill #: <b>${b.no}</b><br>Date: <b>${fmtDate(b.date)}</b></div>
@@ -1944,9 +2020,10 @@ function renderReceipt(b){
       ${b.freight  ? `<div class="p-tr"><span>${t('مزدوری','Mazdoori')}</span><b>+ Rs ${fmt(b.freight)}</b></div>`:''}
       <div class="p-tr grand"><span>${t('کل رقم','TOTAL')}</span><b>Rs ${fmt(b.total)}</b></div>
       <div class="p-tr paid"><span>${pmLabel} (${psLabel})</span><b>Rs ${fmt(advance)}</b></div>
+      ${(b.payments||[]).map(p => `<div class="p-tr" style="font-size:.85em;opacity:.85"><span>↳ ${fmtDate(p.date).split(' ')[0]} ${t('وصولی','received')}</span><b>Rs ${fmt(p.amount)}</b></div>`).join('')}
       ${remaining > 0 ? `<div class="p-tr due"><span>${t('باقی','Balance')}</span><b>Rs ${fmt(remaining)}</b></div>` : ''}
     </div>
-    <div class="p-note-line">${settings.footer}</div>
+    <div class="p-note-line">${escHTML(settings.footer)}</div>
     <div class="p-note-small">Goods once sold will not be taken back.</div>
     <div class="p-foot">
       <div class="sig">${t('دستخط گاہک','Cust Sign')}</div>
@@ -1960,7 +2037,33 @@ function renderReceipt(b){
 
   $('#syncBadge').textContent = b.synced ? 'Synced' : 'Not Synced';
   $('#syncBadge').className = 'badge ' + (b.synced ? 'ok' : 'pend');
+  const rb = $('#recvBtn');
+  if (rb) rb.style.display = remaining > 0 ? 'block' : 'none';
 }
+
+/* ---------- RECEIVE LATER PAYMENT (Outstanding kam karne ke liye) ---------- */
+function addPaymentToBill(b){
+  if (!b) return;
+  const due = Number(b.remaining) || 0;
+  if (due <= 0) return toast(t('اس بل کی پوری رقم وصول ہے', 'This bill is fully paid'));
+  const raw = prompt(t(`باقی Rs ${fmt(due)} — کتنی رقم وصول ہوئی؟`, `Due Rs ${fmt(due)} — amount received?`), due);
+  if (raw === null) return;
+  const amt = Number(raw);
+  if (!(amt > 0)) return toast(t('غلط رقم', 'Invalid amount'));
+  const pay = Math.min(amt, due);
+  b.advance   = (Number(b.advance) || 0) + pay;
+  b.remaining = Math.max(0, (Number(b.total) || 0) - b.advance);
+  b.payStatus = payStatusFor(Number(b.total) || 0, b.advance);
+  b.payments  = [...(b.payments || []), { date: new Date().toISOString(), amount: pay }];
+  b.updatedAt = Date.now();
+  b.synced    = false;
+  save(LS_BILLS, bills);
+  renderReceipt(b); renderHistory(); renderReports(); updateSyncBadge();
+  syncBillToFirebase(b);
+  toast(amt > due ? t(`Rs ${fmt(pay)} درج (باقی سے زیادہ رقم کم کر دی)`, `Rs ${fmt(pay)} recorded (capped at due)`)
+                  : t('وصولی درج ✔', 'Payment recorded ✔'));
+}
+$('#recvBtn').addEventListener('click', () => addPaymentToBill(currentBill));
 
 /* Print page = 211.3 x 375.5 pt. Lambi bill ho to ek page me fit karne ke liye zoom (min 60%). */
 const PRINT_W_PT = 211.3, PRINT_H_PT = 375.5, PRINT_MIN_ZOOM = 0.6;
@@ -2059,12 +2162,22 @@ function buildWhatsAppMsg(b){
 /* ---------- JPG ---------- */
 $('#jpgBtn').addEventListener('click', async () => {
   if (typeof html2canvas === 'undefined'){
-    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
+    try{
+      await loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
+    }catch(e){
+      return toast(t('JPG کے لیے انٹرنیٹ ضروری ہے', 'Internet needed to load the JPG tool'), 3000);
+    }
   }
   toast(t('تصویر بن رہی ہے...', 'Generating image...'), 3000);
   try{
     const canvas = await html2canvas($('#receiptPaper'), {
-      backgroundColor:'#ffffff', scale:3, useCORS:true, logging:false
+      backgroundColor:'#ffffff', scale:3, useCORS:true, logging:false,
+      onclone: doc => {
+        /* html2canvas letter-spacing par Urdu ke huroof alag kar deta hai — Urdu wale hisson mein band */
+        doc.querySelectorAll('#receiptPaper, #receiptPaper *').forEach(el => {
+          if (/[\u0600-\u06FF]/.test(el.textContent)) el.style.letterSpacing = 'normal';
+        });
+      }
     });
     const link = document.createElement('a');
     link.download = `AlIbrahim-Bill-${currentBill ? currentBill.no : 'receipt'}.jpg`;
@@ -2090,6 +2203,7 @@ $('#newBillBtn').addEventListener('click', () => {
   $('#custSuggest').classList.remove('show');
   $('#discInput').value = 0; $('#freightInput').value = 0; $('#advanceInput').value = 0;
   $('#payMethod').value = 'Cash'; $('#payStatus').value = 'Full Paid';
+  advManual = false;
   renderCart(); updateCartBar();
   closeSheet('receiptSheet');
   toast(t('نیا بل تیار ہے', 'Ready for new bill'));
@@ -2420,19 +2534,22 @@ function renderReports(){
   const start = periodStart(reportPeriod);
   const filtered = bills.filter(b => new Date(b.date) >= start);
 
-  let totalSale = 0, totalCost = 0, totalPaid = 0, totalDue = 0;
+  let totalSale = 0, totalCost = 0, totalPaid = 0, totalDue = 0, totalFreight = 0, missingCost = 0;
   let billCount = filtered.length;
 
   filtered.forEach(b => {
     totalSale += Number(b.total) || 0;
     totalPaid += Number(b.advance) || 0;
     totalDue  += Number(b.remaining) || 0;
+    totalFreight += Number(b.freight) || 0;
+    if (billMissingCost(b)) missingCost++;
     const cogs = (b.items||[]).reduce((s,l) => s + (Number(l.costPrice)||0) * Number(l.qty||0), 0);
     totalCost += cogs;
   });
 
-  const profit = totalSale - totalCost;
-  const margin = totalSale > 0 ? (profit / totalSale * 100) : 0;
+  const profit = totalSale - totalFreight - totalCost;           /* mazdoori ke baghair */
+  const netSale = totalSale - totalFreight;
+  const margin = netSale > 0 ? (profit / netSale * 100) : 0;
   const grid = $('#repGrid');
 
   if (billCount === 0){
@@ -2446,7 +2563,8 @@ function renderReports(){
     <div class="rep-card full rep-big">
       <div class="rep-label">${t('خالص منافع / Net Profit', 'Net Profit')}</div>
       <div class="rep-val">Rs ${fmt(profit)}</div>
-      <div class="rep-sub">${margin.toFixed(1)}% ${t('مارجن', 'margin')}</div>
+      <div class="rep-sub">${margin.toFixed(1)}% ${t('مارجن', 'margin')}${totalFreight > 0 ? ' • ' + t('مزدوری شامل نہیں', 'excl. mazdoori') : ''}</div>
+      ${missingCost > 0 ? `<div class="rep-sub" style="color:var(--red);margin-top:4px;">⚠ ${missingCost} ${t('بلز میں لاگت 0 ہے — منافع زیادہ دکھ سکتا ہے', 'bill(s) have cost 0 — profit may look higher')}</div>` : ''}
     </div>
     <div class="rep-card">
       <div class="rep-label">${t('کل سیل', 'Total Sale')}</div>
@@ -2723,6 +2841,13 @@ function startBillsListener(){
         if (!byId.has(id)){
           byId.set(id, cloudToBill(id, ch.doc.data({ serverTimestamps:'estimate' })));
           changed = true;
+        } else if (ch.type === 'modified'){
+          const loc = byId.get(id);
+          if (loc.synced){                      /* local pending change nahi — cloud ki nayi copy lo */
+            byId.set(id, cloudToBill(id, ch.doc.data({ serverTimestamps:'estimate' })));
+            if (currentBill && currentBill.id === id){ currentBill = byId.get(id); if ($('#receiptSheet').classList.contains('open')) renderReceipt(currentBill); }
+            changed = true;
+          }
         }
       });
 
@@ -2924,7 +3049,7 @@ function updateStorageBar(usedBytes){
   if (pct > 85) fill.classList.add('danger');
   else if (pct > 60) fill.classList.add('warn');
 
-  used.textContent = fmtBytes(usedBytes);
+  used.textContent = '≈ ' + fmtBytes(usedBytes);
 }
 
 function estimateLocalBytes(){
@@ -2951,9 +3076,10 @@ async function fetchFirebaseUsage(){
     const billsSnap = { size: bills.filter(x => x.synced).length };
     const itemsSnap = { size: items.length };
 
-    const billsBytes = billsSnap.size * 1600;
-    const itemsBytes = itemsSnap.size * 250;
-    const overhead   = 50000;
+    const jsz = o => { try{ return new Blob([JSON.stringify(o)]).size + 32; }catch(e){ return 1600; } };
+    const billsBytes = bills.filter(x => x.synced).reduce((s,b) => s + jsz(b), 0);
+    const itemsBytes = items.reduce((s,i) => s + jsz(i), 0);
+    const overhead   = 0;
 
     const totalBytes = (billsSnap.size + itemsSnap.size > 0)
       ? billsBytes + itemsBytes + overhead
