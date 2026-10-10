@@ -2,7 +2,7 @@
 <html lang="ur">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, interactive-widget=resizes-content" />
 <meta name="theme-color" content="#0a0e1a" id="themeColorMeta" />
 <title>Al Ibrahim Building Material & Supplier — POS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -285,7 +285,7 @@ body.light select option{background:#fff;color:#0f172a;}
   transition:transform .32s cubic-bezier(.4,0,.2,1);visibility:hidden;
   will-change:transform;}
 body.light .sheet{background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(255,255,255,.96));}
-.sheet.open{transform:translateY(0);visibility:visible;}
+.sheet.open{transform:none;will-change:auto;visibility:visible;}   /* transform/will-change band: keyboard flicker na ho */
 .sheet-head{flex-shrink:0;display:flex;align-items:center;gap:11px;padding:12px 14px;
   background:var(--glass);border-bottom:1px solid var(--glass-border);box-shadow:var(--glass-hl);}
 .sheet-title{flex:1;font-size:14.5px;font-weight:600;color:var(--txt);}
@@ -316,10 +316,10 @@ body.light .sheet{background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(2
 .amt{margin-left:auto;font-size:13.5px;font-weight:700;color:var(--gold);white-space:nowrap;}
 
 /* CUSTOMER SUGGEST */
-.cust-suggest{display:none;margin-top:9px;border-radius:12px;overflow:hidden;
-  border:1px solid var(--glass-border-2);background:var(--glass-2);
+.cust-suggest{display:none;position:absolute;left:11px;right:11px;z-index:20;margin-top:6px;border-radius:12px;overflow:hidden;
+  border:1px solid var(--glass-border-2);background:var(--am-bg2);
   box-shadow:var(--glass-hl);}
-.cust-suggest.show{display:block;animation:fade .18s ease;}
+.cust-suggest.show{display:block;}
 .cust-head{font-size:9px;font-weight:700;color:var(--txt-4);letter-spacing:.5px;
   text-transform:uppercase;padding:7px 11px 4px;}
 .cust-item{display:flex;align-items:center;gap:8px;padding:9px 11px;cursor:pointer;
@@ -950,7 +950,7 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
       <button class="iconbtn danger" id="clearCartBtn">🗑</button>
     </div>
     <div class="sheet-body">
-      <div class="card" style="padding:11px;">
+      <div class="card" style="padding:11px;position:relative;">
         <div class="form-grid" style="margin-bottom:0;">
           <input id="custName"  placeholder="کسٹمر کا نام" autocomplete="off" />
           <input id="custPhone" type="tel" inputmode="numeric" maxlength="11"
@@ -1075,13 +1075,13 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
           <label data-ur="تعداد" data-en="Quantity">تعداد</label>
           <div class="am-qty">
             <button type="button" id="mQtyMinus">−</button>
-            <input id="mQtyInp" type="number" inputmode="decimal" value="1" min="0" />
+            <input id="mQtyInp" type="text" inputmode="decimal" pattern="[0-9]*[.]?[0-9]*" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" name="qty_digits" value="1" />
             <button type="button" id="mQtyPlus">+</button>
           </div>
         </div>
         <div class="am-field">
           <label data-ur="ریٹ (Rs)" data-en="Rate (Rs)">ریٹ (Rs)</label>
-          <input id="mRateInp" class="am-rate" type="number" inputmode="decimal" value="0" />
+          <input id="mRateInp" class="am-rate" type="text" inputmode="decimal" pattern="[0-9]*[.]?[0-9]*" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" name="rate_digits" value="0" />
         </div>
       </div>
       <div class="am-total">
@@ -1526,6 +1526,17 @@ function okBelowCost(sell, cost){
     });
   });
 })();
+
+/* Popup ki Qty/Rate: sirf digits (aur aik point) */
+['mQtyInp','mRateInp'].forEach(id => {
+  const el = document.getElementById(id);
+  el.addEventListener('input', () => {
+    let v = el.value.replace(/[^0-9.]/g, '');
+    const i = v.indexOf('.');
+    if (i !== -1) v = v.slice(0, i + 1) + v.slice(i + 1).replace(/\./g, '');
+    if (v !== el.value) el.value = v;
+  });
+});
 
 /* ---------- ADD-ITEM MODAL ---------- */
 let modalItem = null;
