@@ -977,7 +977,7 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
                 <option value="Online / Bank">Online / Bank — بینک</option>
                 <option value="JazzCash">JazzCash</option>
                 <option value="EasyPaisa">EasyPaisa</option>
-                <option value="Credit / Udhaar">Credit / ادھار</option>
+                <option value="Udhar">Udhar — ادھار</option>
               </select>
             </div>
             <div class="pay-field">
@@ -999,7 +999,7 @@ body.light .cf-bg{background:rgba(15,23,42,.5);}
           </div>
           <div class="pay-preview" id="payPreview">
             <span class="dot"></span>
-            <span class="label" id="payPrevLabel" data-ur="باقی رقم" data-en="Remaining">باقی رقم</span>
+            <span class="label" id="payPrevLabel" data-ur="بقایا" data-en="Baqaya">بقایا</span>
             <span class="val" id="tRem">Rs 0</span>
           </div>
         </div>
@@ -1247,6 +1247,7 @@ items = items.map(i => ({ ...i, costPrice: Number(i.costPrice)||0 }));
 
 bills = bills.map(b => {
   if (!b.payMethod) b.payMethod = 'Cash';
+  if (b.payMethod === 'Credit / Udhaar') b.payMethod = 'Udhar';
   if (!b.payStatus){
     if (b.remaining <= 0 && b.total > 0) b.payStatus = 'Full Paid';
     else if (Number(b.advance) > 0) b.payStatus = 'Half Paid';
@@ -1354,7 +1355,7 @@ function applyLanguage(lang){
     pmSel.options[1].text = t('Online / Bank — بینک', 'Online / Bank');
     pmSel.options[2].text = 'JazzCash';
     pmSel.options[3].text = 'EasyPaisa';
-    pmSel.options[4].text = t('Credit / ادھار', 'Credit / Udhaar');
+    pmSel.options[4].text = t('Udhar — ادھار', 'Udhar');
   }
   const psSel = $('#payStatus');
   if (psSel){
@@ -1671,7 +1672,7 @@ function updatePayPreview(total, advance, rem){
   const val  = $('#tRem');
   prev.classList.remove('paid','unpaid');
   if (cart.length === 0 || total <= 0){
-    lbl.textContent = t('باقی رقم', 'Remaining');
+    lbl.textContent = t('بقایا', 'Baqaya');
     val.textContent = 'Rs 0'; return;
   }
   if (advance >= total - 0.001){
@@ -1679,7 +1680,7 @@ function updatePayPreview(total, advance, rem){
     lbl.textContent = t('پوری رقم ادا ✔', 'Fully Paid ✔');
     val.textContent = 'Rs 0';
   } else if (advance > 0){
-    lbl.textContent = t('باقی رقم', 'Remaining');
+    lbl.textContent = t('بقایا', 'Baqaya');
     val.textContent = 'Rs ' + fmt(rem);
   } else {
     prev.classList.add('unpaid');
@@ -1690,6 +1691,19 @@ function updatePayPreview(total, advance, rem){
 
 $('#payStatus').addEventListener('change', () => {
   advManual = false;
+  calcTotals();
+});
+
+/* Method = Udhar  ->  Status khud Unpaid (Paid = 0). Udhar se hatao to wapas Full Paid. */
+$('#payMethod').addEventListener('change', () => {
+  const m = $('#payMethod').value;
+  if (m === 'Udhar'){
+    $('#payStatus').value = 'Unpaid';
+    advManual = false;
+  } else if ($('#payStatus').value === 'Unpaid'){
+    $('#payStatus').value = 'Full Paid';
+    advManual = false;
+  }
   calcTotals();
 });
 
@@ -1979,7 +1993,7 @@ function renderReceipt(b){
   const pmLabel = {
     'Cash': t('نقد','Cash'), 'Online / Bank': t('بینک','Online'),
     'JazzCash': 'JazzCash', 'EasyPaisa': 'EasyPaisa',
-    'Credit / Udhaar': t('ادھار','Credit')
+    'Udhar': t('ادھار','Udhar'), 'Credit / Udhaar': t('ادھار','Udhar')
   }[payMethod] || payMethod;
 
   const psLabel = {
@@ -2021,7 +2035,7 @@ function renderReceipt(b){
       <div class="p-tr grand"><span>${t('کل رقم','TOTAL')}</span><b>Rs ${fmt(b.total)}</b></div>
       <div class="p-tr paid"><span>${pmLabel} (${psLabel})</span><b>Rs ${fmt(advance)}</b></div>
       ${(b.payments||[]).map(p => `<div class="p-tr" style="font-size:.85em;opacity:.85"><span>↳ ${fmtDate(p.date).split(' ')[0]} ${t('وصولی','received')}</span><b>Rs ${fmt(p.amount)}</b></div>`).join('')}
-      ${remaining > 0 ? `<div class="p-tr due"><span>${t('باقی','Balance')}</span><b>Rs ${fmt(remaining)}</b></div>` : ''}
+      ${remaining > 0 ? `<div class="p-tr due"><span>${t('بقایا','Baqaya')}</span><b>Rs ${fmt(remaining)}</b></div>` : ''}
     </div>
     <div class="p-note-line">${escHTML(settings.footer)}</div>
     <div class="p-note-small">Goods once sold will not be taken back.</div>
@@ -2109,18 +2123,61 @@ $('#printBtn').addEventListener('click', async () => {
   window.print();
 });
 
-/* ---------- WHATSAPP ---------- */
-$('#waBtn').addEventListener('click', () => {
-  if (!currentBill) return toast(t('پہلے بل بنائیں', 'Generate a bill first'));
-  if (!currentBill.phone) return toast(t('کسٹمر کا فون نمبر درج کریں', 'Enter customer phone first'));
-  let phone = String(currentBill.phone).replace(/\D/g, '');
+/* ---------- WHATSAPP (Receipt JPG) ---------- */
+function waPhoneOf(b){
+  let phone = String(b.phone || '').replace(/\D/g, '');
   if (phone.startsWith('00')) phone = phone.slice(2);
   if (phone.startsWith('0'))  phone = '92' + phone.slice(1);
-  else if (!phone.startsWith('92')) phone = '92' + phone;
-  if (phone.length < 11) return toast(t('فون نمبر غلط ہے', 'Invalid phone number'));
-  const msg = buildWhatsAppMsg(currentBill);
-  const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
-  window.open(url, '_blank');
+  else if (phone && !phone.startsWith('92')) phone = '92' + phone;
+  return phone;
+}
+async function receiptToJpgBlob(){
+  if (typeof html2canvas === 'undefined'){
+    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
+  }
+  try{ await document.fonts.ready; }catch(e){}
+  const canvas = await html2canvas($('#receiptPaper'), {
+    backgroundColor:'#ffffff', scale:2.5, useCORS:true, logging:false,
+    onclone: doc => {
+      doc.querySelectorAll('#receiptPaper, #receiptPaper *').forEach(el => {
+        if (/[\u0600-\u06FF]/.test(el.textContent)) el.style.letterSpacing = 'normal';
+      });
+    }
+  });
+  return await new Promise((res, rej) => canvas.toBlob(b => b ? res(b) : rej(new Error('toBlob')), 'image/jpeg', 0.92));
+}
+$('#waBtn').addEventListener('click', async () => {
+  if (!currentBill) return toast(t('پہلے بل بنائیں', 'Generate a bill first'));
+  if (!currentBill.phone) return toast(t('کسٹمر کا فون نمبر درج کریں', 'Enter customer phone first'));
+  const phone = waPhoneOf(currentBill);
+  if (phone.length < 12) return toast(t('فون نمبر غلط ہے', 'Invalid phone number'));
+  const fileName = `AlIbrahim-Bill-${currentBill.no}.jpg`;
+  const waUrl = `https://wa.me/${phone}`;
+  toast(t('رسید کی تصویر بن رہی ہے...', 'Preparing receipt image...'), 3000);
+  let blob;
+  try{ blob = await receiptToJpgBlob(); }
+  catch(err){
+    console.error(err);
+    return toast(t('JPG کے لیے انٹرنیٹ ضروری ہے', 'Internet needed to make the JPG'), 3000);
+  }
+  const file = new File([blob], fileName, { type:'image/jpeg' });
+
+  /* Mobile: JPG seedha WhatsApp ko share */
+  if (navigator.canShare && navigator.canShare({ files:[file] })){
+    try{
+      await navigator.share({ files:[file], title:`Bill #${currentBill.no}`,
+        text:`Bill #${currentBill.no} — ${currentBill.customer} (${currentBill.phone})` });
+      return;
+    }catch(err){
+      if (err && err.name === 'AbortError') return;   /* user ne cancel kiya */
+    }
+  }
+  /* Fallback: JPG save + customer ki WhatsApp chat khulti hai */
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = fileName; a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  toast(t('JPG محفوظ — اب واٹس ایپ میں بھیجیں', 'JPG saved — attach it in WhatsApp'), 3500);
+  setTimeout(() => window.open(waUrl, '_blank'), 900);
 });
 
 function buildWhatsAppMsg(b){
@@ -2147,8 +2204,8 @@ function buildWhatsAppMsg(b){
   if (b.freight)  L.push(`Mazdoori: +Rs ${fmt(b.freight)}`);
   L.push(`*TOTAL: Rs ${fmt(b.total)}*`);
   L.push(``);
-  L.push(`Paid (${b.payMethod||'Cash'}): Rs ${fmt(advance)}`);
-  if (remaining > 0) L.push(`*Remaining: Rs ${fmt(remaining)}*`);
+  L.push(`Paid (${(b.payMethod==='Credit / Udhaar'?'Udhar':b.payMethod)||'Cash'}): Rs ${fmt(advance)}`);
+  if (remaining > 0) L.push(`*Baqaya: Rs ${fmt(remaining)}*`);
   L.push(``);
   L.push(`*Status: ${payStatus === 'Full Paid' ? '✅ FULL PAID' : payStatus === 'Half Paid' ? '⚠️ HALF PAID' : '❌ CREDIT'}*`);
   L.push(``);
@@ -2817,6 +2874,7 @@ function cloudToBill(id, v){
   b.total     = Number(b.total)||0;
   b.remaining = typeof b.remaining === 'number' ? b.remaining : Math.max(0, b.total - b.advance);
   if (!b.payMethod) b.payMethod = 'Cash';
+  if (b.payMethod === 'Credit / Udhaar') b.payMethod = 'Udhar';
   if (!b.payStatus) b.payStatus = b.remaining <= 0 && b.total > 0 ? 'Full Paid' : (b.advance > 0 ? 'Half Paid' : 'Unpaid');
   if (!b.date) b.date = new Date().toISOString();
   return b;
